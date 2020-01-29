@@ -18,15 +18,6 @@ const Header = props => {
                         <div className={styles.logo}>
                             Ranepa client
                         </div>
-                        <ul>
-                            <li><a href="/#">
-                                <img src={find} alt={'ranepa-logo'}/>
-                                <span>Найти</span>
-                            </a></li>
-                            <li><a href="/#">
-                                Профиль
-                            </a></li>
-                        </ul>
                     </div>
                 </div>
 
