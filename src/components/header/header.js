@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './header.module.css'
 import find from '../../images/find.svg'
 import menu from '../../images/menu.svg'
-import { NavLink } from 'react-router-dom'
 
 const Header = props => {
     return (
@@ -10,7 +9,7 @@ const Header = props => {
             <div className={styles.header__container}>
                 <div>
                     <a href='/home'>
-                        <h2>SOUTHYYY</h2>
+                        <h2>RANEPA CLIENT</h2>
                     </a>
                 </div>
                 <div className={styles.header__navbar}>
