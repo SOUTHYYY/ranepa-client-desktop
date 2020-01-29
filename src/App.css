@@ -1,4 +1,13 @@
-a{
+a {
   text-decoration: none;
   color: black;
+}
+
+.content {
+  margin-top: 68px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
