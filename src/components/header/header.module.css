@@ -4,8 +4,8 @@ header {
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
-
     font-family: 'Quicksand', sans-serif;
+    z-index: -1;
 }
 
 .wrapper{
@@ -23,7 +23,7 @@ header {
 .wrapper .top_navbar .hamburger{
     width: 70px;
     height: 100%;
-    background: #cc0000;
+    background: #951b1d;
     padding: 15px 17px;
     border-top-left-radius: 20px;
     cursor: pointer;
@@ -42,6 +42,7 @@ header {
     height: 100%;
     background: #fff;
     border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,7 +53,7 @@ header {
 .wrapper .top_navbar .top_menu .logo {
     font-weight: 600;
     font-size: 25px;
-    color: #cc0000;
+    color: #951b1d;
 }
 
 .wrapper .top_navbar .top_menu ul{
@@ -81,8 +82,8 @@ header {
 .wrapper .sidebar{
     position: fixed;
     top: 70px;
-    left: 10px;
-    background: #cc0000;
+    left: 18px;
+    background: #951b1d;
     width: 200px;
     height: auto;
     border-bottom-left-radius: 20px;
@@ -129,6 +130,7 @@ header {
 
 .wrapper .sidebar ul li a span.title{
     display: flex;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .wrapper .sidebar ul li a:hover,
