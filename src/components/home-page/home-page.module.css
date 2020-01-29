@@ -1,0 +1,9 @@
+.home_page {
+  padding: 40px 0;
+}
+
+.home_page__map {
+  width: 900px;
+  height: 700px;
+  background-color: #e5e5e5;
+}
