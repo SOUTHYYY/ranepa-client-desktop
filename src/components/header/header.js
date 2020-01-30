@@ -19,9 +19,11 @@ const Header = props => {
                 <div className={styles.top_navbar}>
                     <div className={styles.hamburger} style={sidebar ? null : {borderBottomLeftRadius: '20px'}}
                          onClick={() => onToggleHamburger()}>
-                        <div className={styles.one}></div>
-                        <div className={styles.two}></div>
-                        <div className={styles.three}></div>
+                        <div className={styles.hamburger__container}>
+                            <div className={styles.one}></div>
+                            <div className={styles.two}></div>
+                            <div className={styles.three}></div>
+                        </div>
                     </div>
 
                     <div className={styles.top_menu}>
