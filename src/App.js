@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <Header/>
-          <Map/>
+        <Map apiStyle="mapbox://styles/mafahes/ck5zqz49333o11intge32b2pf"/>
     </div>
   );
 }
