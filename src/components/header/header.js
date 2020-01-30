@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './header.module.css'
-import find from '../../images/find.svg'
+import {NavLink} from "react-router-dom";
 
 const Header = props => {
-
-    // className='active' для активных айтемов
+    
     return (
         <header>
             <div className={styles.wrapper}>
@@ -23,22 +22,22 @@ const Header = props => {
 
                 <div className={styles.sidebar}>
                     <ul>
-                        <li><a href="/#">
+                        <li><NavLink to={'/timetable'} activeClassName={styles.active}>
                             <span className={styles.icon}><i className="fas fa-table"></i></span>
                             <span className={styles.title}>Расписание</span>
-                        </a></li>
-                        <li><a href="/#">
+                        </NavLink></li>
+                        <li><NavLink to={'/student-book'} activeClassName={styles.active}>
                             <span className={styles.icon}><i className="far fa-id-card"></i></span>
                             <span className={styles.title}>Зачетка</span>
-                        </a></li>
-                        <li><a href="/#">
+                        </NavLink></li>
+                        <li><NavLink to={'/references'} activeClassName={styles.active}>
                             <span className={styles.icon}><i className="fas fa-copy"></i></span>
                             <span className={styles.title}>Справки</span>
-                        </a></li>
-                        <li><a href="/#">
+                        </NavLink></li>
+                        <li><NavLink to={'/about-us'} activeClassName={styles.active}>
                             <span className={styles.icon}><i className="fas fa-users"></i></span>
                             <span className={styles.title}>О нас</span>
-                        </a></li>
+                        </NavLink></li>
                     </ul>
                 </div>
             </div>
