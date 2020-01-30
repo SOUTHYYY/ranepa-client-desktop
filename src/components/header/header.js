@@ -30,6 +30,12 @@ const Header = props => {
                         <div className={styles.logo}>
                             Ranepa client
                         </div>
+                        <div className={styles.login}>
+                            <NavLink to={'/login'}>
+                                <span>Войти</span>
+                                <i className="fas fa-user"></i>
+                            </NavLink>
+                        </div>
                     </div>
                 </div>
 

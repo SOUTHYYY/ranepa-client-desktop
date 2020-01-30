@@ -8,21 +8,22 @@ header {
     z-index: -1;
 }
 
-.wrapper{
+.wrapper {
     margin: 10px;
 }
 
-.wrapper .top_navbar{
+.wrapper .top_navbar {
     width: calc(100% - 20px);
     height: 60px;
     display: flex;
     position: fixed;
     top: 10px;
+    left: 10px;
 }
 
-.wrapper .top_navbar .hamburger{
+.wrapper .top_navbar .hamburger {
     width: 70px;
-    max-height: 60px ;
+    max-height: 60px;
     background: #951b1d;
     padding: 15px 17px;
     border-top-left-radius: 20px;
@@ -40,7 +41,7 @@ header {
     justify-content: center;
 }
 
-.wrapper .top_navbar .hamburger .hamburger__container div{
+.wrapper .top_navbar .hamburger .hamburger__container div {
     width: 35px;
     height: 4px;
     background: #ffffff;
@@ -48,53 +49,70 @@ header {
     border-radius: 5px;
 }
 
-.wrapper .top_navbar .top_menu{
+.wrapper .top_navbar .top_menu {
     width: calc(100% - 70px);
-    height: 100%;
+    height: calc(100% - 2px);
     background: #fff;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #951b1d;
 }
 
 .wrapper .top_navbar .top_menu .logo {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    height: 100%;
     font-weight: 600;
     font-size: 25px;
     color: #951b1d;
-}
-
-.wrapper .top_navbar .top_menu ul{
     display: flex;
-    list-style: none;
+    flex: 95;
 }
 
-.wrapper .top_navbar .top_menu ul li a{
-    margin: 0 10px;
-    line-height: 35px;
-    text-align: center;
-    color: black;
+.wrapper .top_navbar .top_menu .login {
+    display: flex;
+    height: 100%;
+    flex: 5;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+    transition: all 0.3s ease;
+    border-top-right-radius: 19px;
+    border-bottom-right-radius: 19px;
+    cursor: pointer;
 }
 
-.wrapper .top_navbar .top_menu ul li a:hover{
-    background: #fff;
-    color: #000;
+.wrapper .top_navbar .top_menu .login a {
+    display: flex;
+    align-items: center;
+    color: #951b1d;
+
 }
 
-
-.wrapper .top_navbar .top_menu ul li a img {
-    height: 13px;
-    margin-right: 5px;
+.wrapper .top_navbar .top_menu .login i {
+    margin-left: 10px;
 }
 
+.wrapper .top_navbar .top_menu .login:hover {
+    transition: all 0.3s ease;
+    background: #951b1d;
+    color: #ffffff;
+}
 
-.wrapper .sidebarOn{
+.wrapper .top_navbar .top_menu .login:hover a {
+    color: #ffffff;
+    align-items: center;
+}
+
+.wrapper .sidebarOn {
     position: fixed;
     top: 70px;
-    left: 18px;
+    left: 10px;
     background: #951b1d;
     width: 200px;
     height: auto;
@@ -112,7 +130,7 @@ header {
 
 }
 
-.wrapper .sidebar ul li a{
+.wrapper .sidebar ul li a {
     display: flex;
     align-items: center;
     padding: 20px;
@@ -124,7 +142,7 @@ header {
     font-weight: 600;
 }
 
-.wrapper .sidebar ul li a:before{
+.wrapper .sidebar ul li a:before {
     content: "";
     position: absolute;
     top: 0;
@@ -136,18 +154,18 @@ header {
 
 }
 
-.wrapper .sidebar ul li a span.icon{
+.wrapper .sidebar ul li a span.icon {
     margin-right: 10px;
     display: flex;
 }
 
-.wrapper .sidebar ul li a span.title{
+.wrapper .sidebar ul li a span.title {
     display: flex;
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .wrapper .sidebar ul li a:hover,
-.wrapper .sidebar ul li a.active{
+.wrapper .sidebar ul li a.active {
     background: #fff;
     color: #000;
     border-top-left-radius: 10px;
@@ -160,7 +178,7 @@ header {
 }
 
 
-.wrapper .main_container{
+.wrapper .main_container {
     width: calc(100% - 200px);
     margin-top: 70px;
     margin-left: 200px;
@@ -168,7 +186,7 @@ header {
     transition: all 0.3s ease;
 }
 
-.wrapper .main_container .item{
+.wrapper .main_container .item {
     background: #fff;
     margin-bottom: 10px;
     padding: 15px;
@@ -176,23 +194,23 @@ header {
     line-height: 22px;
 }
 
-.wrapper.collapse .sidebar{
+.wrapper.collapse .sidebar {
     width: 70px;
 }
 
-.wrapper.collapse .sidebar ul li a{
+.wrapper.collapse .sidebar ul li a {
     text-align: center;
 }
 
-.wrapper.collapse .sidebar ul li a span.icon{
+.wrapper.collapse .sidebar ul li a span.icon {
     margin: 0;
 }
 
-.wrapper.collapse .sidebar ul li a span.title{
+.wrapper.collapse .sidebar ul li a span.title {
     display: none;
 }
 
-.wrapper.collapse .main_container{
+.wrapper.collapse .main_container {
     width: calc(100% - 70px);
     margin-left: 70px;
 }
