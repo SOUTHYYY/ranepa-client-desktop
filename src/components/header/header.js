@@ -9,15 +9,22 @@ const Header = props => {
         setSidebar(!sidebar)
     }
     let sideBarstyles = `${styles.sidebar}`
+    let hamburgerStyles = `${styles.hamburger}`
     if (sidebar) {
         sideBarstyles += ` ${styles.sidebarOn}`
+        hamburgerStyles = `${styles.hamburgerOn}`
     }
     const sideBarUl = {display: 'none'}
     return (
         <header>
             <div className={styles.wrapper}>
                 <div className={styles.top_navbar}>
-                    <div className={styles.hamburger} style={sidebar ? null : {borderBottomLeftRadius: '20px'}}
+                    <div className={styles.hamburger}
+                         style={sidebar ? {minWidth: '200px',
+                             borderTopRightRadius: '20px',
+                             borderTopLeftRadius: '20px',
+                             borderBottomLeftRadius: '0px',
+                             borderBottomRightRadius: '0px'} : null}
                          onClick={() => onToggleHamburger()}>
                         <div className={styles.hamburger__container}>
                             <div className={styles.one}></div>
@@ -32,7 +39,6 @@ const Header = props => {
                         </div>
                         <div className={styles.login}>
                             <NavLink to={'/login'}>
-                                <span>Войти</span>
                                 <i className="fas fa-user"></i>
                             </NavLink>
                         </div>
