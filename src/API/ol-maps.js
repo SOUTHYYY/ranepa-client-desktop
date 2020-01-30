@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
-import './maps.css';
+import s from  './maps.module.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFmYWhlcyIsImEiOiJjazV6cW5xdDUwMDRrM21ueHF2Z3EzY3VyIn0.RRuRqnVCy3VWno0v3Xk__w';
 
@@ -34,7 +34,7 @@ export default class Application extends Component {
     render() {
         return (
             <div>
-                <div ref={el => this.mapContainer = el} className='mapContainer' />
+                <div ref={el => this.mapContainer = el} className={s.mapContainer} />
             </div>
         )
     }
