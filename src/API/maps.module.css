@@ -19,3 +19,14 @@
     left: 0;
     bottom: 0;
 }
+
+.mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.mark i {
+    color: red;
+    font-size: 50px;
+}
