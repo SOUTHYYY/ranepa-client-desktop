@@ -1,18 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './header.module.css'
 import {NavLink} from "react-router-dom";
 
 const Header = props => {
 
+    const [sidebar, setSidebar] = useState(false)
+    const onToggleHamburger = () => {
+        setSidebar(!sidebar)
+    }
+    let sideBarstyles = `${styles.sidebar}`
+    if (sidebar) {
+        sideBarstyles += ` ${styles.sidebarOn}`
+    }
+    const sideBarUl = {display: 'none'}
     return (
         <header>
             <div className={styles.wrapper}>
                 <div className={styles.top_navbar}>
-                    <div className={styles.hamburger}>
+                    <div className={styles.hamburger} style={sidebar ? null : {borderBottomLeftRadius: '20px'}}
+                         onClick={() => onToggleHamburger()}>
                         <div className={styles.one}></div>
                         <div className={styles.two}></div>
                         <div className={styles.three}></div>
                     </div>
+
                     <div className={styles.top_menu}>
                         <div className={styles.logo}>
                             Ranepa client
@@ -20,8 +31,8 @@ const Header = props => {
                     </div>
                 </div>
 
-                <div className={styles.sidebar}>
-                    <ul>
+                <div className={sideBarstyles}>
+                    <ul style={sidebar ? null : sideBarUl}>
                         <li><NavLink to={'/map'} activeClassName={styles.active}>
                             <span className={styles.icon}><i className="fas fa-map-marked-alt"></i></span>
                             <span className={styles.title}>Карта</span>
