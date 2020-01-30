@@ -3,7 +3,7 @@ import styles from './header.module.css'
 import {NavLink} from "react-router-dom";
 
 const Header = props => {
-    
+
     return (
         <header>
             <div className={styles.wrapper}>
@@ -22,6 +22,10 @@ const Header = props => {
 
                 <div className={styles.sidebar}>
                     <ul>
+                        <li><NavLink to={'/map'} activeClassName={styles.active}>
+                            <span className={styles.icon}><i className="fas fa-map-marked-alt"></i></span>
+                            <span className={styles.title}>Карта</span>
+                        </NavLink></li>
                         <li><NavLink to={'/timetable'} activeClassName={styles.active}>
                             <span className={styles.icon}><i className="fas fa-table"></i></span>
                             <span className={styles.title}>Расписание</span>
