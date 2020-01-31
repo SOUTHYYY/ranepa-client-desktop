@@ -12,6 +12,8 @@
 }
 
 .mapContainer {
+    width: 1920px;
+    height: 1280px;
     z-index: -2 !important;
     position: absolute;
     top: 0;
