@@ -15,7 +15,7 @@ function App() {
             <Header/>
                 <Switch>
                     <Route path={'/map'}>
-                        <Map apiStyle="mapbox://styles/mafahes/ck5zqz49333o11intge32b2pf"/>
+                        <MapContainer apiStyle="mapbox://styles/mafahes/ck5zqz49333o11intge32b2pf"/>
                     </Route>
                     <Route path={'/timetable'}>
                         <Map apiStyle="mapbox://styles/mafahes/ck5zqz49333o11intge32b2pf"/>

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import MapGL, { Marker } from 'react-map-gl';
+import MapGL, {Marker} from 'react-map-gl';
 import s from './mapbox-gl.css';
 import Pin from './Pins';
+import MapContainer from "../components/container-components/map-container";
 
 export default class Application extends Component {
 
@@ -23,8 +24,8 @@ export default class Application extends Component {
         return (
             <div className="mapContainer">
                 <MapGL{...this.state.viewport}
-                    mapStyle={this.props.apiStyle}
-                             mapboxApiAccessToken={this.state.token}
+                      mapStyle={this.props.apiStyle}
+                      mapboxApiAccessToken={this.state.token}
                       onViewportChange={(viewport) => this.setState({viewport})}>
                     <Marker latitude={56.3081} longitude={43.9863}>
                         <Pin/>
