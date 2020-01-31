@@ -1,0 +1,22 @@
+.not_found {
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.not_found img {
+    width: 300px;
+}
+
+.not_found span {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 100px;
+    font-weight: bold;
+    margin: 25px 0;
+    color: #951b1d;
+}
+
+
