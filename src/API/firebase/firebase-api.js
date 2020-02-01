@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import axios from "axios";
 
 export const config = {
     apiKey: "AIzaSyDpDh_wuj9NfteTWqZeNBLVmu5FIgnd4OY",
@@ -11,3 +12,11 @@ export const config = {
 };
 
 
+export const loadData = async () =>{
+    let dataS = null
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+    }
+    const serverData = await axios.get('https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o')
+    return serverData
+}
