@@ -11,15 +11,17 @@ class MapContainer extends Component {
     }
 
     render() {
-        let {pins, token, apiStyle, viewport, viewportChanged} = this.props
+        let {pins, token, apiStyle, viewport, viewportChanged} = this.props;
+
         const markers = pins.map(el => {
             return (
                 <Marker key={el.id} latitude={el.latitude} longitude={el.longitude}>
                     <Pins/>
                 </Marker>)
-        })
+        });
         return (
             <div className="mapContainer">
+
                 <MapGL{...viewport}
                       mapStyle={apiStyle}
                       mapboxApiAccessToken={token}
@@ -36,6 +38,6 @@ const mapStateToProps = (state) => ({
     pins: state.map.pins,
     viewport: state.map.viewport,
     token: state.map.token
-})
+});
 
 export default connect(mapStateToProps, {viewportChanged})(MapContainer);

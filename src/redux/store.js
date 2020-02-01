@@ -4,7 +4,8 @@ import thunkMiddleware from 'redux-thunk'
 
 const store  = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-// Просмотр всего стейта в консоли window.store.getState()
+// Просмотр всего стейта в консоли
+
 window.store = store.getState()
 
 export  default  store

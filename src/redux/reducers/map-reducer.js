@@ -1,5 +1,6 @@
 import {VIEWPORT_CHANGED} from "../consts/map";
 
+
 const initialState = {
     pins: [
         {
@@ -21,21 +22,21 @@ const initialState = {
         latitude: 56.3081,
         longitude: 43.9863
     },
-}
+};
 
 
 const mapReducer = (state = initialState, action) => {
     switch (action.type) {
-        case VIEWPORT_CHANGED:
+        case 'VIEWPORT_CHANGED':
             return {
                 ...state,
                 viewport: action.payload
-            }
+            };
 
         default:
             return state
     }
-}
+};
 
 
 export default mapReducer
