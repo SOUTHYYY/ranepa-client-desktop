@@ -96,7 +96,7 @@ export default class Application extends Component {
                     "data": this.state.data
                 },
                 "paint": {
-            ...LayerStyle   // Стиль меток
+                    ...LayerStyle   // Стиль меток
                 }
             })
         });
