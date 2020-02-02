@@ -17,19 +17,50 @@ export default class Application extends Component {
         };
     }
 
-
-
-    static initializeMap = (state, viewport) => {
-
-        MapboxGL.accessToken = LayerStyle.token;
-
-        let map = new MapboxGL.Map({
-            container: 'map',
-            style: `${LayerStyle.apiStyle}`,
-            ...viewport
+    createFeatureCollectionOnce(data) {
+        let features = [];
+        data.forEach(point => {
+            features.push({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        point.longitude,
+                        point.latitude
+                    ]
+                },
+                "properties": {
+                    "header": "Тут заглавие",
+                    "details": "Детали",
+                    "time": "Тут время"
+                }
+            });
         });
 
+        return {
+            "type": "FeatureCollection",
+            "features": features
+        }
+    }
+
+    componentWillUnmount() {
+        window.location.reload();
+    }
+
+    static initializeMap = (state, viewport) => {
+        MapboxGL.accessToken = LayerStyle.token;
+
+        if(!map) {
+            var map = new MapboxGL.Map({
+                container: 'map',
+                style: `${LayerStyle.apiStyle}`,
+                ...viewport
+            });
+        }
+
+
         map.on('load', () => {
+
             map.addLayer({
                 "id": "points",
                 "type": "circle",

@@ -4,9 +4,9 @@ import {Switch, Route, DefaultRoute} from 'react-router-dom'
 
 import Header from './components/header/header';
 // import HomePage from './components/home-page/home-page';
-import Map from "./components/container-components/map-caller";
+import Map from "./API/map/map-caller";
 import NotFonud from "./components/not-found/not-fonud";
-
+import MapContainer from "./components/container-components/mapContainer";
 
 
 
@@ -15,20 +15,20 @@ function App() {
         <div>
             <Header/>
                 <Switch>
-                    <Route path={'/map'}>
-                        <Map/>
+                    <Route exact path={'/map'}>
+                        <MapContainer/>
                     </Route>
                     <Route path={'/timetable'}>
-                        <Map/>
+                        <NotFonud/>
                     </Route>
                     <Route path={'/student-book'}>
-                        <Map/>
+                        <MapContainer/>
                     </Route>
                     <Route path={'/references'}>
-                        <Map/>
+                        <MapContainer/>
                     </Route>
                     <Route path={'/login'}>
-                        <Map/>
+                        <MapContainer/>
                     </Route>
                     <Route>
                         {/* Возвращает компонент если нету роута */}

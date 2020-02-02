@@ -1,10 +1,13 @@
 import firebase from "firebase";
-import {snapshotToArray} from "../../API/firebase/firebase-api";
+import {transformData} from "../../API/firebase/firebase-api";
+import axios from "axios";
 import {
     FETCH_API_START,
     FETCH_API_SUCCESS,
     FETCH_API_FAILURE
 } from "./action_types";
+
+const api_url = 'https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o';
 
 function createFeatureCollection(data) {
     let features = [];
@@ -53,10 +56,11 @@ export function fetchAPIFailure() {
 
 export function fetchFromAPI() {
     return dispatch => {
-        firebase.database().ref('markers').on('value', (snap) => {
-            this.setState({
-                data: this.createFeatureCollection(dispatch())
-            });
-        })
+        dispatch(fetchAPIStart());
+        axios.get('https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o')
+            .then((res) => transformData(res.data))
+            .then((res) => createFeatureCollection(res))
+            .then((res) => dispatch(fetchAPISuccess(res)))
+            .catch((error) => dispatch(fetchAPIFailure()))
     }
 }

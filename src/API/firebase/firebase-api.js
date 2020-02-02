@@ -23,3 +23,10 @@ export function snapshotToArray(snapshot) {
 
     return returnArr;
 }
+
+export function transformData(obj) {
+
+    return Object.keys(obj).map(key => {
+        return obj[key];
+    })
+}
