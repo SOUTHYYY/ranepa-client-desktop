@@ -1,7 +1,25 @@
 # ranepa-client-desktop
-Desktop App for ranepa-client
 
-For build work:
 
-npm i react-mapbox-gl
-npm i mapbox-gl
+**Install dependencies:**
+```
+npm install firebase
+npm install axios
+npm install redux
+npm install mapbox-gl
+```
+# 
+
+. | Map source | Database source
+------------ | ------------ | -------------
+Desktop | Mapbox GL | Firebase
+iOS/Anroid | undefined | Firebase
+
+# Config 
+```
+mapConfig.js
+
+pinsConfig: [Current style of all markers]
+apiStyle: [Your map style from Mapbox]
+token: [Your token from Mapbox]
+```
