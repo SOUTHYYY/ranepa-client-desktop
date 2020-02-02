@@ -11,12 +11,15 @@ export const config = {
     appId: "1:723989397537:web:0fb8d658b7b8556d"
 };
 
+export function snapshotToArray(snapshot) {
+    var returnArr = [];
 
-export const loadData = async () =>{
-    let dataS = null
-    if (!firebase.apps.length) {
-        firebase.initializeApp(config);
-    }
-    const serverData = await axios.get('https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o')
-    return serverData
+    snapshot.forEach((childSnapshot) => {
+        var item = childSnapshot.val();
+        item.key = childSnapshot.key;
+
+        returnArr.push(item);
+    });
+
+    return returnArr;
 }
