@@ -3,11 +3,17 @@ import MapboxGL from 'mapbox-gl';
 import s from './mapbox-gl.css';
 import LayerStyle from './mapConfig';
 
+import firebase from "firebase";
+import {config} from "../firebase/firebase-api";
+
 export default class Application extends Component {
 
     constructor(props) {
         super(props);
+        firebase.initializeApp(config);
+
         this.state = {
+            markName: '',
             map: false,
             viewport: {
                 zoom: 17,
@@ -60,7 +66,6 @@ export default class Application extends Component {
 
 
         map.on('load', () => {
-
             map.addLayer({
                 "id": "points",
                 "type": "circle",
@@ -98,6 +103,19 @@ export default class Application extends Component {
 
         map.on('mouseleave', 'points', () => {
             map.getCanvas().style.cursor = '';
+        });
+
+        map.on('click', (coords) => {
+
+            const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
+            if(!result.length) {
+                firebase.database().ref('markers')
+                    .push({
+                        latitude: coords.lngLat.lat,
+                        longitude: coords.lngLat.lng
+                    });
+            }
+
         });
 
         return { map };
