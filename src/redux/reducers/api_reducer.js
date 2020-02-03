@@ -4,7 +4,12 @@ import {
     FETCH_API_FAILURE
 } from "../actions/action_types";
 
-export function APIReducer(state = { loading: false, data: false}, action) {
+export const initialState =  {
+    loading: false,
+    data: false
+}
+
+export function APIReducer(state = initialState, action) {
     const { type, payload } = action;
     switch(type) {
         case FETCH_API_START:

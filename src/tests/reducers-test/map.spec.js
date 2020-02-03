@@ -1,19 +1,16 @@
-// Tests for mapReducer
-
-import mapReducer, {initialState} from "../../redux/reducers/map-reducer";
-import {GET_COORDS_FAILURE, GET_COORDS_REQUEST, GET_COORDS_SUCCES} from "../../redux/consts/map";
+import {APIReducer, initialState} from "../../redux/reducers/api_reducer";
+import { FETCH_API_START, FETCH_API_SUCCESS, FETCH_API_FAILURE} from '../../redux/actions/action_types';
 
 
-describe('mapReducer test', () => {
-    it('GET_COORDS_REQUEST TEST', () => {
+
+describe('APIReducer test', () => {
+    it('FETCH_API_START TEST', () => {
         const action = {
-            type: GET_COORDS_REQUEST
+            type: FETCH_API_START
         }
-        expect(mapReducer(initialState, action)).toEqual({
+        expect(APIReducer(initialState, action)).toEqual({
             ...initialState,
             loading: true,
-            error: false,
-            errorMsg: null
         })
     })
 
@@ -21,17 +18,16 @@ describe('mapReducer test', () => {
         const state = {
             ...initialState,
             loading: true,
-            error: false,
-            errorMsg: null
+
         }
         const action = {
-            type: GET_COORDS_SUCCES,
+            type: FETCH_API_SUCCESS,
             payload: [1, 2, 3, 4, 5]
         }
-        expect(mapReducer(state, action)).toEqual({
+        expect(APIReducer(state, action)).toEqual({
             ...state,
             loading: false,
-            pins: action.payload
+            data: action.payload
         })
     })
 
@@ -39,18 +35,15 @@ describe('mapReducer test', () => {
         const state = {
             ...initialState,
             loading: true,
-            error: false,
-            errorMsg: null
         }
         const action = {
-            type: GET_COORDS_FAILURE,
-            payload: 'Error 404 lost connection'
+            type: FETCH_API_FAILURE,
+            payload: 'Not found Data'
         }
-        expect(mapReducer(state, action)).toEqual({
+        expect(APIReducer(state, action)).toEqual({
             ...state,
             loading: false,
-            error: true,
-            errorMsg: action.payload
+            data: action.payload
         })
     })
 })
