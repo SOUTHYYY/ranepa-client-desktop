@@ -2,18 +2,20 @@ import React from 'react';
 import './App.css';
 import {Switch, Route, DefaultRoute} from 'react-router-dom'
 
-import Header from './components/header/header';
-// import HomePage from './components/home-page/home-page';
-import Map from "./API/map/map-caller";
+
 import NotFonud from "./components/not-found/not-fonud";
 import MapContainer from "./components/container-components/mapContainer";
+import HeaderContainer from './components/container-components/headerContainer'
+import ProfileContainer from './components/container-components/profileContainer'
+import Login from './components/login/login'
+
 
 
 
 function App() {
     return (
         <div>
-            <Header/>
+            <HeaderContainer/>
                 <Switch>
                     <Route exact path={'/map'}>
                         <MapContainer/>
@@ -28,7 +30,10 @@ function App() {
                         <MapContainer/>
                     </Route>
                     <Route path={'/login'}>
-                        <MapContainer/>
+                        <Login/>
+                    </Route>
+                    <Route path={'/profile'}>
+                        <ProfileContainer/>
                     </Route>
                     <Route>
                         {/* Возвращает компонент если нету роута */}

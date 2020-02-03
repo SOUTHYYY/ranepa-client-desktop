@@ -3,7 +3,7 @@ import styles from './header.module.css'
 import {NavLink} from "react-router-dom";
 
 const Header = props => {
-
+    const {isAuth} = props
     const [sidebar, setSidebar] = useState(false)
     const onToggleHamburger = () => {
         setSidebar(!sidebar)
@@ -15,16 +15,25 @@ const Header = props => {
         hamburgerStyles = `${styles.hamburgerOn}`
     }
     const sideBarUl = {display: 'none'}
+    const authUrl = isAuth
+        ? <NavLink to={'/profile'}>
+            <i className="fas fa-user"></i>
+        </NavLink>
+        : <NavLink to={'/login'}>
+            <i className="fas fa-user"></i>
+        </NavLink>
     return (
         <header>
             <div className={styles.wrapper}>
                 <div className={styles.top_navbar}>
                     <div className={styles.hamburger}
-                         style={sidebar ? {minWidth: '200px',
+                         style={sidebar ? {
+                             minWidth: '200px',
                              borderTopRightRadius: '20px',
                              borderTopLeftRadius: '20px',
                              borderBottomLeftRadius: '0px',
-                             borderBottomRightRadius: '0px'} : null}
+                             borderBottomRightRadius: '0px'
+                         } : null}
                          onClick={() => onToggleHamburger()}>
                         <div className={styles.hamburger__container}>
                             <div className={styles.one}></div>
@@ -38,9 +47,7 @@ const Header = props => {
                             Ranepa client
                         </div>
                         <div className={styles.login}>
-                            <NavLink to={'/login'}>
-                                <i className="fas fa-user"></i>
-                            </NavLink>
+                            {authUrl}
                         </div>
                     </div>
                 </div>
