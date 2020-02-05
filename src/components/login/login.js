@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import Input from "../UI/input/input";
 import styles from './login.module.css'
+import { Redirect } from 'react-router-dom'
 
 
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+
 class Login extends Component {
     state = {
         isFormValid: false,
@@ -72,7 +74,6 @@ class Login extends Component {
         event.preventDefault()
     }
 
-
     renderInputs() {
         return Object.keys(this.state.formControls).map((controlName, index) => {
             const control = this.state.formControls[controlName]
@@ -93,11 +94,16 @@ class Login extends Component {
     }
 
     render() {
+        const {isAuth} = this.props
+        if(isAuth) {
+            return <Redirect to={'/map'} />
+        }
         return (
             <div className={styles.login}>
+                <h2>Войти в NIU RANEPA</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
-                    <button disabled={!this.state.isFormValid}>Войти</button>
+                    <button onClick={this.props.login} disabled={!this.state.isFormValid}>Войти</button>
                 </form>
             </div>
         );

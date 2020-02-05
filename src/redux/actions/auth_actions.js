@@ -26,9 +26,9 @@ export const login = (email, password, rememberMe = true) => async (dispatch) =>
         data: {
             id: 1,
             email: 'niuranepa@gmail.com',
-            login: 'NIURANEPA'
+            login: 'NIURANEPA',
+            resultCode: 0,
         },
-        resultCode: 0,
     }
     if (response.data.resultCode === 0) {
         dispatch(OnSetAuthUserData())
@@ -43,7 +43,6 @@ export const logout = () => async (dispatch) => {
         data: {
             resultCode: 0,
         }
-
     }
 
     if (response.data.resultCode === 0) {

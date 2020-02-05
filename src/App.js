@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.css';
-import {Switch, Route, DefaultRoute} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 
 
 import NotFonud from "./components/not-found/not-fonud";
 import MapContainer from "./components/container-components/mapContainer";
 import HeaderContainer from './components/container-components/headerContainer'
 import ProfileContainer from './components/container-components/profileContainer'
-import Login from './components/login/login'
-
-
+import LoginContainer from './components/container-components/loginContainer'
 
 
 function App() {
@@ -30,7 +28,7 @@ function App() {
                         <MapContainer/>
                     </Route>
                     <Route path={'/login'}>
-                        <Login/>
+                        <LoginContainer/>
                     </Route>
                     <Route path={'/profile'}>
                         <ProfileContainer/>

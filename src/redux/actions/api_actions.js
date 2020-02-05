@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import {transformData} from "../../API/firebase/firebase-api";
 import axios from "axios";
 import {
