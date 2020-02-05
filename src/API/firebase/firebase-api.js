@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import axios from "axios";
+import React, {cloneElement} from 'react';
 
 export const config = {
     apiKey: "AIzaSyDpDh_wuj9NfteTWqZeNBLVmu5FIgnd4OY",
@@ -10,6 +11,25 @@ export const config = {
     messagingSenderId: "723989397537",
     appId: "1:723989397537:web:0fb8d658b7b8556d"
 };
+
+export function transformCollection(latitude, longitude) {
+    return {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                longitude,
+                latitude
+            ]
+        },
+        "properties": {
+            "header": "Тут заглавие",
+            "details": "Детали",
+            "time": "Тут время"
+        }
+    }
+}
+
 
 export function snapshotToArray(snapshot) {
     var returnArr = [];
@@ -29,4 +49,18 @@ export function transformData(obj) {
     return Object.keys(obj).map(key => {
         return obj[key];
     })
+}
+export function foo() {
+
+}
+export function updateFireData(latitude, longitude) {
+    if (!firebase.app.length) {
+        firebase.initializeApp(config);
+    }
+
+    firebase.database().ref('markers')
+        .push({
+            latitude: latitude,
+            longitude: longitude
+        })
 }

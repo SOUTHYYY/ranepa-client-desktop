@@ -4,7 +4,7 @@ import s from './mapbox-gl.css';
 import LayerStyle from './mapConfig';
 
 import firebase from "firebase";
-import {config} from "../firebase/firebase-api";
+import {config, foo, transformCollection, updateFireData} from "../firebase/firebase-api";
 
 export default class Application extends Component {
 
@@ -23,35 +23,10 @@ export default class Application extends Component {
         };
     }
 
-    createFeatureCollectionOnce(data) {
-        let features = [];
-        data.forEach(point => {
-            features.push({
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [
-                        point.longitude,
-                        point.latitude
-                    ]
-                },
-                "properties": {
-                    "header": "Тут заглавие",
-                    "details": "Детали",
-                    "time": "Тут время"
-                }
-            });
-        });
-
-        return {
-            "type": "FeatureCollection",
-            "features": features
-        }
-    }
-
     componentWillUnmount() {
         window.location.reload();
     }
+
 
     static initializeMap = (state, viewport) => {
         MapboxGL.accessToken = LayerStyle.token;
@@ -105,17 +80,16 @@ export default class Application extends Component {
             map.getCanvas().style.cursor = '';
         });
 
+
         map.on('click', (coords) => {
 
             const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
-            if(!result.length) {
-                firebase.database().ref('markers')
-                    .push({
-                        latitude: coords.lngLat.lat,
-                        longitude: coords.lngLat.lng
-                    });
-            }
 
+            if(!result.length && map.getSource('points')) {
+                state.data.features.push(transformCollection(coords.lngLat.lat, coords.lngLat.lng));
+                map.getSource('points').setData(state.data);
+                updateFireData(coords.lngLat.lat, coords.lngLat.lng)
+            }
         });
 
         return { map };

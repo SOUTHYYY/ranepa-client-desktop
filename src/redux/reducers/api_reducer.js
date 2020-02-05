@@ -7,7 +7,7 @@ import {
 export const initialState =  {
     loading: false,
     data: false
-}
+};
 
 export function APIReducer(state = initialState, action) {
     const { type, payload } = action;
