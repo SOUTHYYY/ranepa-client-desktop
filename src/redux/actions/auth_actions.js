@@ -1,5 +1,5 @@
 import {SET_AUTH_USER_DATA_SUCCES} from "./action_types";
-import { stopSubmit } from 'redux-form'
+import {stopSubmit} from 'redux-form'
 
 export const setAuthUserData = (id, email, login, isAuth) => ({
     type: SET_AUTH_USER_DATA_SUCCES,
@@ -9,14 +9,14 @@ export const setAuthUserData = (id, email, login, isAuth) => ({
 export const OnSetAuthUserData = () => async (dispatch) => {
     try {
         const data = window.localStorage.getItem('user');
-        if (data !== undefined) {
-            let {id, login, email} = data
+        const parsed = JSON.parse(data)
+        if (parsed !== undefined) {
+            let {id, login, email} = parsed
             dispatch(setAuthUserData(id, email, login, true))
         }
-    }catch (e) {
+    } catch (e) {
 
     }
-
 }
 
 export const login = (email, password, rememberMe = true) => async (dispatch) => {
