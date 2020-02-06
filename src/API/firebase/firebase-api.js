@@ -1,6 +1,4 @@
 import firebase from 'firebase';
-import axios from "axios";
-import React, {cloneElement} from 'react';
 
 export const config = {
     apiKey: "AIzaSyDpDh_wuj9NfteTWqZeNBLVmu5FIgnd4OY",

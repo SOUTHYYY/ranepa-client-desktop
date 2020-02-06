@@ -7,7 +7,7 @@ class NotFonud extends Component {
     render() {
         return (
             <div className={styles.not_found}>
-                <img src={not_found}/>
+                <img src={not_found} alt='not-found'/>
                 <span>404</span>
                 <NavLink to={'/map'}>
                     <button>

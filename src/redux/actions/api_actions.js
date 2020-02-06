@@ -56,7 +56,7 @@ export function fetchAPIFailure() {
 export function fetchFromAPI() {
     return dispatch => {
         dispatch(fetchAPIStart());
-        axios.get('https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o')
+        axios.get(api_url)
             .then((res) => transformData(res.data))
             .then((res) => createFeatureCollection(res))
             .then((res) => dispatch(fetchAPISuccess(res)))

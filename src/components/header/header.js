@@ -9,10 +9,8 @@ const Header = props => {
         setSidebar(!sidebar)
     }
     let sideBarstyles = `${styles.sidebar}`
-    let hamburgerStyles = `${styles.hamburger}`
     if (sidebar) {
         sideBarstyles += ` ${styles.sidebarOn}`
-        hamburgerStyles = `${styles.hamburgerOn}`
     }
     const sideBarUl = {display: 'none'}
     const authUrl = isAuth
