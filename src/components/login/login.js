@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Input from "../UI/input/input";
 import styles from './login.module.css'
 import { Redirect } from 'react-router-dom'
+import Button from "../UI/button/button";
+import ranepa from '../../images/login/ranepa.png'
 
 
 function validateEmail(email) {
@@ -100,10 +102,14 @@ class Login extends Component {
         }
         return (
             <div className={styles.login}>
-                <h2>Войти в NIU RANEPA</h2>
+                <img src={ranepa} alt='ranepa' />
+                <h2>Enter NIU RANEPA</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
-                    <button onClick={this.props.login} disabled={!this.state.isFormValid}>Войти</button>
+                    <Button
+                        text='Войти'
+                        onClickFunc={this.props.login}
+                        disable={!this.state.isFormValid}/>
                 </form>
             </div>
         );
