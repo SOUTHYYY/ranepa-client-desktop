@@ -1,6 +1,7 @@
 
 .input {
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .input label {
@@ -13,7 +14,7 @@
 .input input {
     display: block;
     box-sizing: border-box;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     padding: 7px;
     margin:  0 0 5px;
     width: 100%;

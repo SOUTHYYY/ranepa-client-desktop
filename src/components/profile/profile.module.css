@@ -1,7 +1,37 @@
 .profile {
-    width: 100vw;
-    height: 100vh;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 150px);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    padding-top: 150px;
+    margin: 0px 50px;
+    font-family: 'Quicksand', sans-serif;
 }
+
+.profile__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile__header h1 {
+    color: #951b1d;
+}
+
+.marks {
+    width: 100%;
+}
+
+.marks__table {
+    border-collapse: separate;
+    width: 65%;
+    border-spacing: 10px 10px;
+    min-width: 870px;
+}
+
+
+
+

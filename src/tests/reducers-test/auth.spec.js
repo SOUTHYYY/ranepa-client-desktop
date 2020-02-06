@@ -10,14 +10,14 @@ describe('AIUTH reducer test', () => {
             payload: {
                 id: 1,
                 email: 'example@gmail.com',
-                login: 'southyyy'
+                login: 'southyyy',
+                isAuth: true
             }
         }
 
         expect(AuthReducer(initialState, action)).toEqual({
             ...initialState,
             ...action.payload,
-            isAuth: true
         })
     })
 

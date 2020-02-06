@@ -1,0 +1,7 @@
+.markerItem {
+    border: 1px solid red;
+}
+
+.markerItem img {
+    width: 20px;
+}
