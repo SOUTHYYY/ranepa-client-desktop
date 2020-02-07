@@ -4,7 +4,7 @@ import s from './mapbox-gl.css';
 import LayerStyle from './mapConfig';
 
 import firebase from "firebase";
-import {config, foo, transformCollection, updateFireData} from "../firebase/firebase-api";
+import {config, transformCollection, updateFireData} from "../firebase/firebase-api";
 
 export default class Application extends Component {
 
@@ -82,13 +82,13 @@ export default class Application extends Component {
 
 
         map.on('click', (coords) => {
-
+            console.log(state);
             const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
-
-            if(!result.length && map.getSource('points')) {
+            if(!result.length && map.getSource('points') && state.auth.isAuth) {
                 state.data.features.push(transformCollection(coords.lngLat.lat, coords.lngLat.lng));
                 map.getSource('points').setData(state.data);
-                updateFireData(coords.lngLat.lat, coords.lngLat.lng)
+                updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
+                // getFireProfile('456');
             }
         });
 

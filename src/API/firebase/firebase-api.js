@@ -48,10 +48,8 @@ export function transformData(obj) {
         return obj[key];
     })
 }
-export function foo() {
 
-}
-export function updateFireData(latitude, longitude) {
+export function updateFireData(latitude, longitude, user) {
     if (!firebase.app.length) {
         firebase.initializeApp(config);
     }
@@ -59,6 +57,33 @@ export function updateFireData(latitude, longitude) {
     firebase.database().ref('markers')
         .push({
             latitude: latitude,
-            longitude: longitude
+            longitude: longitude,
+            user: user
+        })
+}
+
+export function getFireProfile(pass) {
+    let response;
+    firebase.database().ref('profiles')
+        .orderByChild('password')
+        .equalTo(pass)
+        .once('value')
+        .then((snap) => {
+            if(snap.val()) {
+                response = snap.val();
+                console.log('Аккаунт подтвержден');
+            } else console.log('Аккаунт не найдет');
+        });
+    return response;
+}
+
+export function findMarkersByUser(user) {
+    let response;
+    firebase.database().ref('markers')
+        .orderByChild('user')
+        .equalTo(user)
+        .once('value')
+        .then((snap) => {
+            response = snap.val();
         })
 }

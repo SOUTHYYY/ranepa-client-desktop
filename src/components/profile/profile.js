@@ -30,7 +30,7 @@ class Profile extends Component {
                 <div className={styles.profile__header}>
                     <h1>Личный кабинет</h1>
                     <div className={styles.header__info}>
-                        <div>SOUTHYYY</div>
+                        <div>{this.props.login}</div>
                     </div>
                 </div>
                 <div className={styles.marks}>
