@@ -73,7 +73,7 @@ class Login extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
     }
 
     renderInputs() {
