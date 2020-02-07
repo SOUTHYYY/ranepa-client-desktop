@@ -6,25 +6,19 @@ import Button from "../UI/button/button";
 import ranepa from '../../images/login/ranepa.png'
 
 
-function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
 class Login extends Component {
     state = {
         isFormValid: false,
         formControls: {
-            email: {
+            login: {
                 value: '',
-                type: 'email',
-                label: 'Email',
-                errorMessage: 'Введите корректный Email',
+                type: 'login',
+                label: 'Логин',
+                errorMessage: 'Введите корректный Логин',
                 valid: false,
                 touched: false,
                 validation: {
                     required: true,
-                    email: true
                 }
             },
             password: {
@@ -46,10 +40,6 @@ class Login extends Component {
         if (validation.required) {
             isValid = value.trim() !== '' && isValid
         }
-        if (validation.email) {
-            isValid = validateEmail(value) && isValid
-        }
-
         return isValid
     }
     onChangeHandler = (event, controlName) => {
@@ -66,7 +56,7 @@ class Login extends Component {
         Object.keys(formControls).forEach(name => {
             isFormValid = formControls[name].valid && isFormValid
         })
-
+        console.log('VALUE', this.state.formControls.login.value)
         this.setState({
             formControls, isFormValid
         })
@@ -106,10 +96,13 @@ class Login extends Component {
                 <h2>Enter NIU RANEPA</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
-                    <Button
-                        text='Войти'
-                        onClickFunc={this.props.login}
-                        disable={!this.state.isFormValid}/>
+                    {/*<Button*/}
+                    {/*    text='Войти'*/}
+                    {/*    onClickFunc={}*/}
+                    {/*    disable={!this.state.isFormValid}/>*/}
+                        <button
+                            disabled={!this.state.isFormValid}
+                            onClick={() => this.props.login(this.state.formControls.login.value, this.state.formControls.password.value)}>Войти</button>
                 </form>
             </div>
         );

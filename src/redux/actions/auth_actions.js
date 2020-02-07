@@ -1,30 +1,31 @@
 import {SET_AUTH_USER_DATA_SUCCES} from "./action_types";
 import {stopSubmit} from 'redux-form'
 
-export const setAuthUserData = (id, email, login, isAuth) => ({
+export const setAuthUserData = (id, login, password, isAuth) => ({
     type: SET_AUTH_USER_DATA_SUCCES,
-    payload: {id, email, login, isAuth}
+    payload: {id, login, password, isAuth}
 })
 
 export const OnSetAuthUserData = () => async (dispatch) => {
     try {
         const data = window.localStorage.getItem('user');
         const parsed = JSON.parse(data)
+        debugger
         if (parsed !== undefined) {
-            let {id, login, email} = parsed
-            dispatch(setAuthUserData(id, email, login, true))
+            let {id, login, password} = parsed
+            dispatch(setAuthUserData(id, login, password, true))
         }
     } catch (e) {
 
     }
 }
 
-export const login = (email, password, rememberMe = true) => async (dispatch) => {
+export const login = (login, password) => async (dispatch) => {
     const response = {
         data: {
             id: 1,
-            email: 'niuranepa@gmail.com',
-            login: 'NIURANEPA',
+            login,
+            password,
             isAuth: true
         },
         resultCode: 0,
@@ -32,7 +33,7 @@ export const login = (email, password, rememberMe = true) => async (dispatch) =>
     if (response.resultCode === 0) {
         //Convert the state to a JSON string
         const serialisedState = JSON.stringify(response.data);
-        //Save the serialised state to localStorage against the key 'app_state'
+        //Save the serialised state to localStorage against the key 'user'
         await window.localStorage.setItem('user', serialisedState)
         dispatch(OnSetAuthUserData())
     } else {

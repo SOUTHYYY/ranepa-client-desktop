@@ -2,8 +2,8 @@ import {SET_AUTH_USER_DATA_SUCCES} from "../actions/action_types";
 
 export const initialState = {
     id: null,
-    email: null,
     login: null,
+    password: null,
     isAuth: false,
     isFretching: false,
 }

@@ -6,11 +6,11 @@ import Login from '../login/login'
 const mapStateToProps = state => ({
     isAuth: state.AuthReducer.isAuth
 })
-const mapDispatchToProps = dispatch => ({
-    login: () => dispatch(login())
-})
+// const mapDispatchToProps = dispatch => ({
+//     login: () => dispatch(login())
+// })
 
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, {login}),
 )(Login)
