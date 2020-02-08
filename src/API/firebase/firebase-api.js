@@ -79,7 +79,6 @@ export async function getFireProfile(pass, login) {
             if(snap.val()) {
                 _login_state.isAuthed = true;
                 _login_state.data = snap.child(login).val();
-                debugger;
                 return true
             } else {
                 console.error('Логин не найден!!');

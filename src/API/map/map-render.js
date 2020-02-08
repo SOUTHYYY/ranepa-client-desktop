@@ -83,7 +83,7 @@ export default class Application extends Component {
 
         map.on('click', (coords) => {
             const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
-            if(!result.length && map.getSource('points') /*&& state.auth.isAuth*/) {
+            if(!result.length && map.getSource('points') && state.auth.isAuth) {
                 state.data.features.push(transformCollection(coords.lngLat.lat, coords.lngLat.lng));
                 map.getSource('points').setData(state.data);
                updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
