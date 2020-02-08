@@ -1,5 +1,7 @@
 import {SET_AUTH_USER_DATA_SUCCES} from "./action_types";
 import {stopSubmit} from 'redux-form'
+import {config, getFireProfile} from "../../API/firebase/firebase-api";
+import * as firebase from "firebase";
 
 export const setAuthUserData = (id, login, password, isAuth) => ({
     type: SET_AUTH_USER_DATA_SUCCES,
@@ -10,7 +12,6 @@ export const OnSetAuthUserData = () => async (dispatch) => {
     try {
         const data = window.localStorage.getItem('user');
         const parsed = JSON.parse(data)
-        debugger
         if (parsed !== undefined) {
             let {id, login, password} = parsed
             dispatch(setAuthUserData(id, login, password, true))
@@ -21,15 +22,12 @@ export const OnSetAuthUserData = () => async (dispatch) => {
 }
 
 export const login = (login, password) => async (dispatch) => {
+    firebase.initializeApp(config);
+
+    const data = await getFireProfile(password, login);
     const response = {
-        data: {
-            id: 1,
-            login,
-            password,
-            isAuth: true
-        },
-        resultCode: 0,
-    }
+        ...data
+    };
     if (response.resultCode === 0) {
         //Convert the state to a JSON string
         const serialisedState = JSON.stringify(response.data);
@@ -37,6 +35,7 @@ export const login = (login, password) => async (dispatch) => {
         await window.localStorage.setItem('user', serialisedState)
         dispatch(OnSetAuthUserData())
     } else {
+        debugger;
         let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Упс... что-то пошло не так...'
         dispatch(stopSubmit('login', {_error: message}))
     }

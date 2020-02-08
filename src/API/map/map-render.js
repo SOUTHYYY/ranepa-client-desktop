@@ -10,8 +10,9 @@ export default class Application extends Component {
 
     constructor(props) {
         super(props);
-        firebase.initializeApp(config);
-
+        if (!firebase.app.length) {
+            firebase.initializeApp(config);
+        };
         this.state = {
             markName: '',
             map: false,
@@ -80,15 +81,12 @@ export default class Application extends Component {
             map.getCanvas().style.cursor = '';
         });
 
-
         map.on('click', (coords) => {
-            console.log(state);
             const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
-            if(!result.length && map.getSource('points') && state.auth.isAuth) {
+            if(!result.length && map.getSource('points') /*&& state.auth.isAuth*/) {
                 state.data.features.push(transformCollection(coords.lngLat.lat, coords.lngLat.lng));
                 map.getSource('points').setData(state.data);
-                updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
-                // getFireProfile('456');
+               updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
             }
         });
 
