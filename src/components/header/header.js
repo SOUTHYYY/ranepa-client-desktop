@@ -14,12 +14,19 @@ const Header = props => {
     }
     const sideBarUl = {display: 'none'}
     const authUrl = isAuth
-        ? <NavLink to={'/profile'}>
-            <i className="fas fa-user"></i>
+        ?
+        <NavLink to={'/profile'}>
+            <div className={styles.login}>
+                <i className="fas fa-user"></i>
+            </div>
         </NavLink>
+
         : <NavLink to={'/login'}>
-            <i className="fas fa-user"></i>
+            <div className={styles.login}>
+                <i className="fas fa-user"></i>
+            </div>
         </NavLink>
+
     return (
         <header>
             <div className={styles.wrapper}>
@@ -44,9 +51,7 @@ const Header = props => {
                         <div className={styles.logo}>
                             Ranepa client
                         </div>
-                        <div className={styles.login}>
-                            {authUrl}
-                        </div>
+                        {authUrl}
                     </div>
                 </div>
 

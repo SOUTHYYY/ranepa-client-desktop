@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import Input from "../UI/input/input";
 import styles from './login.module.css'
-import { Redirect } from 'react-router-dom'
-import Button from "../UI/button/button";
+import {Redirect} from 'react-router-dom'
+import {Button, Input} from '../UI';
 import ranepa from '../../images/login/ranepa.png'
 
 
@@ -12,7 +11,7 @@ class Login extends Component {
         formControls: {
             login: {
                 value: '',
-                type: 'login',
+                type: 'text',
                 label: 'Логин',
                 errorMessage: 'Введите корректный Логин',
                 valid: false,
@@ -72,7 +71,7 @@ class Login extends Component {
             return (
                 <Input
                     key={controlName + index}
-                    inpytType={control.type}
+                    inputType={control.type}
                     value={control.value}
                     valid={control.valid}
                     touched={control.touched}
@@ -87,22 +86,19 @@ class Login extends Component {
 
     render() {
         const {isAuth} = this.props
-        if(isAuth) {
-            return <Redirect to={'/map'} />
+        if (isAuth) {
+            return <Redirect to={'/map'}/>
         }
         return (
             <div className={styles.login}>
-                <img src={ranepa} alt='ranepa' />
+                <img src={ranepa} alt='ranepa'/>
                 <h2>Enter NIU RANEPA</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
-                    {/*<Button*/}
-                    {/*    text='Войти'*/}
-                    {/*    onClickFunc={}*/}
-                    {/*    disable={!this.state.isFormValid}/>*/}
-                        <button
-                            disabled={!this.state.isFormValid}
-                            onClick={() => this.props.login(this.state.formControls.login.value, this.state.formControls.password.value)}>Войти</button>
+                    <Button
+                        type='password'
+                        onClickFunc={() => this.props.login(this.state.formControls.login.value, this.state.formControls.password.value)}
+                        disable={!this.state.isFormValid}>Войти</Button>
                 </form>
             </div>
         );

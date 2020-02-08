@@ -1,0 +1,16 @@
+.marks__table {
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.marks__table th, td {
+    padding: 15px;
+}
+
+.marks__table tbody tr {
+    border: 1px solid rgba(211,211,211 ,0.1 );
+    border-radius: 10px;
+    display: block;
+    margin: 30px 0;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.15)
+}

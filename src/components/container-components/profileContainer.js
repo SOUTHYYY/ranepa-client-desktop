@@ -1,7 +1,7 @@
 import {logout} from '../../redux/actions/auth_actions'
 import {connect} from "react-redux";
 import {compose} from 'redux'
-import Profile from "../profile/profile";
+import Profile from "../profile";
 import {AuthRedirect} from "../hoc/auth-redirect";
 
 const mapStateToProps = state => ({

@@ -84,7 +84,7 @@ header {
     display: flex;
 }
 
-.wrapper .top_navbar .top_menu .login {
+.wrapper .top_navbar .top_menu a {
     display: flex;
     align-items: center;
     justify-content: center;

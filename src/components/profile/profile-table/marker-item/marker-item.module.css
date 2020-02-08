@@ -5,3 +5,7 @@
 .markerItem img {
     width: 20px;
 }
+
+.markerItem td:last-child{
+    padding-left: 50px;
+}
