@@ -20,11 +20,9 @@ class Profile extends Component {
                 <div className={styles.content}>
                     <div className={styles.marks}>
                         <h1>Личный кабинет</h1>
-                        <div>
-                            <h3>Ваши отмеченные точки</h3>
-                        </div>
+                        <h3>Ваши отмеченные точки</h3>
                         <ProfileTable/>
-                        <div className={styles.marks__count}>2 Отмеченные точки</div>
+                        <div className={styles.marks__count}>4 Отмеченные точки</div>
                     </div>
                     <div className={styles.personInfo}>
                         <div className={styles.personInfo__header}>

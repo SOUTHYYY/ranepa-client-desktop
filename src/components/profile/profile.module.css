@@ -16,17 +16,22 @@
 }
 
 .marks {
-    width: 60%;
+    width: 70%;
 }
 
 .marks h1{
     padding: 0;
     margin: 0;
+    color: #d3d3d3;
+}
+
+.marks h3{
+    color: #d3d3d3;
 }
 
 .marks__count {
     font-size: 25px;
-    color: gray;
+    color: #d3d3d3;;
     font-weight: 500;
 }
 
@@ -36,7 +41,8 @@
     align-items: center;
     justify-content: center;
     margin-left: 50px;
-    width: 35%;
+    width: 25%;
+    padding: 25px 0;
     border: 1px solid rgba(211,211,211 , 0.3);
     border-radius: 20px;
     box-shadow: 5px 5px 5px rgba(211,211,211 , 0.3) ;
@@ -58,7 +64,7 @@
 
 .personInfo__header span {
     font-size: 30px;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 
