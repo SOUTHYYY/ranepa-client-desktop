@@ -13,23 +13,24 @@ export const config = {
     appId: "1:723989397537:web:0fb8d658b7b8556d"
 };
 
-export function transformCollection(latitude, longitude) {
-
-    return {
-        "type": "Feature",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                longitude,
-                latitude
-            ]
-        },
-        "properties": {
-            "header": "Тут заглавие",
-            "details": "Детали",
-            "time": "Тут время"
-        }
+export async function transformCollection(latitude, longitude) {
+let colObject = {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            longitude,
+            latitude
+        ]
+    },
+    "properties": {
+        "header": "Тут заглавие",
+        "details": "Детали",
+        "time": `${await _getGeocoderResourse(latitude, longitude)}`
     }
+}
+
+return colObject;
 }
 
 
@@ -53,8 +54,7 @@ export function transformData(obj) {
     })
 }
 
-export async function updateFireData(latitude, longitude, user) {
-
+async function _getGeocoderResourse(latitude, longitude) {
     let __address_data = {
         address: null
     };
@@ -66,13 +66,19 @@ export async function updateFireData(latitude, longitude, user) {
                 :
                 __address_data.address = res.data.features[0].text;
         });
+    return __address_data.address;
+}
+
+export async function updateFireData(latitude, longitude, user) {
+
+    let recievedData = await _getGeocoderResourse(latitude, longitude);
 
     firebase.database().ref('markers')
         .push({
             latitude: latitude,
             longitude: longitude,
             user: user,
-            address: __address_data.address,
+            address: recievedData,
             date: `${(new Date().getDate())}.${(new Date().getMonth()+1)}.${(new Date().getFullYear())}`
         });
 }
