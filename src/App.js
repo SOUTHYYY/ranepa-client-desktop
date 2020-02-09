@@ -13,7 +13,7 @@ import {config} from "./API/firebase/firebase-api";
 
 
 function App() {
-    firebase.initializeApp(config);
+    firebase.initializeApp(config); // important
     return (
         <div>
             <HeaderContainer/>

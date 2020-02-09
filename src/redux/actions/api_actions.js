@@ -21,7 +21,7 @@ function createFeatureCollection(data) {
                 ]
             },
             "properties": {
-                "header": "Тут заглавие",
+                "header": "Заглавие",
                 "details": "Детали",
                 "time": "Тут время"
             }
