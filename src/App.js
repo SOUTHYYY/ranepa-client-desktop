@@ -8,9 +8,12 @@ import MapContainer from "./components/container-components/mapContainer";
 import HeaderContainer from './components/container-components/headerContainer'
 import ProfileContainer from './components/container-components/profileContainer'
 import LoginContainer from './components/container-components/loginContainer'
+import firebase from "firebase";
+import {config} from "./API/firebase/firebase-api";
 
 
 function App() {
+    firebase.initializeApp(config);
     return (
         <div>
             <HeaderContainer/>

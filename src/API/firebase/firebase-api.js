@@ -50,10 +50,6 @@ export function transformData(obj) {
 }
 
 export function updateFireData(latitude, longitude, user) {
-    if (!firebase.app.length) {
-        firebase.initializeApp(config);
-    }
-
     firebase.database().ref('markers')
         .push({
             latitude: latitude,
@@ -109,3 +105,4 @@ export function findMarkersByUser(user) {
             response = snap.val();
         })
 }
+
