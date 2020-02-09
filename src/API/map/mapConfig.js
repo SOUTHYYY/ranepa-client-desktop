@@ -10,7 +10,8 @@ const config = {
         "circle-stroke-color": "#bcb7b9"
     },
     apiStyle: 'mapbox://styles/mafahes/ck5zqz49333o11intge32b2pf',
-    token: 'pk.eyJ1IjoibWFmYWhlcyIsImEiOiJjazV6cW5xdDUwMDRrM21ueHF2Z3EzY3VyIn0.RRuRqnVCy3VWno0v3Xk__w'
+    token: 'pk.eyJ1IjoibWFmYWhlcyIsImEiOiJjazV6cW5xdDUwMDRrM21ueHF2Z3EzY3VyIn0.RRuRqnVCy3VWno0v3Xk__w',
+    geoCoderAPI: 'https://api.mapbox.com/geocoding/v5/mapbox.places'
 };
 
 export default config;
