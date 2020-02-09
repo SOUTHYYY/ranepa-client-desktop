@@ -3,9 +3,9 @@ import MapboxGL from 'mapbox-gl';
 import s from './mapbox-gl.css';
 import LayerStyle from './mapConfig';
 
-import firebase from "firebase";
-import {config, transformCollection, updateFireData} from "../firebase/firebase-api";
-// import {getAdress} from "./map-geocoder";
+
+import {transformCollection, updateFireData} from "../firebase/firebase-api";
+
 
 export default class Application extends Component {
 
@@ -82,9 +82,9 @@ export default class Application extends Component {
         map.on('click', (coords) => {
             const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
             if(!result.length && map.getSource('points') && state.auth.isAuth) {
-                // state.data.features.push(transformCollection(coords.lngLat.lat, coords.lngLat.lng));
+                state.data.features.push(transformCollection(coords.lngLat.lat, coords.lngLat.lng));
                 map.getSource('points').setData(state.data);
-               // updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
+               updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
             }
         });
 

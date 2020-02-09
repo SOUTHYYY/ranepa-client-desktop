@@ -1,3 +1,4 @@
+import React from 'react';
 import firebase from 'firebase';
 import axios from "axios";
 import mapConfig from "../map/mapConfig";
@@ -13,6 +14,7 @@ export const config = {
 };
 
 export function transformCollection(latitude, longitude) {
+
     return {
         "type": "Feature",
         "geometry": {
@@ -56,7 +58,6 @@ export async function updateFireData(latitude, longitude, user) {
     let __address_data = {
         address: null
     };
-
     await axios.get(`${mapConfig.geoCoderAPI}/${longitude},${latitude}.json?access_token=${mapConfig.token}`)
         .then((res) => {
             __address_data.address = res.data.features[0].properties.address;
@@ -71,8 +72,9 @@ export async function updateFireData(latitude, longitude, user) {
             latitude: latitude,
             longitude: longitude,
             user: user,
-            address: __address_data.address
-        })
+            address: __address_data.address,
+            date: `${(new Date().getDate())}.${(new Date().getMonth()+1)}.${(new Date().getFullYear())}`
+        });
 }
 
 export async function getFireProfile(pass, login) {

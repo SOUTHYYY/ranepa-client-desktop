@@ -14,7 +14,6 @@ class ProfileContainer extends Component {
 
     render() {
         if(this.props.loading) {
-            debugger
             return <span>ЗАГРУЖАЕМ!</span>
         }
         return (
