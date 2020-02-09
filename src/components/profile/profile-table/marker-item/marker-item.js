@@ -4,15 +4,15 @@ import marker  from '../../../../images/profile/marker.svg'
 import remove from '../../../../images/profile/quit.svg'
 
 const markerItem  = ({item, idx}) => {
-    const {title, mainInfo, date, adress} = item
+    const {title, description, date, address} = item
     return(
         <tr className={styles.markerItem}>
             <td align={"left"}>{idx + 1}</td>
             <td><img src={marker} alt={'marker'}/></td>
             <td>{title}</td>
-            <td>{mainInfo}</td>
+            <td>{description}</td>
             <td>{date}</td>
-            <td>{adress}</td>
+            <td>{address}</td>
             <td>
                 <img src={remove} alt='remove'/>
             </td>

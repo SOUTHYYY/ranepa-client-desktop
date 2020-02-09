@@ -22,8 +22,6 @@ export const OnSetAuthUserData = () => async (dispatch) => {
 }
 
 export const login = (login, password) => async (dispatch) => {
-    firebase.initializeApp(config);
-
     const data = await getFireProfile(password, login);
     const response = {
         ...data

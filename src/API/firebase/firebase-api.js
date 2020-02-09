@@ -95,14 +95,15 @@ export async function getFireProfile(pass, login) {
     return _login_state;
 }
 
-export function findMarkersByUser(user) {
-    let response;
-    firebase.database().ref('markers')
+export async function findMarkersByUser(user) {
+    let response = null
+    await firebase.database().ref('markers')
         .orderByChild('user')
         .equalTo(user)
         .once('value')
         .then((snap) => {
             response = snap.val();
         })
+    return response
 }
 
