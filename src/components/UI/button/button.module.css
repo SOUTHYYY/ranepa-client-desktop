@@ -8,12 +8,15 @@
 }
 
 .active {
-    color: #951b1d;
-    border: 2px solid rgba(149, 27, 29, 0.7);
+    /*color: #951b1d;*/
+    /*border: 2px solid rgba(149, 27, 29, 0.7);*/
+    color: rgba(211,211,211 , 1);
+    border: 2px solid rgba(211,211,211 , 1);
 }
 .active:hover {
     color: white;
-    background-color: #951b1d;
+    /*background-color: #951b1d;*/
+    background-color: rgba(211,211,211 , 1);
     transition: all 0.3s ease;
 }
 

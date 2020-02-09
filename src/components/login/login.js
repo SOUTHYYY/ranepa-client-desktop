@@ -92,7 +92,7 @@ class Login extends Component {
         return (
             <div className={styles.login}>
                 <img src={ranepa} alt='ranepa'/>
-                <h2>Enter NIU RANEPA</h2>
+                <h2>Войти в клиент</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
                     <Button

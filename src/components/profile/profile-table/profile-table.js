@@ -15,6 +15,18 @@ class ProfileTable extends Component {
                 mainInfo: 'Сорвенование для мальчиков с СПО',
                 date: '20.03.2020',
                 adress: 'Ул. Пушкина 10'
+            },
+            {
+                title: 'Мистер СПО',
+                mainInfo: 'Сорвенование для мальчиков с СПО',
+                date: '20.03.2020',
+                adress: 'Ул. Пушкина 10'
+            },
+            {
+                title: 'Мистер СПО',
+                mainInfo: 'Сорвенование для мальчиков с СПО',
+                date: '20.03.2020',
+                adress: 'Ул. Пушкина 10'
             }].map((item, idx) => {
             return <MarkerItem idx={idx} item={item}/>
         })
