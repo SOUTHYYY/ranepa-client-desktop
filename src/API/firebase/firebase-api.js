@@ -1,4 +1,6 @@
 import firebase from 'firebase';
+import axios from "axios";
+import mapConfig from "../map/mapConfig";
 
 export const config = {
     apiKey: "AIzaSyDpDh_wuj9NfteTWqZeNBLVmu5FIgnd4OY",
@@ -49,12 +51,27 @@ export function transformData(obj) {
     })
 }
 
-export function updateFireData(latitude, longitude, user) {
+export async function updateFireData(latitude, longitude, user) {
+
+    let __address_data = {
+        address: null
+    };
+
+    await axios.get(`${mapConfig.geoCoderAPI}/${longitude},${latitude}.json?access_token=${mapConfig.token}`)
+        .then((res) => {
+            __address_data.address = res.data.features[0].properties.address;
+            res.data.features[0].properties.address.length ?
+                __address_data.address = res.data.features[0].properties.address
+                :
+                __address_data.address = res.data.features[0].text;
+        });
+
     firebase.database().ref('markers')
         .push({
             latitude: latitude,
             longitude: longitude,
-            user: user
+            user: user,
+            address: __address_data.address
         })
 }
 
