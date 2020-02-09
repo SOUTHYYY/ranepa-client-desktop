@@ -23,7 +23,7 @@ function createFeatureCollection(data) {
             "properties": {
                 "header": "Заглавие",
                 "details": "Детали",
-                "time": "Тут время"
+                "time": `${point.address}`
             }
         });
     });
