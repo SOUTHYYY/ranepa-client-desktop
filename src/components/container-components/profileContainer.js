@@ -6,7 +6,8 @@ import {AuthRedirect} from "../hoc/auth-redirect";
 
 const mapStateToProps = state => ({
     login: state.AuthReducer.login,
-    email: state.AuthReducer.email
+    siteName: state.AuthReducer.siteName,
+    icon: state.AuthReducer.icon
 })
 
 const mapDispatchToProps = dispatch => ({

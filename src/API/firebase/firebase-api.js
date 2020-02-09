@@ -62,19 +62,41 @@ export function updateFireData(latitude, longitude, user) {
         })
 }
 
-export function getFireProfile(pass) {
-    let response;
-    firebase.database().ref('profiles')
-        .orderByChild('password')
+export async function getFireProfile(pass, login) {
+
+    let _login_state = {
+        isAuthed: false,
+        data: {},
+        resultCode: null
+    };
+
+
+    const __login_data = await firebase.database().ref('profiles')
+        .orderByChild('login')
+        .equalTo(login)
+        .once('value')
+        .then((snap) => {
+            if(snap.val()) {
+                _login_state.isAuthed = true;
+                _login_state.data = snap.child(login).val();
+                return true
+            } else {
+                console.error('Логин не найден!!');
+                return false;
+            }
+        });
+    __login_data ?
+        await firebase.database().ref('profiles/' + login)
+        .orderByValue()
         .equalTo(pass)
         .once('value')
         .then((snap) => {
             if(snap.val()) {
-                response = snap.val();
-                console.log('Аккаунт подтвержден');
-            } else console.log('Аккаунт не найдет');
-        });
-    return response;
+                _login_state.resultCode = 0;
+            } else _login_state.resultCode = 1;
+        }) : _login_state.resultCode = 1;
+
+    return _login_state;
 }
 
 export function findMarkersByUser(user) {

@@ -13,8 +13,7 @@ class Profile extends Component {
             logout()
         }
 
-        const {login} = this.props
-
+        const {login, siteName, icon} = this.props;
         return (
             <div className={styles.profile}>
                 <div className={styles.content}>
@@ -26,11 +25,11 @@ class Profile extends Component {
                     </div>
                     <div className={styles.personInfo}>
                         <div className={styles.personInfo__header}>
-                            <img src={logo} alt={'logo'}/>
-                            <span>{login}</span>
+                            <img src={icon} alt={'logo'}/>
+                            <span>{siteName}</span>
                         </div>
                         <div className={styles.personInfo__settings}>
-                            <Button>Сменить пароль</Button>
+                            <Button disable>Сменить пароль</Button>
                             <Button
                                 onClickFunc={() => handleLogout()}
                                 disabled={false}>Выйти</Button>
