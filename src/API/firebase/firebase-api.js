@@ -13,7 +13,7 @@ export const config = {
     appId: "1:723989397537:web:0fb8d658b7b8556d"
 };
 
-export async function transformCollection(latitude, longitude) {
+export async function transformCollection(latitude, longitude, profile) {
 let colObject = {
     "type": "Feature",
     "geometry": {
@@ -24,9 +24,9 @@ let colObject = {
         ]
     },
     "properties": {
-        "header": "Тут заглавие",
+        "header": `${profile.siteName}`,
         "details": "Детали",
-        "time": `${await _getGeocoderResourse(latitude, longitude)}`
+        "address": `${await _getGeocoderResourse(latitude, longitude)}`
     }
 }
 
@@ -60,11 +60,14 @@ async function _getGeocoderResourse(latitude, longitude) {
     };
     await axios.get(`${mapConfig.geoCoderAPI}/${longitude},${latitude}.json?access_token=${mapConfig.token}`)
         .then((res) => {
-            __address_data.address = res.data.features[0].properties.address;
+
+
+            res.data.features[0].properties.hasOwnProperty('address') ?
             res.data.features[0].properties.address.length ?
                 __address_data.address = res.data.features[0].properties.address
                 :
-                __address_data.address = res.data.features[0].text;
+                __address_data.address = res.data.features[0].text
+                : __address_data.address = "Адрес не найден"
         });
     return __address_data.address;
 }
@@ -72,12 +75,13 @@ async function _getGeocoderResourse(latitude, longitude) {
 export async function updateFireData(latitude, longitude, user) {
 
     let recievedData = await _getGeocoderResourse(latitude, longitude);
-
+debugger;
     firebase.database().ref('markers')
         .push({
             latitude: latitude,
             longitude: longitude,
-            user: user,
+            user: user.login,
+            siteName: user.siteName,
             address: recievedData,
             date: `${(new Date().getDate())}.${(new Date().getMonth()+1)}.${(new Date().getFullYear())}`
         });

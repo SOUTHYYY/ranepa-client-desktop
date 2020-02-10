@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from "firebase";
 import {config, snapshotToArray} from "../firebase/firebase-api";
 import Map from './map-render';
-import axios from 'axios';
+
 
 
 

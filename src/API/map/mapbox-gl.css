@@ -1,16 +1,26 @@
 .mapContainer {
     width: 1920px;
     height: 1280px;
-    z-index: -2 !important;
+    z-index: -4 !important;
     position: absolute;
-    top: 0;
+    top: 0px;
     right: 0;
-    left: 0;
+    left: 0px;
     bottom: 0;
 }
 
+.popup-text-header {
+    font-size: 19px;
+}
+.popup-text-address {
+    color: #c7c1c1;
+}
+.popup-text-details {
+
+}
 
 .mapboxgl-popup-content {
+    padding: 18px 18px 18px;
     color: #ffffff;
     background-color: #951a1d;
     max-width: 250px;

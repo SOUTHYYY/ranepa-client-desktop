@@ -55,7 +55,7 @@ export default class Application extends Component {
 
         map.on('click', 'points', (e) => {
             const coordinates = e.features[0].geometry.coordinates.slice();
-            const { details, header, time } = e.features[0].properties;
+            const { details, header, address } = e.features[0].properties;
 
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 100) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -64,9 +64,10 @@ export default class Application extends Component {
             new MapboxGL.Popup()
                 .setLngLat(coordinates)
                 .setHTML(`
-                <strong>${header}</strong><br />
-                <em>${time}</em><br />
-                <p>${details}</p>
+                <strong class="popup-text-header">${header}</strong><br />
+                <em class="popup-text-address">${address}</em><br />
+                <p class="popup-text-details">${details}</p>
+                
                 `)
                 .addTo(map);
         });
@@ -82,12 +83,12 @@ export default class Application extends Component {
         map.on('click', (coords) => {
             const result = map.queryRenderedFeatures(coords.point, { layers: ['points']});
             if(!result.length && map.getSource('points') && state.auth.isAuth) {
-               transformCollection(coords.lngLat.lat, coords.lngLat.lng)
-                   .then((res) => {
-                       state.data.features.push(res);
-                       map.getSource('points').setData(state.data);
-                   });
-               updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth.login);
+                transformCollection(coords.lngLat.lat, coords.lngLat.lng, state.auth)
+                    .then((res) => {
+                        state.data.features.push(res);
+                        map.getSource('points').setData(state.data);
+                    });
+                updateFireData(coords.lngLat.lat, coords.lngLat.lng, state.auth);
             }
         });
 
@@ -97,6 +98,7 @@ export default class Application extends Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         const { map, data } = nextProps;
         if (data && !map) return Application.initializeMap(nextProps, prevState.viewport);
+
         else return null;
     }
 
