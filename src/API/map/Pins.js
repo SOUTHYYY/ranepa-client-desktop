@@ -11,7 +11,6 @@ const SIZE = 20;
 export default class Pins extends PureComponent {
     render() {
         const {data, onClick} = this.props;
-        debugger
         return data.map((marker, index) => (
 
             <Marker key={`marker-${index}`} longitude={marker.longitude} latitude={marker.latitude}>

@@ -5,7 +5,7 @@ import './mapbox-gl.css';
 import windowSize from 'react-window-size';
 import Pins from './Pins';
 import mapConfig from './mapConfig';
-
+import {fromJS} from 'immutable';
 
 
 const TOKEN = 'pk.eyJ1IjoibWFmYWhlcyIsImEiOiJjazV6cW5xdDUwMDRrM21ueHF2Z3EzY3VyIn0.RRuRqnVCy3VWno0v3Xk__w'; // Set your mapbox token here
@@ -40,7 +40,6 @@ class App extends Component {
     }
     _renderPopup() {
         const {popupInfo} = this.state;
-debugger;
         return (
             popupInfo && (
                 <Popup
@@ -50,12 +49,7 @@ debugger;
                     latitude={popupInfo.latitude}
                     closeOnClick={false}
                     onClose={() => this.setState({popupInfo: null})}
-                    onMouseEnter={() => {
-                        document.body.style.cursor = "pointer";
-                    }}
-                    onMouseLeave={() => {
-                        document.body.style.cursor = "default";
-                    }}
+
                 >
                     <form onSubmit={false}>
                         <strong className="popup-text-header">{popupInfo.siteName}</strong><br/>
