@@ -53,7 +53,7 @@ export function transformData(obj) {
     })
 }
 
-async function _getGeocoderResourse(latitude, longitude) {
+export async function _getGeocoderResourse(latitude, longitude) {
     let __address_data = {
         address: null
     };
@@ -71,12 +71,13 @@ async function _getGeocoderResourse(latitude, longitude) {
     return __address_data.address;
 }
 
-export async function updateFireData(latitude, longitude, user) {
+export async function updateFireData(latitude, longitude, user, description) {
 
     let recievedData = await _getGeocoderResourse(latitude, longitude);
 debugger;
     firebase.database().ref('markers')
         .push({
+            description: description,
             latitude: latitude,
             longitude: longitude,
             user: user.login,

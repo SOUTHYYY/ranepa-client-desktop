@@ -5,14 +5,12 @@ import './mapbox-gl.css';
 import windowSize from 'react-window-size';
 import Pins from './Pins';
 import mapConfig from './mapConfig';
-import {fromJS} from 'immutable';
-
-
-const TOKEN = 'pk.eyJ1IjoibWFmYWhlcyIsImEiOiJjazV6cW5xdDUwMDRrM21ueHF2Z3EzY3VyIn0.RRuRqnVCy3VWno0v3Xk__w'; // Set your mapbox token here
+import {_getGeocoderResourse, updateFireData} from "../firebase/firebase-api";
 
 class App extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             viewport: {
                 latitude: 56.3081,
@@ -21,8 +19,19 @@ class App extends Component {
                 bearing: 0,
                 pitch: 0
             },
-            popupInfo: null
+            popupInfo: null,
+            popupIsCreated: false,
+            popupData: false,
+            popupInputData: null
         };
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data !== this.state.popupData) {
+            this.setState({
+                popupData: nextProps.data
+            });
+        }
+        console.log(this.state.popupData);
     }
 
     _updateViewport = viewport => {
@@ -30,13 +39,76 @@ class App extends Component {
         this.setState({viewport: etc});
     };
 
-    _onClickMarker = city => {
-        this.setState({popupInfo: city});
+    _onClickMarker = marker => {
+        this.setState({popupInfo: marker});
     };
 
-    smFunc(event) {
+    _createPopupForm = async (event) => {
         event.preventDefault();
-        console.log('lol')
+
+        const { lngLat } = event;
+
+       await _getGeocoderResourse(lngLat[1], lngLat[0])
+            .then((address) => {
+                this.setState({
+                    popupIsCreated: {
+                        longitude: lngLat[0],
+                        latitude: lngLat[1],
+                        address: address
+                    }
+                });
+            });
+    };
+
+    handleInput = (e) => {
+        this.setState({
+            popupInputData: e.target.value
+        })
+    };
+    createMarker = (longitude, latitude, description, user) => {
+        _getGeocoderResourse(latitude, longitude)
+            .then((address) => {
+                const newElement = {
+                    address: address,
+                    date: `${(new Date().getDate())}.${(new Date().getMonth()+1)}.${(new Date().getFullYear())}`,
+                    latitude: latitude,
+                    longitude: longitude,
+                    description: description,
+                    user: user,
+                    siteName: user.siteName
+                }
+                this.setState({
+                    popupData: [...this.state.popupData, newElement],
+                    popupIsCreated: false
+                })
+                updateFireData(latitude, longitude, user, description);
+            })
+
+    }
+
+    _renderCreatedPopup = () => {
+        const { popupIsCreated, popupInputData } = this.state;
+        const { auth } = this.props;
+
+        return(
+            popupIsCreated && (
+                <Popup
+                    tipSize={5}
+                    anchor="top"
+                    longitude={popupIsCreated.longitude}
+                    latitude={popupIsCreated.latitude}
+                    closeOnClick={false}
+                    onClose={() => this.setState({popupIsCreated: false})}
+                >
+                   <form onSubmit={(e) => e.preventDefault()}>
+                       <strong className="popup-text-header">{this.props.auth.siteName}</strong><br/>
+                       <em className="popup-text-address">{popupIsCreated.address}</em><br/><br/>
+                       <input type="text" maxLength={30} placeholder='Описание' onChange={this.handleInput}/><br/><br/>
+                       <button className="button_submit" onClick={ () => this.createMarker(popupIsCreated.longitude, popupIsCreated.latitude, popupInputData, auth) }>Принять</button>
+                   </form>
+                </Popup>
+            )
+        )
     }
     _renderPopup() {
         const {popupInfo} = this.state;
@@ -49,14 +121,10 @@ class App extends Component {
                     latitude={popupInfo.latitude}
                     closeOnClick={false}
                     onClose={() => this.setState({popupInfo: null})}
-
                 >
-                    <form onSubmit={false}>
                         <strong className="popup-text-header">{popupInfo.siteName}</strong><br/>
                         <em className="popup-text-address">{popupInfo.address}</em><br/>
-                        <p className="popup-text-details">Детали</p>
-                        <button onClick={(e) => this.smFunc(e)}>Tap here</button>
-                    </form>
+                        <p className="popup-text-details">{popupInfo.description}</p>
                 </Popup>
             )
         );
@@ -64,11 +132,13 @@ class App extends Component {
 
     render() {
         const {viewport} = this.state;
-        const mapPins = this.props.data ? <Pins data={this.props.data} onClick={this._onClickMarker} /> : null;
+        const mapPins = this.props.data ? <Pins data={this.state.popupData ? this.state.popupData : this.props.data} onClick={this._onClickMarker} /> : null;
+        const preventLeakMemoryFromPopup = this.state.popupIsCreated ? this._renderCreatedPopup() : null;
 
 
         return (
             <MapGL
+                onClick={this._createPopupForm}
                 width="100vw"
                 height="100vh"
                 {...viewport}
@@ -78,8 +148,8 @@ class App extends Component {
                 className='mapContainer'
             >
                 {mapPins}
-
                 {this._renderPopup()}
+                {preventLeakMemoryFromPopup}
 
             </MapGL>
         );
