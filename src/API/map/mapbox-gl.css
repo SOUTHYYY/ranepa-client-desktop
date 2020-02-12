@@ -74,3 +74,7 @@ input[type="text"] {
 .button_submit:active {
     box-shadow: inset 1px 1px 1px #DFDFDF;
 }
+.button_submit:disabled {
+    background-color: #b23640;
+    border: 0;
+}

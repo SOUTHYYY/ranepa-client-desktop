@@ -22,7 +22,8 @@ class App extends Component {
             popupInfo: null,
             popupIsCreated: false,
             popupData: false,
-            popupInputData: null
+            popupInputData: null,
+            disabled: false
         };
     }
     componentWillReceiveProps(nextProps) {
@@ -66,6 +67,7 @@ class App extends Component {
         })
     };
     createMarker = (longitude, latitude, description, user) => {
+        console.log(this.props);
         _getGeocoderResourse(latitude, longitude)
             .then((address) => {
                 const newElement = {
@@ -104,7 +106,11 @@ class App extends Component {
                        <strong className="popup-text-header">{this.props.auth.siteName}</strong><br/>
                        <em className="popup-text-address">{popupIsCreated.address}</em><br/><br/>
                        <input type="text" maxLength={30} placeholder='Описание' onChange={this.handleInput}/><br/><br/>
-                       <button className="button_submit" onClick={ () => this.createMarker(popupIsCreated.longitude, popupIsCreated.latitude, popupInputData, auth) }>Принять</button>
+                       <button className="button_submit"
+                               disabled={this.state.disabled}
+                               onClick={ () => this.props.auth.isAuth ?
+                                   this.createMarker(popupIsCreated.longitude, popupIsCreated.latitude, popupInputData, auth)
+                               : this.setState({ disabled: true })}>Принять</button>
                    </form>
                 </Popup>
             )
