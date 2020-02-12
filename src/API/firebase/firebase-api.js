@@ -33,7 +33,6 @@ let colObject = {
 return colObject;
 }
 
-
 export function snapshotToArray(snapshot) {
     var returnArr = [];
 

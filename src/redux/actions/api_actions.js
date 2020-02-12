@@ -11,7 +11,6 @@ import {findMarkersByUser} from '../../API/firebase/firebase-api'
 const api_url = 'https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o';
 
 function createFeatureCollection(data) {
-    debugger;
     let features = [];
     data.forEach(point => {
         features.push({
@@ -44,7 +43,6 @@ export function fetchAPIStart() {
 }
 
 export function fetchAPISuccess(data) {
-    console.log(data);
     return {
         type: FETCH_API_SUCCESS,
         payload: data
@@ -83,7 +81,6 @@ export function fetchFromAPI() {
         dispatch(fetchAPIStart());
         axios.get(api_url)
             .then((res) => transformData(res.data))
-            .then((res) => createFeatureCollection(res))
             .then((res) => dispatch(fetchAPISuccess(res)))
             .catch((error) => dispatch(fetchAPIFailure()))
     }
