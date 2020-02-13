@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MapGL, { Popup } from "react-map-gl";
 import "./mapbox-gl.css";
-import windowSize from "react-window-size";
 import Pins from "./Pins";
 import mapConfig from "./mapConfig";
 import { _getGeocoderResourse, updateFireData } from "../firebase/firebase-api";
@@ -83,11 +82,11 @@ class App extends Component {
   };
 
   _renderCreatedPopup = () => {
+
     const { popupIsCreated, popupInputData } = this.state;
     const auth = this.props.auth.siteName
       ? this.props.auth
       : JSON.parse(localStorage.getItem("user"));
-
     return (
       popupIsCreated &&
       this.props.auth.isAuth && (
@@ -190,4 +189,4 @@ class App extends Component {
   }
 }
 
-export default windowSize(App);
+export default App;
