@@ -1,4 +1,4 @@
-import {logout} from '../../redux/actions/auth_actions'
+import {logout, OnSetAuthUserData} from '../../redux/actions/auth_actions'
 import {fethUserPins} from '../../redux/actions/api_actions'
 import {connect} from "react-redux";
 import {compose} from 'redux'
@@ -26,12 +26,10 @@ const mapStateToProps = state => ({
     login: state.AuthReducer.login,
     siteName: state.AuthReducer.siteName,
     icon: state.AuthReducer.icon,
-    userPins: state.APIReducer.userPins,
-    loading: state.APIReducer.loading
-
+    userPins: state.APIReducer.userPins
 })
 
 export default compose(
-    connect(mapStateToProps, {logout, fethUserPins}),
+    connect(mapStateToProps, {logout, fethUserPins, OnSetAuthUserData}),
     AuthRedirect
 )(ProfileContainer)
