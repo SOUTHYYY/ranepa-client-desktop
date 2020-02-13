@@ -1,80 +1,80 @@
 .overlay {
-    z-index: -4 !important;
+  z-index: -4 !important;
 }
 .mapContainer {
-    z-index: -5 !important;
+  z-index: -5 !important;
 }
 .circleBase {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 .type2 {
-    width: 50px;
-    height: 50px;
-    opacity: 0.5;
-    background: #951b1d;
-    border: 3px solid #bcb7b9;
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+  background: #951b1d;
+  border: 3px solid #bcb7b9;
 }
 .popup-text-header {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal !important;
-    font-size: 24px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal !important;
+  font-size: 24px;
 }
 .popup-text-address {
-    font-size: 13px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal !important;
-    color: #c7c1c1;
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal !important;
+  color: #c7c1c1;
 }
 .popup-text-details {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal !important;
+  font-family: "Roboto", sans-serif;
+  font-style: normal !important;
 }
 .mapboxgl-popup-content {
-    padding: 18px 18px 18px;
-    color: #ffffff;
-    background-color: #951a1d;
-    max-width: 250px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+  padding: 18px 18px 18px;
+  color: #ffffff;
+  background-color: #951a1d;
+  max-width: 250px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 .mapboxgl-popup-close-button {
-    color: #fff;
+  color: #fff;
 }
 input[type="text"] {
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    background: #ffffff !important;
-    outline: none;
-    height: 24px;
-    width: 120px;
-    color: #000000;
-    font-size: 11px;
-    font-family: Tahoma;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  background: #ffffff !important;
+  outline: none;
+  height: 24px;
+  width: 120px;
+  color: #000000;
+  font-size: 11px;
+  font-family: Tahoma;
 }
 .button_submit {
-    color: #444444;
-    background: #F3F3F3;
-    border: 1px #DADADA solid;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 9pt;
-    outline: none;
+  color: #444444;
+  background: #f3f3f3;
+  border: 1px #dadada solid;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 9pt;
+  outline: none;
 }
 
 .button_submit:hover {
-    border: 1px #C6C6C6 solid;
-    color: #333333;
-    background: #cdcdcd;
+  border: 1px #c6c6c6 solid;
+  color: #333333;
+  background: #cdcdcd;
 }
 
 .button_submit:active {
-    box-shadow: inset 1px 1px 1px #DFDFDF;
+  box-shadow: inset 1px 1px 1px #dfdfdf;
 }
 .button_submit:disabled {
-    background-color: #b23640;
-    border: 0;
+  background-color: #b23640;
+  border: 0;
 }
