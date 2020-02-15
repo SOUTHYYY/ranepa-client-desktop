@@ -13,26 +13,6 @@ export const config = {
     appId: "1:723989397537:web:0fb8d658b7b8556d"
 };
 
-export async function transformCollection(latitude, longitude, profile) {
-let colObject = {
-    "type": "Feature",
-    "geometry": {
-        "type": "Point",
-        "coordinates": [
-            longitude,
-            latitude
-        ]
-    },
-    "properties": {
-        "header": `${profile.siteName}`,
-        "details": "Детали",
-        "address": `${await _getGeocoderResourse(latitude, longitude)}`
-    }
-}
-
-return colObject;
-}
-
 export function snapshotToArray(snapshot) {
     var returnArr = [];
 
@@ -47,9 +27,8 @@ export function snapshotToArray(snapshot) {
 }
 
 export function transformData(obj) {
-
     return Object.keys(obj).map(key => {
-        return obj[key];
+        return obj[key] = {...obj[key], key: key};
     })
 }
 
@@ -134,5 +113,10 @@ export async function findMarkersByUser(user) {
             response = snap.val();
         })
     return response
+}
+
+export async function deleteMarker(key) {
+    let markerRef = firebase.database().ref('markers/' + key);
+    await markerRef.remove().then(() => console.log('del')).catch((err) => console.log('err' + err))
 }
 

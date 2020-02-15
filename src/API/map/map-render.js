@@ -24,6 +24,7 @@ class App extends Component {
       disabled: false
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.data !== this.state.popupData) {
       this.setState({

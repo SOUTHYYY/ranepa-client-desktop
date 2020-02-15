@@ -10,31 +10,6 @@ import {findMarkersByUser} from '../../API/firebase/firebase-api'
 
 const api_url = 'https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o';
 
-function createFeatureCollection(data) {
-    let features = [];
-    data.forEach(point => {
-        features.push({
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    point.longitude,
-                    point.latitude
-                ]
-            },
-            "properties": {
-                "header": `${point.siteName}`,
-                "details": "Детали",
-                "address": `${point.address}` //
-            }
-        });
-    });
-
-    return {
-        "type": "FeatureCollection",
-        "features": features
-    }
-}
 
 export function fetchAPIStart() {
     return {

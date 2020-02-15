@@ -4,7 +4,7 @@ import MarkerItem from "./marker-item/marker-item";
 
 class ProfileTable extends Component {
     render() {
-        const items = this.props.data.map((item, idx) => {
+        let items = this.props.data.map((item, idx) => {
             return <MarkerItem key={idx} idx={idx} item={item}/>
         })
         return (
