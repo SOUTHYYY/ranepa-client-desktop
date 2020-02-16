@@ -1,0 +1,128 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+.scrollbar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.scrollbar:hover {
+    height: 100%;
+    width: 100%;
+}
+
+.fa-lg {
+    font-size: 1em;
+    margin: 20px;
+}
+
+.fa {
+    position: relative;
+    width: 55px;
+    height: 36px;
+    top: 12px;
+    font-size: 20px;
+
+}
+
+.main-menu:hover, nav.main-menu.expanded {
+    width: 250px;
+    overflow: hidden;
+    opacity: 1;
+
+}
+
+.main-menu {
+    background: #ffffff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 80px;
+    overflow: hidden;
+    -webkit-transition: width .2s linear;
+    transition: width .2s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    box-shadow: 1px 0 15px rgba(0, 0, 0, 0.07);
+    opacity: 1;
+    z-index: 99;
+}
+
+.main-menu.scrollbar > ul {
+    text-decoration: none;
+    width: 100%;
+}
+
+.main-menu li {
+    position: relative;
+    display: block;
+    width: 250px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.main-menu li > a {
+    position: relative;
+    width: 255px;
+    display: flex;
+    align-items: center;
+    color: #8a8a8a;
+    font-size: 13px;
+    text-decoration: none;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    -webkit-transition: all .14s linear;
+    transition: all .14s linear;
+    font-family: 'Strait', sans-serif;
+    height: 100%;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+
+.main-menu .nav-icon {
+    position: relative;
+    width: 55px;
+    height: 36px;
+    font-size: 18px;
+}
+
+
+.main-menu .nav-text {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu .share {
+}
+
+
+.main-menu .fb-like {
+    left: 180px;
+    position: absolute;
+    top: 15px;
+}
+
+.main-menu > ul.logout {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+}
+
+.no-touch .scrollable.hover {
+    overflow-y: hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+    overflow-y: auto;
+    overflow: visible;
+}
+

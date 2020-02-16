@@ -11,6 +11,7 @@ import LoginContainer from './components/container-components/loginContainer'
 import firebase from "firebase";
 import {config} from "./API/firebase/firebase-api";
 import Book from "./components/container-components/studentbookContainer";
+import HomePage from "./components/home-page/home-page";
 
 
 function App() {
@@ -19,11 +20,11 @@ function App() {
         <>
             <HeaderContainer/>
                 <Switch>
-                    <Route exact={'/'}>
-                        <MapContainer/>
+                    <Route exact path={'/'}>
+                        <HomePage/>
                     </Route>
                     <Route exact path={'/map'}>
-                        <MapContainer/>
+                        <MapContainer width='calc(100vw - 80px)' height='100vh'/>
                     </Route>
                     <Route path={'/timetable'}>
                         <NotFonud/>

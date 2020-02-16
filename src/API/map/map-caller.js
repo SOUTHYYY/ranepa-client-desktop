@@ -18,7 +18,7 @@ class Caller extends Component {
 
     render() {
         return (
-            <Map startFetch={this.props.startFetch} data={this.props.API.data} auth={this.props.auth}/>
+            <Map startFetch={this.props.startFetch} data={this.props.API.data} auth={this.props.auth} {...this.props} />
         )
     }
 }

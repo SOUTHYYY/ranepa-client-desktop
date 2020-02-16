@@ -1,9 +1,28 @@
 .home_page {
-  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: calc(100vw - 300px);
 }
 
+
+.home_page__info h1 {
+  text-transform: uppercase;
+  font-size: 75px;
+  padding: 0;
+  margin: 0;
+}
+
+.home_page__info p {
+  margin-top: 15px;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: darkgray;
+}
+
+
+
+
+
 .home_page__map {
-  width: 900px;
-  height: 700px;
-  background-color: #e5e5e5;
 }

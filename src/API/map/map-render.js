@@ -174,8 +174,8 @@ class App extends Component {
     return (
       <MapGL
         onClick={this._createPopupForm}
-        width="100vw"
-        height="100vh"
+        width={this.props.width}
+        height={this.props.height}
         {...viewport}
         mapStyle={mapConfig.apiStyle}
         onViewportChange={this._updateViewport}
