@@ -15,9 +15,12 @@ import {config} from "./API/firebase/firebase-api";
 function App() {
     firebase.initializeApp(config); // important
     return (
-        <div>
+        <>
             <HeaderContainer/>
                 <Switch>
+                    <Route exact={'/'}>
+                        <MapContainer/>
+                    </Route>
                     <Route exact path={'/map'}>
                         <MapContainer/>
                     </Route>
@@ -41,7 +44,7 @@ function App() {
                         <NotFonud/>
                     </Route>
                 </Switch>
-        </div>
+        </>
     );
 }
 
