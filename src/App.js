@@ -10,6 +10,7 @@ import ProfileContainer from './components/container-components/profileContainer
 import LoginContainer from './components/container-components/loginContainer'
 import firebase from "firebase";
 import {config} from "./API/firebase/firebase-api";
+import Book from "./components/container-components/studentbookContainer";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
                         <NotFonud/>
                     </Route>
                     <Route path={'/student-book'}>
-                        <MapContainer/>
+                        <Book/>
                     </Route>
                     <Route path={'/references'}>
                         <MapContainer/>
