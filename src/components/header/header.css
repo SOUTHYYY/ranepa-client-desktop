@@ -1,6 +1,3 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
-
 .scrollbar {
     height: 100%;
     width: 100%;
@@ -15,25 +12,26 @@
     width: 100%;
 }
 
+.logo img {
+    margin-left: 25px;
+    width: 30px;
+}
+
 .fa-lg {
-    font-size: 1em;
-    margin: 20px;
+    margin: 31px;
+    font-size: 1.53333em;
+    line-height: 1.53333em;
 }
 
 .fa {
     position: relative;
-    width: 55px;
-    height: 36px;
-    top: 12px;
-    font-size: 20px;
-
+    width: 20px;
 }
 
 .main-menu:hover, nav.main-menu.expanded {
-    width: 250px;
+    width: 200px;
     overflow: hidden;
     opacity: 1;
-
 }
 
 .main-menu {
@@ -44,6 +42,7 @@
     height: 100%;
     left: 0;
     width: 80px;
+    height: calc(100vh - 15px);
     overflow: hidden;
     -webkit-transition: width .2s linear;
     transition: width .2s linear;
@@ -51,6 +50,7 @@
     box-shadow: 1px 0 15px rgba(0, 0, 0, 0.07);
     opacity: 1;
     z-index: 99;
+    padding-top: 15px;
 }
 
 .main-menu.scrollbar > ul {
@@ -81,48 +81,5 @@
     font-family: 'Strait', sans-serif;
     height: 100%;
     text-shadow: 1px 1px 1px #fff;
-}
-
-
-.main-menu .nav-icon {
-    position: relative;
-    width: 55px;
-    height: 36px;
-    font-size: 18px;
-}
-
-
-.main-menu .nav-text {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    width: 190px;
-    font-family: 'Titillium Web', sans-serif;
-}
-
-.main-menu .share {
-}
-
-
-.main-menu .fb-like {
-    left: 180px;
-    position: absolute;
-    top: 15px;
-}
-
-.main-menu > ul.logout {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-}
-
-.no-touch .scrollable.hover {
-    overflow-y: hidden;
-}
-
-.no-touch .scrollable.hover:hover {
-    overflow-y: auto;
-    overflow: visible;
 }
 

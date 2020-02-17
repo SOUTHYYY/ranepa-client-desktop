@@ -19,12 +19,13 @@ function App() {
     return (
         <>
             <HeaderContainer/>
+            <div className='main-content'>
                 <Switch>
                     <Route exact path={'/'}>
                         <HomePage/>
                     </Route>
                     <Route exact path={'/map'}>
-                        <MapContainer width='calc(100vw - 80px)' height='100vh'/>
+                        <MapContainer width='100%' height='100vh'/>
                     </Route>
                     <Route path={'/timetable'}>
                         <NotFonud/>
@@ -46,6 +47,7 @@ function App() {
                         <NotFonud/>
                     </Route>
                 </Switch>
+            </div>
         </>
     );
 }
