@@ -1,8 +1,9 @@
 .home_page {
+  background-color: #671314;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: calc(100vw - 300px);
+  width: 100vw;
 }
 
 
@@ -19,10 +20,16 @@
   font-size: 15px;
   color: darkgray;
 }
-
+.home_page__header {
+  color: #FFFFFF;
+}
 
 
 
 
 .home_page__map {
+  clip-path: circle(33%);
+}
+.home_page__map_wrapper {
+  filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.9));
 }

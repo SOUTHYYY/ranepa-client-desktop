@@ -30,10 +30,17 @@ ol, ul {
 }
 
 .main-content {
+
     margin-left: 80px;
     width: calc(100% - 80px);
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+}
+canvas{
+    top: 0px;
+    left: 0px;
+    background-color:#000;
+    z-index : -1;
 }

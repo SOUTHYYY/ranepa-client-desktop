@@ -25,7 +25,7 @@ function App() {
                         <HomePage/>
                     </Route>
                     <Route exact path={'/map'}>
-                        <MapContainer width='100%' height='100vh'/>
+                        <MapContainer width='100%' height='100vh' welcomeScreen={false}/>
                     </Route>
                     <Route path={'/timetable'}>
                         <NotFonud/>

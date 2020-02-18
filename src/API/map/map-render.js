@@ -11,17 +11,22 @@ class App extends Component {
 
     this.state = {
       viewport: {
-        latitude: 56.3081,
-        longitude: 43.9863,
-        zoom: 17,
+        latitude: 56.3126,
+        longitude: 44.0353,
+        zoom: 10,
         bearing: 0,
-        pitch: 0
+        pitch: 0,
+        ff: this.props.welcomeScreen ? null : null
       },
       popupInfo: null,
       popupIsCreated: false,
       popupData: false,
       popupInputData: null,
-      disabled: false
+      mapWelcome: {
+        dragPan: !this.props.welcomeScreen,
+        doubleClickZoom: !this.props.welcomeScreen,
+        dragRotate: !this.props.welcomeScreen
+      }
     };
   }
 
@@ -83,7 +88,7 @@ class App extends Component {
   };
 
   _renderCreatedPopup = () => {
-
+    debugger;
     const { popupIsCreated, popupInputData } = this.state;
     const auth = this.props.auth.siteName
       ? this.props.auth
@@ -104,17 +109,21 @@ class App extends Component {
               {this.props.auth.siteName
                 ? this.props.auth.siteName
                 : auth.siteName}
-            </strong><br />
-            <em className="popup-text-address">{popupIsCreated.address}</em><br /><br />
+            </strong>
+            <br />
+            <em className="popup-text-address">{popupIsCreated.address}</em>
+            <br />
+            <br />
             <input
               type="text"
               maxLength={30}
               placeholder="Описание"
               onChange={this.handleInput}
-            /><br /><br />
+            />
+            <br />
+            <br />
             <button
-              className="button_submit "
-              disabled={this.state.disabled}
+              className="button_submit"
               onClick={() => {
                 this.createMarker(
                   popupIsCreated.longitude,
@@ -161,23 +170,30 @@ class App extends Component {
 
   render() {
     const { viewport } = this.state;
+
     const mapPins = this.props.data ? (
-      <Pins
-        data={this.state.popupData ? this.state.popupData : this.props.data}
-        onClick={this._onClickMarker}
-      />
+        this.props.welcomeScreen ? null : (
+        <Pins
+          data={this.state.popupData ? this.state.popupData : this.props.data}
+          onClick={this._onClickMarker}
+        />
+      )
     ) : null;
+
     const preventLeakMemoryFromPopup = this.state.popupIsCreated
-      ? this._renderCreatedPopup()
+      ? this.props.welcomeScreen
+        ? null
+        : this._renderCreatedPopup()
       : null;
 
     return (
       <MapGL
+        {...this.state.mapWelcome}
         onClick={this._createPopupForm}
         width={this.props.width}
         height={this.props.height}
         {...viewport}
-        mapStyle={mapConfig.apiStyle}
+        mapStyle={this.props.welcomeScreen ? mapConfig.apiWelcomeStyle : mapConfig.apiStyle}
         onViewportChange={this._updateViewport}
         mapboxApiAccessToken={mapConfig.token}
         className="mapContainer"
