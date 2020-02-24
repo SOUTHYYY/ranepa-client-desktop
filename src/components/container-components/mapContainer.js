@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Map from '../../API/map/map-caller';
-import {fetchFromAPI} from "../../redux/actions/api_actions";
+import {fetchFromAPI, fetchPolygonData} from "../../redux/actions/api_actions";
 
 const mapStateToProps = state => {
     return {
@@ -11,7 +11,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        startFetch: () => dispatch(fetchFromAPI())
+        startFetch: () => dispatch(fetchFromAPI()),
+        startPolygonFetch: () => dispatch(fetchPolygonData())
     }
 };
 

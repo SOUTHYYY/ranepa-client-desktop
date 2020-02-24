@@ -12,6 +12,7 @@ class Book extends React.Component {
       this.setState({text: e.target.value})
   }
   render() {
+      const { bookmarks } = this.props.API;
     return (
       <div className={styles.studentBook_content}>
         <div className={styles.studentBook_header}>
@@ -30,10 +31,24 @@ class Book extends React.Component {
             />
           </span>
         </div>
+          {bookmarks.length ?
+              <div className={styles.studentBooK_tableHead}>
+                  <span style={{marginLeft: "15px"}} className={styles.studentBooK_tableHead_text}>№</span>
+                  <span style={{marginLeft: "40px"}} className={styles.studentBooK_tableHead_text}>Курс</span>
+                  <span style={{marginLeft: "40px"}} className={styles.studentBooK_tableHead_text}>Предмет</span>
+                  <span style={{marginLeft: "380px"}} className={styles.studentBooK_tableHead_text}>Тип зачета</span>
+                  <span style={{marginLeft: "167px"}} className={styles.studentBooK_tableHead_text}>Оценка</span>
+              </div>
+              :
+              null}
 
-        <div className={styles.studentBooK_tableContent}>
-          <BookItems data={this.props}/>
-        </div>
+          {bookmarks.length ?
+
+              <div className={styles.studentBooK_tableContent}>
+              <BookItems data={this.props}/>
+          </div>
+              :
+              null}
       </div>
     );
   }

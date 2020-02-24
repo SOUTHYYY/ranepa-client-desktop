@@ -7,7 +7,8 @@ import {
   FETCH_USER_PINS_FAILURE,
   FETCH_USER_BOOK_START,
   FETCH_USER_BOOK_FAILURE,
-  FETCH_USER_BOOK_SUCCESS
+  FETCH_USER_BOOK_SUCCESS,
+  FETCH_MAP_POLYGON
 } from "../actions/action_types";
 
 export const initialState = {
@@ -15,7 +16,8 @@ export const initialState = {
   data: false,
   userPins: [],
   errorMessage: null,
-  bookmarks: []
+  bookmarks: [],
+  polygons: null
 };
 
 export function APIReducer(state = initialState, action) {
@@ -39,6 +41,8 @@ export function APIReducer(state = initialState, action) {
       return { ...state, errorBook: payload };
     case FETCH_USER_BOOK_START:
       return { ...state };
+    case FETCH_MAP_POLYGON:
+      return { ...state, polygons: payload };
     default:
       return state;
   }

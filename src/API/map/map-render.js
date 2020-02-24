@@ -1,22 +1,21 @@
 import React, { Component } from "react";
-import MapGL, { Popup } from "react-map-gl";
+import MapGL, { Popup, Layer, Source } from "react-map-gl";
 import "./mapbox-gl.css";
 import Pins from "./Pins";
 import mapConfig from "./mapConfig";
 import { _getGeocoderResourse, updateFireData } from "../firebase/firebase-api";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       viewport: {
-        latitude: 56.3126,
-        longitude: 44.0353,
-        zoom: 10,
+        latitude: 56.307,
+        longitude: 43.991,
+        zoom: 9,
         bearing: 0,
-        pitch: 0,
-        ff: this.props.welcomeScreen ? null : null
+        pitch: 0
       },
       popupInfo: null,
       popupIsCreated: false,
@@ -26,7 +25,8 @@ class App extends Component {
         dragPan: !this.props.welcomeScreen,
         doubleClickZoom: !this.props.welcomeScreen,
         dragRotate: !this.props.welcomeScreen
-      }
+      },
+      data: this.props.API.polygons
     };
   }
 
@@ -35,6 +35,11 @@ class App extends Component {
       this.setState({
         popupData: nextProps.data
       });
+    }
+    if (nextProps.API.polygons !== this.state.data) {
+      this.setState({
+        data: nextProps.API.polygons
+      })
     }
   }
 
@@ -88,7 +93,6 @@ class App extends Component {
   };
 
   _renderCreatedPopup = () => {
-    debugger;
     const { popupIsCreated, popupInputData } = this.state;
     const auth = this.props.auth.siteName
       ? this.props.auth
@@ -170,7 +174,6 @@ class App extends Component {
 
   render() {
     const { viewport } = this.state;
-
     const mapPins = this.props.data ? (
         this.props.welcomeScreen ? null : (
         <Pins
@@ -185,7 +188,15 @@ class App extends Component {
         ? null
         : this._renderCreatedPopup()
       : null;
-
+    const dataLayer = {
+      id: 'data',
+      type: 'line',
+      paint: {
+        'line-color': "#b23640",
+        'line-opacity': 0.9,
+        'line-width': 2
+      }
+    };
     return (
       <MapGL
         {...this.state.mapWelcome}
@@ -201,6 +212,9 @@ class App extends Component {
         {mapPins}
         {this._renderPopup()}
         {preventLeakMemoryFromPopup}
+        <Source type="geojson" data={this.state.data}>
+          <Layer {...dataLayer}/>
+        </Source>
       </MapGL>
     );
   }

@@ -1,17 +1,15 @@
 import React from "react";
+import styles from "./student.module.css";
 
 const markItem = ({ item, idx }) => {
-  debugger;
   const { course, subject, type, mark } = item;
   return (
-    <tr>
-      <td align={"left"}>
-        <i className="fas fa-book"></i>
-      </td>
-      <td>{course} курс</td>
-      <td>{subject}</td>
-      <td>{type}</td>
-      <td>{mark}</td>
+    <tr className={styles.book_tr}>
+      <td align={"left"} className={styles.studentBooK_tableHead_text}>{idx}</td>
+      <td className={styles.studentBooK_Content_text}>{course} курс</td>
+      <td className={styles.studentBooK_tableHead_text}>{subject}</td>
+      <td className={styles.studentBooK_Content_text}>{type}</td>
+      <td className={styles.studentBooK_tableHead_text}>{mark ? mark : 'нет данных'}</td>
     </tr>
   );
 };

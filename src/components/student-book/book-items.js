@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MarkItem from "../student-book/mark-item";
+import styles from "./student.module.css";
 
 class BookItems extends Component {
   render() {
