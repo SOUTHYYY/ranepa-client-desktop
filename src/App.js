@@ -12,6 +12,7 @@ import firebase from "firebase";
 import {config} from "./API/firebase/firebase-api";
 import Book from "./components/container-components/studentbookContainer";
 import HomePage from "./components/home-page/home-page";
+import AboutUs from "./components/about-us/about-us";
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
                     </Route>
                     <Route path={'/profile'}>
                         <ProfileContainer/>
+                    </Route>
+                    <Route path={'/about-us'}>
+                        <MapContainer/>
                     </Route>
                     <Route>
                         {/* Возвращает компонент если нету роута */}

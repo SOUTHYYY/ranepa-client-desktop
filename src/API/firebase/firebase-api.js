@@ -38,9 +38,7 @@ export async function _getGeocoderResourse(latitude, longitude) {
     };
     await axios.get(`${mapConfig.geoCoderAPI}/${longitude},${latitude}.json?access_token=${mapConfig.token}`)
         .then((res) => {
-
-
-            res.data.features[0].properties.hasOwnProperty('address') ?
+            res.data.features.length && res.data.features[0].properties.hasOwnProperty('address') ?
             res.data.features[0].properties.address.length ?
                 __address_data.address = res.data.features[0].properties.address
                 :
@@ -53,7 +51,7 @@ export async function _getGeocoderResourse(latitude, longitude) {
 export async function updateFireData(latitude, longitude, user, description) {
 
     let recievedData = await _getGeocoderResourse(latitude, longitude);
-debugger;
+
     firebase.database().ref('markers')
         .push({
             description: description,

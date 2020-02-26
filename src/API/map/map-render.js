@@ -74,6 +74,7 @@ class App extends Component {
     });
   };
   createMarker = (longitude, latitude, description, user) => {
+
     _getGeocoderResourse(latitude, longitude).then(address => {
       const newElement = {
         address: address,
@@ -86,7 +87,7 @@ class App extends Component {
         siteName: user.siteName
       };
       this.setState({
-        popupData: [...this.state.popupData, newElement]
+        popupData: [...this.props.data, newElement]
       });
       updateFireData(latitude, longitude, user, description);
     });

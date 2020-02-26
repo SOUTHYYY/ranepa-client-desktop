@@ -4,18 +4,18 @@ import marker  from '../../../../images/profile/marker.svg'
 import remove from '../../../../images/profile/quit.svg'
 import {deleteMarker} from "../../../../API/firebase/firebase-api";
 
-const markerItem  = ({item, idx}) => {
+const markerItem  = ({item, idx, deleteMark}) => {
     const {title, description, date, address, key} = item;
+
     return(
         <tr className={styles.markerItem}>
             <td align={"left"}>{idx + 1}</td>
             <td><img src={marker} alt={'marker'}/></td>
-            <td>{title}</td>
             <td>{description}</td>
             <td>{date}</td>
             <td>{address}</td>
             <td>
-                <img src={remove} alt='remove' onClick={() => deleteMarker(key)} style={{cursor: 'pointer'}}/>
+                <img src={remove} alt='remove' onClick={() => {deleteMarker(key); deleteMark(idx)}} style={{cursor: 'pointer'}}/>
             </td>
         </tr>
     )

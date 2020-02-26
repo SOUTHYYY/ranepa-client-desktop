@@ -73,13 +73,17 @@
     display: flex;
     align-items: center;
     color: #8a8a8a;
-    font-size: 13px;
+    font-size: 15   px;
     text-decoration: none;
     -webkit-transform: translateZ(0) scale(1, 1);
     -webkit-transition: all .14s linear;
     transition: all .14s linear;
-    font-family: 'Strait', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
     height: 100%;
     text-shadow: 1px 1px 1px #fff;
 }
 
+.main-menu li:hover > a {
+
+    color: #951a1d;
+}
