@@ -1,38 +1,60 @@
-import React from 'react'
-import styles from './about-us.module.css'
+import React from "react";
+import "./about-us.css";
 
-import map from '../../images/about-us/map-on-cellphone-screen.svg'
+import map from "../../images/about-us/map-on-cellphone-screen.svg";
 
 const AboutUs = () => {
-    return (
-        <div className={styles.aboutUs}>
-            <div className={styles.aboutUs__header}>
-                Немного информации о нашем сервисе
-            </div>
-            <div className={styles.aboutUs__info}>
-                <div>Создание мероприятий НИУ РАНХиГС больше не создает трудности в оповещении и привлечении
-                    аудитории!
-                </div>
-                <div className={styles.aboutUs__mainInfo}>
-                    <div className={styles.aboutUs__mapIcon}>
-                        <img src={map} alt={'map'}/>
-                    </div>
-                    <div className={styles.aboutUs__benefits}>
-                        <h4>Преимущества нашего клиента</h4>
-                        <ul>
-                            <li>Вы всегда в курсе новых ивентов НИУ РАНХиГС, знаете точный адрес и время проведения</li>
-                            <li>Обновленный дизайн распиания</li>
-                            <li>Возможность заказать справку не заходя в деканат!</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className={styles.aboutUs__links}>
-                <h3>Над проектом работали:</h3>
-            </div>
+  return (
+    <div>
+      <div className="home-title">
+        <span className="aboutUsHeader">
+          Данный клиент является неоффициальным клиентом сайта НИУ РАНХиГС и не
+          имеет ничего общего с его содержимым
+        </span>
+        <span className="aboutUsName">Создано при помощи библиотеки React</span>
+        <div className="aboutUsLogo fa-5x">
+          <a href="https://ru.reactjs.org/">
+            <i className="aboutIcon fab fa-react"></i>
+          </a>
+          <a href="https://firebase.google.com/">
+            <i className="aboutIcon fas fa-fire-alt"></i>
+          </a>
+          <a href="https://github.com/SOUTHYYY/ranepa-client-desktop">
+            <i className="aboutIcon fab fa-github"></i>
+          </a>
+          <a href="https://www.mapbox.com/">
+            <i className="aboutIcon fas fa-map-marked-alt"></i>
+          </a>
         </div>
-    )
-}
+      </div>
+      <div className="waveWrapper waveAnimation">
+        <div className="waveWrapperInner bgTop">
+          <div
+            className="wave waveTop"
+            style={{
+              backgroundImage: `url('http://front-end-noobs.com/jecko/img/wave-top.png')`
+            }}
+          />
+        </div>
+        <div className="waveWrapperInner bgMiddle">
+          <div
+            className="wave waveMiddle"
+            style={{
+              backgroundImage: `url('http://front-end-noobs.com/jecko/img/wave-mid.png')`
+            }}
+          />
+        </div>
+        <div className="waveWrapperInner bgBottom">
+          <div
+            className="wave waveBottom"
+            style={{
+              backgroundImage: `url('http://front-end-noobs.com/jecko/img/wave-bot.png')`
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-
-export default AboutUs
+export default AboutUs;

@@ -44,7 +44,7 @@ function App() {
                         <ProfileContainer/>
                     </Route>
                     <Route path={'/about-us'}>
-                        <MapContainer/>
+                        <AboutUs/>
                     </Route>
                     <Route>
                         {/* Возвращает компонент если нету роута */}
