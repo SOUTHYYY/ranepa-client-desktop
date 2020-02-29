@@ -1,0 +1,112 @@
+.timetable_header {
+    display: flex;
+    justify-content: flex-start;
+    width: 1000px;
+}
+.timetable_input {
+    border: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 90%;
+    background-color: #f1eeee;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+}
+.timetable_Button {
+    line-height: 6vh;
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #f1eeee;
+    width: 10%;
+    height: 6.3vh;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+
+}
+.timetable_searchIcon {
+    vertical-align: middle;
+    color: #951a1d;
+}
+.timetable_selector {
+    display: inline-block;
+    padding: 15px 15px 15px 15px;
+}
+.timetable_selector:hover {
+    cursor: pointer;
+}
+.timetable_selector_active {
+    background-color: #951a1d;
+    border-radius: 40px;
+    color: #ffffff;
+}
+.timetable_wrap_selector {
+    font-family: 'Roboto', sans-serif !important;
+    margin-left: auto;
+    justify-content: center;
+    border-radius: 25px;
+    display: flex;
+    width: 182px;
+    margin-bottom: 20px;
+    background-color: #f1eeee;
+    color: #951a1d
+}
+
+.timetable_wrap_selector:nth-child(1) {
+    margin-right: 5px;
+}
+.timetable_tableHead_text {
+    color: #951a1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.timetable_Content_text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+.timetable_Content_text_lessons {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    width: 1000px;
+}
+.timetable_Content_text_lessons:hover {
+    border-radius: 20px;
+}
+.timetable_Content_text_lessons > p, h2, h4 {
+    text-align: center;
+}
+.timetable_Content_text_lessons > h2 {
+    border-radius: 90px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background-color: #951A1D;
+    color: white;
+}
+.timetable_list_wrapper {
+    background-color: #f1eeee;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    max-height: 25vh;
+    margin-top: 10px;
+    overflow: auto;
+}
+.timetable_Content_text:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(149, 26, 29, 0.5);
+    border-radius: 40px;
+}
+.timetable_list_wrapper_lesson {
+    background-color: #f1eeee;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-top: 10px;
+    height: 70vh;
+    overflow: auto;
+    width: 1000px;
+}

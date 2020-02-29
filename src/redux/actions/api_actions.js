@@ -17,10 +17,10 @@ import { findMarkersByUser } from "../../API/firebase/firebase-api";
 import { getRanepaS } from "../../API/ranepa/ranepa-services";
 
 const ranepa_book_url =
-  "http://services.niu.ranepa.ru/API/public/student/getDiary";
+    "http://services.niu.ranepa.ru/API/public/student/getDiary";
 
 const api_url =
-  "https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o";
+    "https://basic-lock-238415.firebaseio.com/markers.json?auth=QpEDGE1BvmXlj6cSboFbxwCwkOsN3UBcLVxdj68o";
 
 const polygon_url = "https://nominatim.openstreetmap.org/search.php?q=Нижний+Новгород&polygon_geojson=1&format=geojson";
 
@@ -96,10 +96,10 @@ export function fetchFromAPI() {
   return dispatch => {
     dispatch(fetchAPIStart());
     axios
-      .get(api_url)
-      .then(res => transformData(res.data))
-      .then(res => dispatch(fetchAPISuccess(res)))
-      .catch(error => dispatch(fetchAPIFailure()));
+        .get(api_url)
+        .then(res => transformData(res.data))
+        .then(res => dispatch(fetchAPISuccess(res)))
+        .catch(error => dispatch(fetchAPIFailure()));
   };
 }
 
@@ -119,10 +119,10 @@ export function fetchFromRanepaAPI(id) {
   return async dispatch => {
     dispatch(fetchBookmarksStart());
     await axios
-      .post(ranepa_book_url, {
-        recBook: id
-      })
-      .then(res => dispatch(fetchBookmarksSuccess(res.data)));
+        .post(ranepa_book_url, {
+          recBook: id
+        })
+        .then(res => dispatch(fetchBookmarksSuccess(res.data)));
   };
 }
 
@@ -133,4 +133,3 @@ export function fetchPolygonData() {
         .then(res => dispatch(fetchMapPolygon(res.data)))
   }
 }
-// Иб-011-128/18

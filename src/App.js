@@ -13,6 +13,7 @@ import {config} from "./API/firebase/firebase-api";
 import Book from "./components/container-components/studentbookContainer";
 import HomePage from "./components/home-page/home-page";
 import AboutUs from "./components/about-us/about-us";
+import Timetable from "./components/timetable/timetable";
 
 
 function App() {
@@ -28,11 +29,11 @@ function App() {
                     <Route exact path={'/map'}>
                         <MapContainer width='100%' height='100vh' welcomeScreen={false}/>
                     </Route>
-                    <Route path={'/timetable'}>
-                        <NotFonud/>
-                    </Route>
                     <Route path={'/student-book'}>
                         <Book/>
+                    </Route>
+                    <Route path={'/timetable'}>
+                        <Timetable />
                     </Route>
                     <Route path={'/references'}>
                         <MapContainer/>
