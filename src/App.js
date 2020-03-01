@@ -13,7 +13,7 @@ import {config} from "./API/firebase/firebase-api";
 import Book from "./components/container-components/studentbookContainer";
 import HomePage from "./components/home-page/home-page";
 import AboutUs from "./components/about-us/about-us";
-import Timetable from "./components/timetable/timetable";
+import Timetable from "./components/container-components/timetableContainer";
 
 
 function App() {

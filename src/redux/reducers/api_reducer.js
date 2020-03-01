@@ -8,7 +8,8 @@ import {
   FETCH_USER_BOOK_START,
   FETCH_USER_BOOK_FAILURE,
   FETCH_USER_BOOK_SUCCESS,
-  FETCH_MAP_POLYGON
+  FETCH_LESSON_DATA,
+  FETCH_SEARCH_DATA
 } from "../actions/action_types";
 
 export const initialState = {
@@ -17,11 +18,13 @@ export const initialState = {
   userPins: [],
   errorMessage: null,
   bookmarks: [],
-  polygons: null
+  searchTimetable: [],
+  lessonTimetable: [],
+  text: ''
 };
 
 export function APIReducer(state = initialState, action) {
-  const { type, payload } = action;
+  const { type, payload, text } = action;
   switch (type) {
     case FETCH_API_START:
       return { ...state, loading: true };
@@ -41,6 +44,10 @@ export function APIReducer(state = initialState, action) {
       return { ...state, errorBook: payload };
     case FETCH_USER_BOOK_START:
       return { ...state };
+    case FETCH_SEARCH_DATA:
+      return { ...state, searchTimetable: payload };
+    case FETCH_LESSON_DATA:
+      return { ...state, lessonTimetable: payload, text: text };
     default:
       return state;
   }

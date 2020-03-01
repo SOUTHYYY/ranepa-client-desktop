@@ -10,10 +10,12 @@ import {
   FETCH_USER_BOOK_START,
   FETCH_USER_BOOK_FAILURE,
   FETCH_USER_BOOK_SUCCESS,
+  FETCH_LESSON_DATA,
+  FETCH_SEARCH_DATA
 } from "./action_types";
 
 import { findMarkersByUser } from "../../API/firebase/firebase-api";
-import { getRanepaS } from "../../API/ranepa/ranepa-services";
+import RanepaService from "../../API/ranepa/ranepa-services";
 
 const ranepa_book_url =
     "http://services.niu.ranepa.ru/API/public/student/getDiary";
@@ -77,10 +79,18 @@ export function fetchBookmarksSuccess(data) {
   };
 }
 
-export function fetchBoormarksFailure(error) {
+export function fetchTimetableSuccess(data) {
   return {
-    type: FETCH_USER_BOOK_FAILURE,
-    payload: error
+    type: FETCH_SEARCH_DATA,
+    payload: data
+  };
+}
+
+export function fetchObjectTimetableSucces(data, text) {
+  return {
+    type: FETCH_LESSON_DATA,
+    payload: data,
+    text: text
   };
 }
 
@@ -116,4 +126,18 @@ export function fetchFromRanepaAPI(id) {
         })
         .then(res => dispatch(fetchBookmarksSuccess(res.data)));
   };
+}
+
+export function fetchSearchTimetable(type) {
+  return async dispatch => {
+    await new RanepaService().getGroupOrTeacher(type)
+        .then((res) => dispatch(fetchTimetableSuccess(res)));
+  }
+}
+
+export function fetchObjectsTimetable(oid, type, text) {
+  return async dispatch => {
+    await new RanepaService().getResource(oid, type)
+        .then((res) => dispatch(fetchObjectTimetableSucces(res, text)))
+  }
 }
