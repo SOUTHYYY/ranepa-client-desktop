@@ -173,7 +173,7 @@ class App extends Component {
         this.props.welcomeScreen ? null : (
         <Pins
           data={this.state.popupData ? this.state.popupData : this.props.data}
-          onClick={this._onClickMarker}
+          onClick={this._onClickMarker} iconSize={this.state.viewport.zoom}
         />
       )
     ) : null;
