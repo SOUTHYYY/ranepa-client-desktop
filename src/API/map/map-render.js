@@ -26,7 +26,6 @@ class App extends Component {
         doubleClickZoom: !this.props.welcomeScreen,
         dragRotate: !this.props.welcomeScreen
       },
-      data: this.props.API.polygons
     };
   }
 
@@ -35,11 +34,6 @@ class App extends Component {
       this.setState({
         popupData: nextProps.data
       });
-    }
-    if (nextProps.API.polygons !== this.state.data) {
-      this.setState({
-        data: nextProps.API.polygons
-      })
     }
   }
 
@@ -189,15 +183,6 @@ class App extends Component {
         ? null
         : this._renderCreatedPopup()
       : null;
-    const dataLayer = {
-      id: 'data',
-      type: 'line',
-      paint: {
-        'line-color': "#b23640",
-        'line-opacity': 0.9,
-        'line-width': 2
-      }
-    };
     return (
       <MapGL
         {...this.state.mapWelcome}
@@ -213,9 +198,6 @@ class App extends Component {
         {mapPins}
         {this._renderPopup()}
         {preventLeakMemoryFromPopup}
-        <Source type="geojson" data={this.state.data}>
-          <Layer {...dataLayer}/>
-        </Source>
       </MapGL>
     );
   }

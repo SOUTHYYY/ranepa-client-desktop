@@ -12,16 +12,15 @@ class Caller extends Component {
     }
 
     componentDidMount() {
-        const { startFetch, API: { data }, startPolygonFetch } = this.props;
+        const { startFetch, API: { data } } = this.props;
         if (!data) {
             startFetch();
-            startPolygonFetch();
         }
     }
 
     render() {
         return (
-            <Map startFetch={this.props.startFetch} startPolygonFetch={this.props.startPolygonFetch} data={this.props.API.data} auth={this.props.auth} {...this.props} />
+            <Map startFetch={this.props.startFetch} data={this.props.API.data} auth={this.props.auth} {...this.props} />
         )
     }
 }

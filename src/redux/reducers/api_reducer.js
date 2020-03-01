@@ -41,8 +41,6 @@ export function APIReducer(state = initialState, action) {
       return { ...state, errorBook: payload };
     case FETCH_USER_BOOK_START:
       return { ...state };
-    case FETCH_MAP_POLYGON:
-      return { ...state, polygons: payload };
     default:
       return state;
   }
