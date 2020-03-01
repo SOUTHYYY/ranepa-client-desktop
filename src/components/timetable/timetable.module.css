@@ -21,7 +21,9 @@
     height: 6.3vh;
     align-items: center;
     box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
-
+}
+.timetable_Button:hover {
+    background-color: #afacac;
 }
 .timetable_searchIcon {
     vertical-align: middle;
@@ -82,12 +84,6 @@
     color: white;
 }
 .timetable_list_wrapper {
-    background-color: #f1eeee;
-    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
     max-height: 25vh;
     margin-top: 10px;
     overflow: auto;

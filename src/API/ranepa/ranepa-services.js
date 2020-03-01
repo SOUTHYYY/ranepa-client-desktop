@@ -12,7 +12,6 @@ export default class RanepaService {
 
     getResource = async (id, type) => {
         const res = await axios.get(`${this._api}${type === '1' ? 'teacher/' : 'group/'}${id}/schedule/${this.getCurrentDate()}/${this.getPlus7Date()}`);
-        debugger;
         return res.data.map((el) => this._transformData(el));
     };
 
@@ -35,13 +34,16 @@ export default class RanepaService {
         return `${date}.${month<10?`0${month}`:`${month}`}.${year}`
     }
     getPlus7Date(separator=''){
+        let increaseDate = new Date();
+        let numberOfDaysToAdd = 6;
+        increaseDate.setDate(increaseDate.getDate() + numberOfDaysToAdd);
+        let dd = increaseDate.getDate();
+        let mm = increaseDate.getMonth() + 1;
+        let y = increaseDate.getFullYear();
+        let FormattedDate = dd + '.'+ mm + '.'+ y;
 
-        let newDate = new Date();
-        let date = newDate.getDate() + 7 - (newDate.getDate()+7 >= 31? 31 : 0);
-        let month = newDate.getMonth() + 1 + (date + 31 >= 31 ? 1 : 0);
-        let year = newDate.getFullYear();
 
-        return `${date}.${month<10?`0${month}`:`${month}`}.${year}`
+        return FormattedDate;
     }
 
     _transformData = (data) => {
