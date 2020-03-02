@@ -5,7 +5,6 @@ import TimetableItems from "./timetable-item";
 import TimetableLessons from "./timetable-lessons";
 
 export default class Timetable extends React.Component {
-  ranepaService = new RanepaService();
   constructor() {
     super();
 
@@ -14,7 +13,8 @@ export default class Timetable extends React.Component {
       type: "0",
       lessons: [],
       currentLessons: [],
-      isTargetSelected: false
+      isTargetSelected: false,
+      isLoading: false
     };
   }
 
@@ -22,7 +22,8 @@ export default class Timetable extends React.Component {
     if (nextProps.API.searchTimetable !== this.state.lessons) {
       this.setState({
         lessons: nextProps.API.searchTimetable.filter(obj => obj.value.toLowerCase().indexOf(this.state.text.toLowerCase()) > -1),
-        isTargetSelected: false
+        isTargetSelected: false,
+        isLoading: false
       });
     }
     if (
@@ -52,6 +53,9 @@ export default class Timetable extends React.Component {
   };
   getSourceData = () => {
     this.props.fetchSearch(this.state.type);
+    this.setState({
+      isLoading: true
+    })
   };
   getLessonsById = oid => {
     this.props.fetchLesson(oid, this.state.type, this.state.text);
@@ -61,6 +65,15 @@ export default class Timetable extends React.Component {
       this.state.type === "1" ? styles.timetable_selector_active : null;
     const selectorStudent =
       this.state.type === "0" ? styles.timetable_selector_active : null;
+
+    const container = this.state.isTargetSelected ? (
+        <TimetableLessons data={this.state.currentLessons} />
+    ) : this.state.lessons.length ? (
+        <TimetableItems
+            data={this.state.lessons}
+            getLesson={this.getLessonsById}
+        />
+    ) : null;
 
     return (
       <div>
@@ -94,15 +107,17 @@ export default class Timetable extends React.Component {
             />
           </span>
         </div>
-        {this.state.isTargetSelected ? (
-          <TimetableLessons data={this.state.currentLessons} />
-        ) : this.state.lessons.length ? (
-          <TimetableItems
-            data={this.state.lessons}
-            getLesson={this.getLessonsById}
-          />
-        ) : null}
+        {this.state.isLoading ? <Loading /> : container}
       </div>
     );
   }
 }
+
+export const Loading = () => {
+  return(
+      <div className={styles.loading_circle__container}>
+        <i className={styles.loading_circle + ' fas fa-spinner fa-pulse fa-3x'}></i>
+      </div>
+  )
+};
+

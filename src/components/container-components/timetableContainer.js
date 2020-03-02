@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const TimetableStateToProps = state => {
-    debugger;
     return {
         API: state.APIReducer,
     }

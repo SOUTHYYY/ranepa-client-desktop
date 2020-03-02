@@ -106,3 +106,10 @@
     overflow: auto;
     width: 1000px;
 }
+.loading_circle {
+    color: #951a1d;
+}
+.loading_circle__container {
+    text-align: center;
+    margin-top: 40px;
+}
