@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import MapGL, { Popup, Layer, Source } from "react-map-gl";
+import MapGL, { Popup } from "react-map-gl";
 import "./mapbox-gl.css";
 import Pins from "./Pins";
 import mapConfig from "./mapConfig";
 import { _getGeocoderResourse, updateFireData } from "../firebase/firebase-api";
-import axios from "axios";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewport: {
+        mapboxApiAccessToken: mapConfig.token,
         latitude: 56.307,
         longitude: 43.991,
         zoom: 9,
@@ -35,6 +35,9 @@ class App extends Component {
         popupData: nextProps.data
       });
     }
+  }
+  componentWillUnmount() {
+    this.props.startFetch(true);
   }
 
   _updateViewport = viewport => {
@@ -185,14 +188,13 @@ class App extends Component {
       : null;
     return (
       <MapGL
-        {...this.state.mapWelcome}
         onClick={this._createPopupForm}
         width={this.props.width}
         height={this.props.height}
+        {...this.state.mapWelcome}
         {...viewport}
         mapStyle={this.props.welcomeScreen ? mapConfig.apiWelcomeStyle : mapConfig.apiStyle}
         onViewportChange={this._updateViewport}
-        mapboxApiAccessToken={mapConfig.token}
         className="mapContainer"
       >
         {mapPins}

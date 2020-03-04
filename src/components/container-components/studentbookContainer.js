@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import StudentBook from '../student-book/student-book'
-import axios from "axios";
 import {fetchFromRanepaAPI} from "../../redux/actions/api_actions";
 
 const mapDispatchToProps = dispatch => {

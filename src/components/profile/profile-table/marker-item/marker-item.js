@@ -5,7 +5,7 @@ import remove from '../../../../images/profile/quit.svg'
 import {deleteMarker} from "../../../../API/firebase/firebase-api";
 
 const markerItem  = ({item, idx, deleteMark}) => {
-    const {title, description, date, address, key} = item;
+    const {description, date, address, key} = item;
 
     return(
         <tr className={styles.markerItem}>

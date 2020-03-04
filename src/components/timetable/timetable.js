@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./timetable.module.css";
-import RanepaService from "../../API/ranepa/ranepa-services";
 import TimetableItems from "./timetable-item";
 import TimetableLessons from "./timetable-lessons";
 
@@ -17,24 +16,26 @@ export default class Timetable extends React.Component {
       isLoading: false
     };
   }
+  componentWillReceiveProps(nextProps, nextContent) {
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    if (nextProps.API.searchTimetable !== this.state.lessons) {
+    const { text, searchTimetable, lessonTimetable  } = nextProps;
+
+    const { currentLessons } = this.state;
+
+    if (searchTimetable !== this.state.lessons) {
       this.setState({
-        lessons: nextProps.API.searchTimetable.filter(obj => obj.value.toLowerCase().indexOf(this.state.text.toLowerCase()) > -1),
+        lessons: searchTimetable.filter(obj => obj.value.toLowerCase().indexOf(this.state.text.toLowerCase()) > -1),
         isTargetSelected: false,
         isLoading: false
       });
     }
-    if (
-      nextProps.API.lessonTimetable.length !== this.state.currentLessons.length
-    ) {
+    if (lessonTimetable.length !== currentLessons.length) {
       this.setState({
-        currentLessons: nextProps.API.lessonTimetable,
+        currentLessons: lessonTimetable,
         isTargetSelected: true
       });
     }
-    if (nextProps.API.text === this.state.text) {
+    if ((text === this.state.text) && (text !== "")) {
       this.setState({
         isTargetSelected: true
       });
@@ -66,15 +67,12 @@ export default class Timetable extends React.Component {
     const selectorStudent =
       this.state.type === "0" ? styles.timetable_selector_active : null;
 
-    const container = this.state.isTargetSelected ? (
-        <TimetableLessons data={this.state.currentLessons} />
-    ) : this.state.lessons.length ? (
+    const container = this.state.isTargetSelected ? <TimetableLessons data={this.state.currentLessons} /> : this.state.lessons.length ?
         <TimetableItems
             data={this.state.lessons}
             getLesson={this.getLessonsById}
         />
-    ) : null;
-
+     : null;
     return (
       <div>
         <div className={styles.timetable_wrap_selector}>

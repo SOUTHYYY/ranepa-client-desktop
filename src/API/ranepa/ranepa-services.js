@@ -1,4 +1,6 @@
 import axios from 'axios';
+import moment from 'moment';
+import 'moment/locale/ru'
 
 // http://services.niu.ranepa.ru/API/public/group/15834/schedule/21.1.2020/27.1.2020
 
@@ -19,9 +21,24 @@ export default class RanepaService {
         const DataRegExp = /[0-9].......([0-9]*)/;
         return data.xdt.match(DataRegExp)[1];
     }
+    _getDayOfWeek(num) {
+        moment.locale('ru');
+
+        let day = num.xdt.substr(8);
+        day = day.substring(0, day.length - 13);
+        day = (day / 10) < 1 ? day.substr(1) : day;
+
+        let month = num.xdt.substr(5);
+        month = month.substring(0, month.length - 16);
+        month = (month / 10) < 1 ? month.substr(1) : month;
+
+        let year = num.xdt.substring(0, num.xdt.length - 19);
+
+        return moment(`${day}.${month}.${year}`, 'DD.MM.YYYY').format('dddd');
+    }
     async getGroupOrTeacher(type) {
         const res = await axios.get(this._api_group)
-            .then((res) => res.data.filter((obj) => obj.type == type));
+            .then((res) => res.data.filter((obj) => obj.type === type));
         return res;
     }
     getCurrentDate(separator=''){
@@ -53,7 +70,8 @@ export default class RanepaService {
             lesson: data.subject,
             type: data.type,
             time: data.nf + ' - ' + data.kf,
-            xdt: this._extractData(data)
+            xdt: this._extractData(data),
+            dayOfWeek: this._getDayOfWeek(data)
         };
     };
 }

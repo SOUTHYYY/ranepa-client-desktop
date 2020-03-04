@@ -1,8 +1,6 @@
 import React from "react";
 import "./about-us.css";
 
-import map from "../../images/about-us/map-on-cellphone-screen.svg";
-
 const AboutUs = () => {
   return (
     <div>

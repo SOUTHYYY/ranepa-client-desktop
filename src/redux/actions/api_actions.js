@@ -8,7 +8,7 @@ import {
   FETCH_USER_PINS_SUCCES,
   FETCH_USER_PINS_FAILURE,
   FETCH_USER_BOOK_START,
-  FETCH_USER_BOOK_FAILURE,
+  // FETCH_USER_BOOK_FAILURE,
   FETCH_USER_BOOK_SUCCESS,
   FETCH_LESSON_DATA,
   FETCH_SEARCH_DATA
@@ -94,8 +94,10 @@ export function fetchObjectTimetableSucces(data, text) {
   };
 }
 
-export function fetchFromAPI() {
-  return dispatch => {
+export function fetchFromAPI(isUnmounted) {
+  return isUnmounted ? dispatch => dispatch(fetchAPISuccess(null))
+      :
+          dispatch => {
     dispatch(fetchAPIStart());
     axios
         .get(api_url)

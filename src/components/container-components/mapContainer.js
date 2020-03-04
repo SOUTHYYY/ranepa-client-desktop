@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        startFetch: () => dispatch(fetchFromAPI()),
+        startFetch: (isUnmounted) => dispatch(fetchFromAPI(isUnmounted)),
     }
 };
 

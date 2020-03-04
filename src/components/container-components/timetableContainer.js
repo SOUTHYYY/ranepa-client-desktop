@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Timetable from "../timetable/timetable";
-import axios from "axios";
 import {fetchSearchTimetable, fetchObjectsTimetable} from "../../redux/actions/api_actions";
 
 const mapDispatchToProps = dispatch => {
@@ -11,8 +10,11 @@ const mapDispatchToProps = dispatch => {
 };
 
 const TimetableStateToProps = state => {
+    const { lessonTimetable, searchTimetable, text } = state.APIReducer;
     return {
-        API: state.APIReducer,
+        lessonTimetable: lessonTimetable,
+        searchTimetable: searchTimetable,
+        text: text
     }
 };
 

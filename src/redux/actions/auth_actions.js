@@ -1,7 +1,6 @@
 import {SET_AUTH_USER_DATA_SUCCES} from "./action_types";
 import {stopSubmit} from 'redux-form'
-import {config, getFireProfile} from "../../API/firebase/firebase-api";
-import * as firebase from "firebase";
+import {getFireProfile} from "../../API/firebase/firebase-api";
 
 export const setAuthUserData = (id, login, password, isAuth, siteName, icon) => ({
     type: SET_AUTH_USER_DATA_SUCCES,

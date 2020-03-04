@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./student.module.css";
-import { fetchFromRanepaAPI } from "../../redux/actions/api_actions";
 import BookItems from "./book-items";
 import {Loading} from "../timetable/timetable";
 

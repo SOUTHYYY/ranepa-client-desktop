@@ -13,7 +13,7 @@ class ProfileTable extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.data != this.state.data) {
+        if (nextProps.data !== this.state.data) {
             this.setState({data: nextProps.data});
         }
     }
