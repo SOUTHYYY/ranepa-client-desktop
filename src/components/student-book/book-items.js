@@ -7,6 +7,7 @@ class BookItems extends Component {
           return <MarkItem key={idx} idx={idx} item={item}/>
       });
 
+      if(!this.props.data.API.bookmarks) return <p>Пиздец</p>;
     return (
       <table>
         <tbody>

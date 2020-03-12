@@ -4,7 +4,8 @@ import {compose} from 'redux'
 import Login from '../login/login'
 
 const mapStateToProps = state => ({
-    isAuth: state.AuthReducer.isAuth
+    isAuth: state.AuthReducer.isAuth,
+    isFailed: state.AuthReducer.isFailed
 })
 // const mapDispatchToProps = dispatch => ({
 //     login: () => dispatch(login())

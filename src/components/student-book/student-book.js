@@ -3,6 +3,9 @@ import styles from "./student.module.css";
 import BookItems from "./book-items";
 import {Loading} from "../timetable/timetable";
 
+export const Child = props => {
+    console.log(props);
+};
 class Book extends React.Component {
   constructor() {
     super();
@@ -32,7 +35,7 @@ class Book extends React.Component {
         <span style={{marginLeft: "40px"}} className={styles.studentBooK_tableHead_text}>Курс</span>
         <span style={{marginLeft: "40px"}} className={styles.studentBooK_tableHead_text}>Предмет</span>
         <span style={{marginLeft: "380px"}} className={styles.studentBooK_tableHead_text}>Тип зачета</span>
-        <span style={{marginLeft: "167px"}} className={styles.studentBooK_tableHead_text}>Оценка</span>
+        <span style={{marginLeft: "70px"}} className={styles.studentBooK_tableHead_text}>Оценка</span>
       </div>;
     return (
       <div className={styles.studentBook_content}>

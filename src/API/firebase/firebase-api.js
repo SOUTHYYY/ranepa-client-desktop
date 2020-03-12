@@ -48,12 +48,13 @@ export async function _getGeocoderResourse(latitude, longitude) {
     return __address_data.address;
 }
 
-export async function updateFireData(latitude, longitude, user, description) {
+export async function updateFireData(latitude, longitude, user, description, dateBegin) {
 
     let recievedData = await _getGeocoderResourse(latitude, longitude);
-
+debugger;
     firebase.database().ref('markers')
         .push({
+            dateBegin: dateBegin,
             description: description,
             latitude: latitude,
             longitude: longitude,

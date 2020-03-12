@@ -11,7 +11,6 @@ export default class TimetableItems extends Component {
                 <td className={styles.timetable_Content_text} onClick={() => this.props.getLesson(item.oid)}>{item.value}</td>
             </tr>
         });
-
         return (<div className={styles.timetable_list_wrapper}>
                 <table>
                 <tbody style={{overflow: "scroll"}}>
@@ -19,7 +18,6 @@ export default class TimetableItems extends Component {
                 </tbody>
             </table>
         </div>
-
         );
     }
 }

@@ -13,16 +13,30 @@
     height: calc(100% - 150px);
     margin: 0px 50px;
     display: flex;
+    justify-content: space-evenly;
 }
 
 .marks {
+    display: flex;
+    flex-direction: row;
     width: 70%;
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgba(211,211,211 , 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(211,211,211 , 0.3);
+}
+.marks > div:nth-child(2) {
+    width: 60%;
+}
+.marks > div:nth-child(2) > h1, h3 {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
 }
 
 .marks h1{
     padding: 0;
     margin: 0;
-    color: #d3d3d3;
+    color: #000000;
 }
 
 .marks h3{
@@ -40,8 +54,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: 50px;
-    width: 25%;
+    margin-right: 50px;
+    width: 40%;
     padding: 25px 0;
     border: 1px solid rgba(211,211,211 , 0.3);
     border-radius: 20px;

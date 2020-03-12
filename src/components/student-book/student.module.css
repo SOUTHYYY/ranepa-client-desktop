@@ -27,12 +27,15 @@
     background-color: #f1eeee;
 }
 .studentBooK_tableHead_text {
+    padding: 10px;
+
     color: #951a1d;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
 
 .studentBooK_Content_text {
+    padding: 10px;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
 }
@@ -82,8 +85,8 @@ input[name=tableSearch] {
     vertical-align: middle;
     color: #951a1d;
 }
-.book_tr {
-
+.book_tr > td.studentBooK_tableHead_text {
+    padding-left: 20px;
 }
 .book_td {
 
@@ -94,29 +97,3 @@ input[name=tableSearch] {
 .book_mark {
 
 }
-/* #customers {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#customers tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-#customers tr:hover {
-    background-color: #ddd;
-}
-
-#customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}   */

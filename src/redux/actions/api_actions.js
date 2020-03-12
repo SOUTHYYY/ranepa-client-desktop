@@ -98,7 +98,6 @@ export function fetchFromAPI(isUnmounted) {
   return isUnmounted ? dispatch => dispatch(fetchAPISuccess(null))
       :
           dispatch => {
-    dispatch(fetchAPIStart());
     axios
         .get(api_url)
         .then(res => transformData(res.data))

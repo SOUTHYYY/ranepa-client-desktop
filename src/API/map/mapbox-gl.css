@@ -18,56 +18,62 @@
   font-family: "Roboto", sans-serif;
   font-style: normal !important;
   font-size: 24px;
+  color: #951b1d;
 }
 .popup-text-address {
   font-size: 13px;
   font-family: "Roboto", sans-serif;
   font-style: normal !important;
-  color: #c7c1c1;
+  color: #6d6d6d;
 }
 .popup-text-details {
   font-family: "Roboto", sans-serif;
   font-style: normal !important;
 }
 .mapboxgl-popup-content {
+  backdrop-filter: blur(2px);
   padding: 18px 18px 18px;
   color: #ffffff;
-  background-color: #951a1d;
+  background-color: #f1eeee8f;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  box-shadow: 0 15px 22px rgba(0,0,0,.1);
 }
 .mapboxgl-popup-close-button {
-  color: #fff;
-}
-input[type="text"] {
-  border: 1px solid #cccccc;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  background: #ffffff !important;
-  outline: none;
-  height: 24px;
-  width: 120px;
   color: #000000;
-  font-size: 11px;
-  font-family: Tahoma;
 }
+
 .button_submit {
-  color: #444444;
-  background: #f3f3f3;
-  border: 1px #dadada solid;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 9pt;
-  outline: none;
+  background: #951b1d !important;
 }
 
 .button_submit:hover {
   border: 1px #c6c6c6 solid;
   color: #333333;
   background: #cdcdcd;
+}
+.Mui-focused {
+  color: black !important;
+}
+.MuiInputBase {
+  color: black !important;
+}
+.MuiAlert-standardInfo {
+  margin-top: 5px;
+  padding-bottom: 0px !important;
+  background-color: rgba(0,0,0,0) !important;
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  border-top: 1px solid #bfbfbf;
+  border-radius: 0px !important;
+}
+.MuiAlert-standardError {
+  padding-bottom: 0px !important;
+  margin-top: 0px;
+  background-color: rgba(0,0,0,0) !important;
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  border-radius: 0px !important;
 }
 
 .button_submit:active {

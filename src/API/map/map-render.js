@@ -4,6 +4,10 @@ import "./mapbox-gl.css";
 import Pins from "./Pins";
 import mapConfig from "./mapConfig";
 import { _getGeocoderResourse, updateFireData } from "../firebase/firebase-api";
+import ButtonUI from '@material-ui/core/Button';
+import {TextField} from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 
 class App extends Component {
   constructor(props) {
@@ -19,8 +23,9 @@ class App extends Component {
       },
       popupInfo: null,
       popupIsCreated: false,
-      popupData: false,
+      popupData: null,
       popupInputData: null,
+      popupDateBegin: null,
       mapWelcome: {
         dragPan: !this.props.welcomeScreen,
         doubleClickZoom: !this.props.welcomeScreen,
@@ -30,12 +35,13 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.state.popupData) {
+    if (nextProps.API.data !== this.state.popupData) {
       this.setState({
-        popupData: nextProps.data
+        popupData: nextProps.API.data
       });
     }
   }
+
   componentWillUnmount() {
     this.props.startFetch(true);
   }
@@ -70,9 +76,24 @@ class App extends Component {
       popupInputData: e.target.value
     });
   };
-  createMarker = (longitude, latitude, description, user) => {
+  handleDateBegin = e => {
+    this.setState({
+      popupDateBegin: e.target.value
+    })
+  };
+  _transformDateBegin(date) {
+    if(date === null) return null;
+
+    let time = date.substring(11);
+    let year = date.substring(0, 10);
+
+    return year + ' ' + time;
+  }
+
+  createMarker = (longitude, latitude, description, user, dateBegin) => {
 
     _getGeocoderResourse(latitude, longitude).then(address => {
+      this._transformDateBegin(dateBegin);
       const newElement = {
         address: address,
         date: `${new Date().getDate()}.${new Date().getMonth() +
@@ -81,17 +102,18 @@ class App extends Component {
         longitude: longitude,
         description: description,
         user: user.login,
-        siteName: user.siteName
+        siteName: user.siteName,
+        dateBegin: this._transformDateBegin(dateBegin)
       };
       this.setState({
-        popupData: [...this.props.data, newElement]
+        popupData: [...this.props.API.data, ...this.state.popupData, newElement]
       });
-      updateFireData(latitude, longitude, user, description);
+      updateFireData(latitude, longitude, user, description, this._transformDateBegin(dateBegin));
     });
   };
 
   _renderCreatedPopup = () => {
-    const { popupIsCreated, popupInputData } = this.state;
+    const { popupIsCreated, popupInputData, popupDateBegin } = this.state;
     const auth = this.props.auth.siteName
       ? this.props.auth
       : JSON.parse(localStorage.getItem("user"));
@@ -116,33 +138,42 @@ class App extends Component {
             <em className="popup-text-address">{popupIsCreated.address}</em>
             <br />
             <br />
-            <input
-              type="text"
-              maxLength={30}
-              placeholder="Описание"
-              onChange={this.handleInput}
+            <TextField id="outlined-size-small" label="Описание" variant="outlined" type="text" size="small"
+                       inputProps={{
+                         maxLength: 30,
+                       }}
+                       onChange={this.handleInput}/>
+            <br />
+            <br />
+            <TextField
+                onChange={this.handleDateBegin}
+                id="datetime-local"
+                label="Дата"
+                type="datetime-local"
+                defaultValue="0000-00-00T00:00"
+                InputLabelProps={{
+                  shrink: true,
+                }}
             />
             <br />
             <br />
-            <button
-              className="button_submit"
-              onClick={() => {
-                this.createMarker(
+            <ButtonUI variant="contained" color="secondary" className="button_submit" onClick={() => {
+              this.createMarker(
                   popupIsCreated.longitude,
                   popupIsCreated.latitude,
                   popupInputData,
-                  auth
-                );
-                setTimeout(() => {
-                  this.setState({
-                    popupIsCreated: false,
-                    popupInputData: null
-                  });
-                }, 500);
-              }}
-            >
+                  auth,
+                  popupDateBegin
+              );
+              setTimeout(() => {
+                this.setState({
+                  popupIsCreated: false,
+                  popupInputData: null
+                });
+              }, 500);
+            }}>
               Принять
-            </button>
+            </ButtonUI>
           </form>
         </Popup>
       )
@@ -164,7 +195,8 @@ class App extends Component {
           <br />
           <em className="popup-text-address">{popupInfo.address}</em>
           <br />
-          <p className="popup-text-details">{popupInfo.description}</p>
+          {popupInfo.description === undefined ? null : <Alert severity="info">{popupInfo.description}</Alert>}
+          {popupInfo.dateBegin === undefined ? null : <Alert severity="error" icon={<ScheduleIcon fontSize="inherit"/>}>{popupInfo.dateBegin}</Alert>}
         </Popup>
       )
     );
@@ -172,13 +204,11 @@ class App extends Component {
 
   render() {
     const { viewport } = this.state;
-    const mapPins = this.props.data ? (
-        this.props.welcomeScreen ? null : (
+    const mapPins = this.props.API.data ? (
         <Pins
-          data={this.state.popupData ? this.state.popupData : this.props.data}
+          data={this.state.popupData ? this.state.popupData : this.props.API.data}
           onClick={this._onClickMarker} iconSize={this.state.viewport.zoom}
         />
-      )
     ) : null;
 
     const preventLeakMemoryFromPopup = this.state.popupIsCreated

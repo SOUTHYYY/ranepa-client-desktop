@@ -11,7 +11,7 @@ const HomePage = props => {
             </div>
             <div className={styles.home_page__map_wrapper}>
                 <div className={styles.home_page__map}>
-                    <MapContainer width='500px' height='100vh' welcomeScreen={true}/>
+                    <MapContainer width='500px' height='100vh' welcomeScreen={props.welcomeScreen}/>
                 </div>
             </div>
 

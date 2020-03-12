@@ -7,15 +7,15 @@ import Map from './map-render';
 class Caller extends Component {
 
     componentDidMount() {
-        const { startFetch, API: { data } } = this.props;
+        const { startFetch, API: { data }, welcomeScreen } = this.props;
         if (!data) {
-            startFetch(false);
+            return welcomeScreen ? null : startFetch(false);
         }
     }
 
     render() {
         return (
-            <Map startFetch={this.props.startFetch} data={this.props.API.data} auth={this.props.auth} {...this.props} />
+            <Map startFetch={this.props.startFetch} auth={this.props.auth} {...this.props} />
         )
     }
 }

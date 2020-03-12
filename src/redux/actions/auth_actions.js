@@ -1,11 +1,16 @@
-import {SET_AUTH_USER_DATA_SUCCES} from "./action_types";
+import {SET_AUTH_USER_DATA_SUCCES, SET_AUTH_USER_DATA_FAILURE} from "./action_types";
 import {stopSubmit} from 'redux-form'
 import {getFireProfile} from "../../API/firebase/firebase-api";
 
-export const setAuthUserData = (id, login, password, isAuth, siteName, icon) => ({
+export const setAuthUserData = (id, login, password, isAuth, siteName, icon, isFailed) => ({
     type: SET_AUTH_USER_DATA_SUCCES,
-    payload: {id, login, password, siteName, icon,  isAuth}
-})
+    payload: {id, login, password, siteName, icon,  isAuth, isFailed}
+});
+
+export const AuthFail = () => ({
+    type: SET_AUTH_USER_DATA_FAILURE,
+    payload: {isFailed: true}
+});
 
 export const OnSetAuthUserData = () => async (dispatch) => {
     try {
@@ -13,7 +18,7 @@ export const OnSetAuthUserData = () => async (dispatch) => {
         const parsed = JSON.parse(data)
         if (parsed !== undefined) {
             let {id, login, password, siteName, icon} = parsed
-            dispatch(setAuthUserData(id, login, password, true, siteName, icon))
+            dispatch(setAuthUserData(id, login, password, true, siteName, icon, false))
         }
     } catch (e) {
 
@@ -25,6 +30,7 @@ export const login = (login, password) => async (dispatch) => {
     const response = {
         ...data
     };
+
     if (response.resultCode === 0) {
         //Convert the state to a JSON string
         const serialisedState = JSON.stringify(response.data);
@@ -33,7 +39,8 @@ export const login = (login, password) => async (dispatch) => {
         dispatch(OnSetAuthUserData())
 
     } else {
-        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Упс... что-то пошло не так...'
+        dispatch(AuthFail());
+        let message = 'Упс... что-то пошло не так...';
         dispatch(stopSubmit('login', {_error: message}))
     }
 }
