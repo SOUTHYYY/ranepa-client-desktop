@@ -10,12 +10,20 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ButtonUI from '@material-ui/core/Button';
 import {deleteMarker} from "../../../API/firebase/firebase-api";
 import {Loading} from "../../timetable/timetable";
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Alert from "@material-ui/lab/Alert";
 
 class ProfileTable extends Component {
 
     state = {
-        data: []
+        emptyData: false,
+        data: [],
+        alertIsOpen: false,
+        tempKey: null
     };
     deleteMarkArr = (id) => {
         this.state.data.splice(id, 1);
@@ -23,14 +31,37 @@ class ProfileTable extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.data !== this.state.data) {
-            this.setState({data: nextProps.data});
+        if (nextProps.data.hasOwnProperty('empty')) {
+            this.setState({emptyData: true})
+        } else {
+            if (nextProps.data !== this.state.data) {
+                this.setState({data: nextProps.data});
+            }
         }
+        console.log(this.state)
     }
 
-    render() {
 
+    handleClickOpen = (key) => {
+        this.setState({
+            alertIsOpen: true,
+            tempKey: key
+        });
+    };
+
+    handleClose = () => {
+        this.setState({alertIsOpen: false});
+    };
+    handleSubmit = () => {
+        this.setState({
+            alertIsOpen: false
+        });
+        this.deleteMarkArr(this.state.tempKey);
+        deleteMarker(this.state.tempKey)
+    };
+    render() {
         return (
+            <React.Fragment>
             <List>
                 {this.state.data.length ? this.state.data.map((item, idx) => {
                         return <ListItem key={idx} idx={idx} item={item} className='marker_list'>
@@ -40,13 +71,34 @@ class ProfileTable extends Component {
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText primary={item.address} secondary={item.date} />
-                            <ButtonUI variant="contained" color="secondary" onClick={() => {this.deleteMarkArr(item.key); deleteMarker(item.key)}}>
+                            <ButtonUI variant="contained" color="secondary" onClick={() => this.handleClickOpen(item.key)}>
                                 <DeleteIcon />
                             </ButtonUI>
                         </ListItem>
-                    }) : <Loading/>}
-
+                    }) : this.props.data.empty ? <h2>Ни одного маркера не найдено</h2> : <Loading/>}
             </List>
+                <Dialog
+                    open={this.state.alertIsOpen}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title"><Alert icon={<DeleteIcon fontSize="inherit" />} severity="warning">Подтверждение удаления маркера</Alert></DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Вы уверены что хотите удалить данный маркер?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <ButtonUI onClick={this.handleClose} color="primary">
+                            Отмена
+                        </ButtonUI>
+                        <ButtonUI onClick={this.handleSubmit} color="primary" autoFocus>
+                            Подтверждаю
+                        </ButtonUI>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment>
         );
     }
 }

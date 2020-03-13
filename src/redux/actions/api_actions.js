@@ -111,7 +111,11 @@ export function fethUserPins(user) {
     dispatch(fetchUserPinsStart());
     try {
       const data = await findMarkersByUser(user);
-      dispatch(fethUserPinsSucces(transformData(data)));
+      if(data === null) {
+        dispatch(fethUserPinsSucces({empty: true}))
+      } else {
+        dispatch(fethUserPinsSucces(transformData(data)));
+      }
     } catch (error) {
       dispatch(fethUserPinsFailure(error));
     }

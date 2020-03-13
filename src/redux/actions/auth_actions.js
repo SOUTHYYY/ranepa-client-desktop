@@ -7,9 +7,9 @@ export const setAuthUserData = (id, login, password, isAuth, siteName, icon, isF
     payload: {id, login, password, siteName, icon,  isAuth, isFailed}
 });
 
-export const AuthFail = () => ({
+export const AuthFail = (type) => ({
     type: SET_AUTH_USER_DATA_FAILURE,
-    payload: {isFailed: true}
+    payload: {isFailed: type}
 });
 
 export const OnSetAuthUserData = () => async (dispatch) => {
@@ -39,7 +39,7 @@ export const login = (login, password) => async (dispatch) => {
         dispatch(OnSetAuthUserData())
 
     } else {
-        dispatch(AuthFail());
+        dispatch(AuthFail(true));
         let message = 'Упс... что-то пошло не так...';
         dispatch(stopSubmit('login', {_error: message}))
     }

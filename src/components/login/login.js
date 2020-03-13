@@ -39,9 +39,7 @@ class Login extends Component {
         }
     };
     componentWillReceiveProps(nextProps, nextContext) {
-        if(nextProps.isFailed) {
-            this.setState({alertState: nextProps.isFailed})
-        }
+        this.setState({alertState: nextProps.isFailed})
     }
 
     validate = (value, validation) => {
@@ -76,7 +74,7 @@ class Login extends Component {
     };
 
     handleClose = () => {
-            this.setState({alertState: false})
+            this.props.AuthFail(false)
     };
 
     renderInputs() {
