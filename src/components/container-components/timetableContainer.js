@@ -10,7 +10,7 @@ import React, {Component} from "react";
 const mapDispatchToProps = dispatch => {
     return {
         fetchSearch: (type) => dispatch(fetchSearchTimetable(type)),
-        fetchLesson: (oid, type, text) => dispatch(fetchObjectsTimetable(oid, type, text)),
+        fetchLesson: (oid, type) => dispatch(fetchObjectsTimetable(oid, type)),
         searchClear: () => dispatch(payloadSearchTimetableClear())
     }
 };

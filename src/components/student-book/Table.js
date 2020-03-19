@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useRef} from 'react';
+import React, {forwardRef, useRef} from 'react';
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -40,7 +40,7 @@ const tableIcons = {
 
 export default function MaterialTableDemo(props) {
     let componentRef = useRef();
-    const [state, setState] = React.useState({
+    const state = {
         columns: [
             { title: 'Курс', field: 'course'},
             { title: 'Тип', field: 'type'},
@@ -48,7 +48,7 @@ export default function MaterialTableDemo(props) {
             { title: 'Оценка', field: 'mark', type: 'numeric', width: 80, render: rowData => rowData.mark === "" ? <span>-</span> : <span style={mark(rowData.mark)}>{rowData.mark}</span> }
         ],
         data: props.data.API.bookmarks,
-    });
+    };
     
     const mark = (markData) => {
         const defStyles = {padding: '5px', borderRadius: '40px'};
@@ -59,6 +59,10 @@ export default function MaterialTableDemo(props) {
                 return {backgroundColor: '#017d0187', ...defStyles};
             case 'зачет':
                 return {backgroundColor: '#017d0187', ...defStyles};
+            case 'удовлетворительно':
+                return {backgroundColor: '#ff5346b5', ...defStyles};
+            default:
+                break;
         }
     };
 

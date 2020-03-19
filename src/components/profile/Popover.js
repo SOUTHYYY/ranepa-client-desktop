@@ -7,7 +7,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import useTheme from "@material-ui/core/styles/useTheme";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
@@ -51,9 +50,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SimplePopover(props) {
     const classes = useStyles();
-    const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const {is_closed, photo_200, members_count, page, type, name} = props.vkData.response[0];
+    const { photo_200, members_count, name } = props.vkData.response[0];
     const {photos, videos} = props.vkData.response[0].counters;
     const handleClick = event => {
         setAnchorEl(event.currentTarget);

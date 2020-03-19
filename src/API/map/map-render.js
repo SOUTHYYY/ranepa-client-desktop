@@ -10,6 +10,7 @@ import Alert from "@material-ui/lab/Alert";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import { offsets } from "../../offsets/offsets";
 import { withSnackbar } from "notistack";
+import SpeedDialTooltipOpen from "./floatButton/floatButton";
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +33,10 @@ class App extends Component {
         dragPan: !this.props.welcomeScreen,
         doubleClickZoom: !this.props.welcomeScreen,
         dragRotate: !this.props.welcomeScreen
+      },
+      settings: {
+        markHide: false,
+        darkMode: false
       }
     };
   }
@@ -48,6 +53,28 @@ class App extends Component {
     this.props.startFetch(true);
   }
 
+  _changesettings(type, action) {
+    switch (type) {
+      case 1:
+        this.setState({
+          settings: {
+            ...this.state.settings,
+            markHide: action
+          }
+        });
+        break;
+      case 2:
+        this.setState({
+          settings: {
+            ...this.state.settings,
+            darkMode: action
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  }
   _updateViewport = viewport => {
     const { height, width, ...etc } = viewport;
     this.setState({ viewport: etc });
@@ -235,11 +262,12 @@ class App extends Component {
 
   render() {
     const { viewport } = this.state;
-    const mapPins = this.props.API.data ? (
+    const mapPins = this.props.API.data ? this.state.settings.markHide ? null : (
       <Pins
         data={this.state.popupData ? this.state.popupData : this.props.API.data}
         onClick={this._onClickMarker}
         iconSize={this.state.viewport.zoom}
+        styles={this.state.settings.darkMode}
       />
     ) : null;
 
@@ -249,24 +277,29 @@ class App extends Component {
         : this._renderCreatedPopup()
       : null;
     return (
-      <MapGL
-        onClick={this._createPopupForm}
-        width={this.props.width}
-        height={this.props.height}
-        {...this.state.mapWelcome}
-        {...viewport}
-        mapStyle={
-          this.props.welcomeScreen
-            ? mapConfig.apiWelcomeStyle
-            : mapConfig.apiStyle
-        }
-        onViewportChange={this._updateViewport}
-        className="mapContainer"
-      >
-        {mapPins}
-        {this._renderPopup()}
-        {preventLeakMemoryFromPopup}
-      </MapGL>
+        <>
+          <MapGL
+            onClick={this._createPopupForm}
+            width={this.props.width}
+            height={this.props.height}
+            {...this.state.mapWelcome}
+            {...viewport}
+            mapStyle={
+              this.props.welcomeScreen
+                  ? mapConfig.apiWelcomeStyle
+                  : this.state.settings.darkMode ?
+                  mapConfig.apiDarkStyle : mapConfig.apiStyle
+            }
+            onViewportChange={this._updateViewport}
+            className="mapContainer"
+        >
+          {mapPins}
+          {this._renderPopup()}
+          {preventLeakMemoryFromPopup}
+        </MapGL>
+          <SpeedDialTooltipOpen changeSettings={this._changesettings.bind(this)}/>
+          </>
+
     );
   }
 }

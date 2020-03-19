@@ -25,7 +25,7 @@ class Timetable extends React.Component {
 
 
   componentWillReceiveProps(nextProps, nextContent) {
-    const { text, searchTimetable, lessonTimetable  } = nextProps;
+    const { searchTimetable, lessonTimetable  } = nextProps;
     const { currentLessons } = this.state;
 
     if (searchTimetable !== this.state.lessons) {
@@ -37,11 +37,6 @@ class Timetable extends React.Component {
     if (lessonTimetable.length !== currentLessons.length) {
       this.setState({
         currentLessons: lessonTimetable,
-        isTargetSelected: true
-      });
-    }
-    if ((text === this.state.text) && (text !== "")) {
-      this.setState({
         isTargetSelected: true
       });
     }
@@ -65,7 +60,7 @@ class Timetable extends React.Component {
     });
   };
   getLessonsById = oid => {
-    this.props.fetchLesson(oid, this.state.type, this.state.text);
+    this.props.fetchLesson(oid, this.state.type);
   };
   render() {
     const selectorTeacher =
@@ -115,6 +110,7 @@ class Timetable extends React.Component {
             </Fab>
           </div>
           {this.state.isLoading ? <Loading /> : container}
+
         </div>
     );
   }

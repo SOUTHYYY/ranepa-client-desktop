@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Switch, Route} from 'react-router-dom'
-
-
 import NotFonud from "./components/not-found/not-fonud";
 import MapContainer from "./components/container-components/mapContainer";
 import HeaderContainer from './components/container-components/headerContainer'

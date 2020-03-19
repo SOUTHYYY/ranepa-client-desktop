@@ -80,7 +80,9 @@ img ~ span {
     font-size: 30px;
     font-weight: bold;
 }
-
+.MuiDialog-paperWidthSm {
+    max-width: 0 !important;
+}
 
 .personInfo__settings {
     display: flex;

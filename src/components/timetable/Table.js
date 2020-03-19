@@ -42,7 +42,7 @@ const tableIcons = {
 export default function MaterialTableDemo(props) {
 
     let componentRef = useRef();
-    const [state, setState] = React.useState({
+    const state = {
         columns: [
             { title: 'Преподаватель', field: 'teacher', grouping: false},
             { title: 'Аудитория', field: 'audit', grouping: false},
@@ -51,7 +51,7 @@ export default function MaterialTableDemo(props) {
             { title: 'День', field: 'dayOfWeek', defaultGroupOrder: 0}
         ],
         data: props.data,
-    });
+    };
 
     return (
         <MaterialTable

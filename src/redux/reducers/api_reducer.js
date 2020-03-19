@@ -22,12 +22,11 @@ export const initialState = {
   bookmarks: [],
   searchTimetable: [],
   lessonTimetable: [],
-  text: '',
   vkData: []
 };
 
 export function APIReducer(state = initialState, action) {
-  const { type, payload, text } = action;
+  const { type, payload} = action;
   switch (type) {
     case FETCH_API_START:
       return { ...state, loading: true };
@@ -50,7 +49,7 @@ export function APIReducer(state = initialState, action) {
     case FETCH_SEARCH_DATA:
       return { ...state, searchTimetable: payload };
     case FETCH_LESSON_DATA:
-      return { ...state, lessonTimetable: payload, text: text };
+      return { ...state, lessonTimetable: payload };
     case FETCH_VK_GROUP_FAILURE:
       return { ...state, vkData: 'failed'};
     case FETCH_VK_GROUP_SUCCESS:

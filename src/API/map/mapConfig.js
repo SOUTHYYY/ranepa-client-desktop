@@ -14,6 +14,7 @@ const config = {
   },
   apiStyle: "mapbox://styles/mafahes/ck5zqz49333o11intge32b2pf",
   apiWelcomeStyle: "mapbox://styles/mafahes/ck5zquanh093c1ip55qgp0e76",
+  apiDarkStyle: 'mapbox://styles/mafahes/ck7ytniby1cm81jlktlfxfuuh',
   token:
     "pk.eyJ1IjoibWFmYWhlcyIsImEiOiJjazV6cW5xdDUwMDRrM21ueHF2Z3EzY3VyIn0.RRuRqnVCy3VWno0v3Xk__w",
   geoCoderAPI: "https://api.mapbox.com/geocoding/v5/mapbox.places"

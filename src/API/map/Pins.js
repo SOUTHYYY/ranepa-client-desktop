@@ -16,9 +16,9 @@ export default class Pins extends PureComponent {
           style={{
               fontSize: iconSize*(iconSize/6),
               cursor: 'pointer',
-              color: '#951a1d',
+              color: this.props.styles ? 'white' : '#951a1d',
               stroke: 'none',
-              transform: `translate(-6px, ${-(iconSize*(iconSize/6))}px)`
+              transform: `translate(${-14}px, ${-(iconSize*(iconSize/6))}px)`
           }}
         ></i>
       </Marker>

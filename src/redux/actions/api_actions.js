@@ -93,7 +93,6 @@ export function fetchObjectTimetableSucces(data, text) {
   return {
     type: FETCH_LESSON_DATA,
     payload: data,
-    text: text
   };
 }
 
@@ -174,9 +173,9 @@ export function payloadSearchTimetableClear() {
   }
 }
 
-export function fetchObjectsTimetable(oid, type, text) {
+export function fetchObjectsTimetable(oid, type) {
   return async dispatch => {
     await new RanepaService().getResource(oid, type)
-        .then((res) => dispatch(fetchObjectTimetableSucces(res, text)))
+        .then((res) => dispatch(fetchObjectTimetableSucces(res)))
   }
 }
