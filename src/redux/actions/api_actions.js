@@ -11,11 +11,14 @@ import {
   // FETCH_USER_BOOK_FAILURE,
   FETCH_USER_BOOK_SUCCESS,
   FETCH_LESSON_DATA,
-  FETCH_SEARCH_DATA
+  FETCH_SEARCH_DATA,
+  FETCH_VK_GROUP_SUCCESS,
+  FETCH_VK_GROUP_FAILURE
 } from "./action_types";
 
 import { findMarkersByUser } from "../../API/firebase/firebase-api";
 import RanepaService from "../../API/ranepa/ranepa-services";
+import {getVKGroupsInfo} from "../../API/VK/VK-api";
 
 const ranepa_book_url =
     "http://services.niu.ranepa.ru/API/public/student/getDiary";
@@ -94,6 +97,31 @@ export function fetchObjectTimetableSucces(data, text) {
   };
 }
 
+export function fetchVkDataSuccess(data) {
+  return {
+    type: FETCH_VK_GROUP_SUCCESS,
+    payload: data
+  }
+}
+
+export function fetchVkFail() {
+  return {
+    type: FETCH_VK_GROUP_FAILURE
+  }
+}
+
+export function fetchVkData(id) {
+  return async dispatch => {
+    const data = await getVKGroupsInfo(id);
+    if(data.hasOwnProperty('error')) {
+      dispatch(fetchVkFail())
+    }
+    if(data.hasOwnProperty('response')) {
+      dispatch(fetchVkDataSuccess(data));
+    }
+  }
+}
+
 export function fetchFromAPI(isUnmounted) {
   return isUnmounted ? dispatch => dispatch(fetchAPISuccess(null))
       :
@@ -111,15 +139,15 @@ export function fethUserPins(user) {
     dispatch(fetchUserPinsStart());
     try {
       const data = await findMarkersByUser(user);
-      if(data === null) {
-        dispatch(fethUserPinsSucces({empty: true}))
-      } else {
-        dispatch(fethUserPinsSucces(transformData(data)));
-      }
+       dispatch(fethUserPinsSucces(transformData(data)))
     } catch (error) {
       dispatch(fethUserPinsFailure(error));
     }
   };
+}
+
+export function clearRanepaPayload() {
+  return dispatch => dispatch(fetchBookmarksSuccess([]));
 }
 
 export function fetchFromRanepaAPI(id) {
@@ -137,6 +165,12 @@ export function fetchSearchTimetable(type) {
   return async dispatch => {
     await new RanepaService().getGroupOrTeacher(type)
         .then((res) => dispatch(fetchTimetableSuccess(res)));
+  }
+}
+
+export function payloadSearchTimetableClear() {
+  return dispatch => {
+    dispatch(fetchTimetableSuccess([]))
   }
 }
 

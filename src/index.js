@@ -12,6 +12,8 @@ import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {initialState} from "./redux/reducers/auth_reducer";
+import {SnackbarProvider} from "notistack";
+
 
 if (localStorage.getItem('user')) {
     var authState = JSON.parse(localStorage.getItem('user'))
@@ -29,7 +31,9 @@ window.store = store.getState()
 ReactDOM.render(
     <Router>
         <Provider store={store}>
-            <App/>
+            <SnackbarProvider>
+                <App />
+            </SnackbarProvider>
         </Provider>
 
     </Router>, document.getElementById('root'));

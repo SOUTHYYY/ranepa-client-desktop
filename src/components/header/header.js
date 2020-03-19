@@ -1,8 +1,9 @@
 import React from 'react';
 import './header.css'
 import {NavLink} from "react-router-dom";
-
+import {offsets} from "../../offsets/offsets";
 import ranepa from '../../images/header/ranepa.png'
+import Divider from "@material-ui/core/Divider";
 
 const Header = props => {
     return (
@@ -19,40 +20,40 @@ const Header = props => {
                         {props.isAuth ?
                             <NavLink to={'/profile'} activeClassName="active">
                                 <i className="fa fa-user-circle fa-lg"></i>
-                                <span className="nav-text">Мой профиль</span>
+                                <span className="nav-text">{offsets.header.profile}</span>
                             </NavLink>
                             :
                             <NavLink to={'/login'} activeClassName="active">
                                 <i className="fa fa-sign-in-alt fa-lg"></i>
-                                <span className="nav-text">Войти</span>
+                                <span className="nav-text">{offsets.header.login}</span>
                             </NavLink>
                         }
                     </li>
                     <li>
-                        &nbsp;
+                        <Divider/>
                     </li>
                     <li>
                         <NavLink to={'/map'} activeClassName="active">
                             <i className="fa fa-map-marked-alt fa-lg"></i>
-                            <span className="nav-text">Карта</span>
+                            <span className="nav-text">{offsets.header.map}</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to={'/timetable'} activeClassName="active">
                             <i className="fa fa-table fa-lg"></i>
-                            <span className="nav-text">Расписание</span>
+                            <span className="nav-text">{offsets.header.timetable}</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to={'/student-book'} activeClassName="active">
                             <i className="fa fa-book-open fa-lg"></i>
-                            <span className="nav-text">Зачетка</span>
+                            <span className="nav-text">{offsets.header.studentBook}</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to={'/about-us'} activeClassName="active">
                             <i className="fa fa-info-circle fa-lg"></i>
-                            <span className="nav-text">О нас</span>
+                            <span className="nav-text">{offsets.header.aboutUs}</span>
                         </NavLink>
                     </li>
 

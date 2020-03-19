@@ -14,10 +14,10 @@ export const config = {
 };
 
 export function snapshotToArray(snapshot) {
-    var returnArr = [];
+    let returnArr = [];
 
     snapshot.forEach((childSnapshot) => {
-        var item = childSnapshot.val();
+        let item = childSnapshot.val();
         item.key = childSnapshot.key;
 
         returnArr.push(item);
@@ -49,9 +49,7 @@ export async function _getGeocoderResourse(latitude, longitude) {
 }
 
 export async function updateFireData(latitude, longitude, user, description, dateBegin) {
-
     let recievedData = await _getGeocoderResourse(latitude, longitude);
-debugger;
     firebase.database().ref('markers')
         .push({
             dateBegin: dateBegin,
@@ -84,7 +82,6 @@ export async function getFireProfile(pass, login) {
                 _login_state.data = snap.child(login).val();
                 return true
             } else {
-                console.error('Логин не найден!!');
                 return false;
             }
         });
@@ -103,19 +100,19 @@ export async function getFireProfile(pass, login) {
 }
 
 export async function findMarkersByUser(user) {
-    let response = null
+    let response = null;
     await firebase.database().ref('markers')
         .orderByChild('user')
         .equalTo(user)
         .once('value')
         .then((snap) => {
             response = snap.val();
-        })
+        });
     return response
 }
 
 export async function deleteMarker(key) {
     let markerRef = firebase.database().ref('markers/' + key);
-    await markerRef.remove().then(() => console.log('del')).catch((err) => console.log('err' + err))
+    await markerRef.remove().then().catch((err) => console.log('err' + err))
 }
 

@@ -7,6 +7,7 @@ import ButtonUI from '@material-ui/core/Button';
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import {offsets} from "../../offsets/offsets";
 
 class Login extends Component {
     state = {
@@ -17,7 +18,7 @@ class Login extends Component {
             login: {
                 value: '',
                 type: 'text',
-                label: 'Логин',
+                label: offsets.login.loginLabel,
                 errorMessage: 'Введите корректный Логин',
                 valid: false,
                 touched: false,
@@ -28,7 +29,7 @@ class Login extends Component {
             password: {
                 value: '',
                 type: 'password',
-                label: 'Password',
+                label: offsets.login.passwordLabel,
                 errorMessage: 'Введите корректный пароль',
                 valid: false,
                 touched: false,
@@ -105,17 +106,17 @@ class Login extends Component {
             <div className={styles.login}>
                 <Snackbar open={this.state.alertState} autoHideDuration={6000} onClose={this.handleClose}>
                     <Alert onClose={this.handleClose} icon={<VpnKeyIcon fontSize="inherit"/>} severity="warning">
-                        Кажется вы ввели неправильные данные
+                        {offsets.login.alertErrorLogin}
                     </Alert>
                 </Snackbar>
                 <img src={ranepa} alt='ranepa'/>
-                <h2>Войти в клиент</h2>
+                <h2>{offsets.login.loginHeader}</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
                     <ButtonUI variant="contained" type='password'
                               onClick={() => this.props.login(this.state.formControls.login.value, this.state.formControls.password.value)}
                               disable={!this.state.isFormValid}>
-                        Войти
+                        {offsets.login.loginButton}
                     </ButtonUI>
                 </form>
             </div>

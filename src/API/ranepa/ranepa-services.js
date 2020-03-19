@@ -71,7 +71,8 @@ export default class RanepaService {
             type: data.type,
             time: data.nf + ' - ' + data.kf,
             xdt: this._extractData(data),
-            dayOfWeek: this._getDayOfWeek(data)
+            dayOfWeek: this._getDayOfWeek(data),
+            fullData: data.xdt
         };
     };
 }

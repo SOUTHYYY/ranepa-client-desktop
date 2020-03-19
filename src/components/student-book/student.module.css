@@ -40,16 +40,8 @@
     font-weight: 100;
 }
 .studentBooK_tableContent {
-    overflow: auto;
     margin-top: 10px;
     box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    max-width: 100%;
-    height: 350px;
-    background-color: #f1eeee;
 }
 
 .studentBook_header {

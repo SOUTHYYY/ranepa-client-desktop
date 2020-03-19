@@ -1,19 +1,20 @@
 import React from "react";
 import styles from "./student.module.css";
-import BookItems from "./book-items";
 import {Loading} from "../timetable/timetable";
+import {offsets} from "../../offsets/offsets";
+import MaterialTableDemo from "./Table";
 
-export const Child = props => {
-    console.log(props);
-};
+
 class Book extends React.Component {
   constructor() {
     super();
     this.state = {
       text: '',
+       propsText: '',
       isLoading: false
     }
   }
+
   handleChange = (e) => {
       this.setState({
         text: e.target.value,
@@ -25,24 +26,20 @@ class Book extends React.Component {
         isLoading: false
       })
     }
-
   }
 
-  render() {
+  componentWillUnmount() {
+      this.props.clearData();
+  }
+
+    render() {
       const { bookmarks } = this.props.API;
-      const headerBook = <div className={styles.studentBooK_tableHead}>
-        <span style={{marginLeft: "15px"}} className={styles.studentBooK_tableHead_text}>№</span>
-        <span style={{marginLeft: "40px"}} className={styles.studentBooK_tableHead_text}>Курс</span>
-        <span style={{marginLeft: "40px"}} className={styles.studentBooK_tableHead_text}>Предмет</span>
-        <span style={{marginLeft: "380px"}} className={styles.studentBooK_tableHead_text}>Тип зачета</span>
-        <span style={{marginLeft: "70px"}} className={styles.studentBooK_tableHead_text}>Оценка</span>
-      </div>;
     return (
       <div className={styles.studentBook_content}>
         <div className={styles.studentBook_header}>
           <input
             className={styles.studentBook_input}
-            placeholder="Поиск"
+            placeholder={offsets.studBook.placeholderSearch}
             name="tableSearch"
             onChange={this.handleChange}
           />
@@ -51,7 +48,8 @@ class Book extends React.Component {
             onClick={() => {
               this.props.someData(this.state.text);
               this.setState({
-                isLoading: true
+                isLoading: true,
+                  propsText: this.state.text
               })
             }}
           >
@@ -60,19 +58,12 @@ class Book extends React.Component {
             />
           </span>
         </div>
-        {(this.state.isLoading && this.props.API.bookmarks.length === 0) ? null : bookmarks.length ?
-            headerBook
-            :
-            null }
         {(this.state.isLoading && this.props.API.bookmarks.length === 0) ? <Loading/> : bookmarks.length ?
-
             <div className={styles.studentBooK_tableContent}>
-              <BookItems data={this.props}/>
+              <MaterialTableDemo data={this.props} text={this.state.propsText}/>
             </div>
             :
             null}
-
-
       </div>
     );
   }

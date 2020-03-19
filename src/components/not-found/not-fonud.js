@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import not_found from '../../images/not-found/browser.svg'
 import styles from './not-found.module.css'
 import {NavLink} from "react-router-dom";
+import {offsets} from "../../offsets/offsets";
 
 class NotFonud extends Component {
     render() {
@@ -11,7 +12,7 @@ class NotFonud extends Component {
                 <span>404</span>
                 <NavLink to={'/map'}>
                     <button>
-                        Венуться на главную
+                        {offsets.notFound.label}
                     </button>
                 </NavLink>
             </div>

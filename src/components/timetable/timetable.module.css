@@ -1,17 +1,19 @@
 .timetable_header {
+    margin-bottom: 10px;
     display: flex;
     justify-content: flex-start;
     width: 1000px;
 }
 .timetable_input {
+    margin-right: 20px;
     border: 0;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 20px;
     width: 90%;
+    height: 6.3vh;
     background-color: #f1eeee;
     box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
 }
-.timetable_Button {
+/*.timetable_Button {
     line-height: 6vh;
     text-align: center;
     border-top-right-radius: 20px;
@@ -22,6 +24,7 @@
     align-items: center;
     box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
 }
+ */
 .timetable_Button:hover {
     background-color: #afacac;
 }
@@ -68,80 +71,6 @@
     padding: 15px;
     border-left-width: 10px;
 }
-.timetable_td_text_lessons {
-    background-color: #e0e0e0;
-    border-radius: 20px;
-}
-.timetable_Content_text_lessons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    width: 800px;
-}
-.timetable_Content_text_lessons > div#lesson_description {
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #f1eeee;
-    padding-left: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    margin-bottom: 10px;
-}
-.timetable_Content_text_lessons > div#lesson_header {
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #f1eeee;
-    padding-left: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom: 1px #373f472b solid;
-
-}
-.timetable_Content_text_lessons > div#lesson_header > div {
-    display: flex;
-    justify-content: space-between;
-}
-.timetable_Content_text_lessons > div#lesson_header > p {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0px;
-    margin-top: 0px;
-}
-.timetable_Content_text_lessons > div#lesson_header > p > p {
-    color: #373f47;
-    font-weight: 400;
-}
-.timetable_Content_text_lessons > div > div > p > i {
-    font-size: 20px;
-    color: #373f47;
-}
-.timetable_Content_text_lessons > div#lesson_header > div > p#dayCounter {
-    margin-right: 25px;
-}
-.timetable_Content_text_lessons > div > p > i {
-    color: #373f47;
-}
-/*.timetable_Content_text_lessons:hover {
-    border-radius: 20px;
-} */
-.timetable_Content_text_lessons > p, h2, h4 {
-    text-align: center;
-}
-.timetable_Content_text_header {
-    margin-left: 200px;
-    margin-right: 200px;
-    border-radius: 90px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    background-color: #951A1D;
-    color: white;
-}
 .timetable_list_wrapper {
     max-height: 25vh;
     margin-top: 10px;
@@ -171,18 +100,4 @@
 .loading_circle__container {
     text-align: center;
     margin-top: 40px;
-}
-.timetable_dayCounter {
-    color: #373f47;
-    margin-left: 100px;
-    margin-right: 100px;
-    background-color: #e0e0e0;
-    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
-    font-size: 25px;
-    text-align: center;
-    border-radius: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }

@@ -16,31 +16,31 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Alert from "@material-ui/lab/Alert";
+import {offsets} from "../../../offsets/offsets";
 
 class ProfileTable extends Component {
 
     state = {
-        emptyData: false,
+        error: null,
         data: [],
         alertIsOpen: false,
-        tempKey: null
+        tempKey: null,
+        loading: false
     };
     deleteMarkArr = (id) => {
         this.state.data.splice(id, 1);
-        this.setState({data: this.state.data})
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.data.hasOwnProperty('empty')) {
-            this.setState({emptyData: true})
-        } else {
-            if (nextProps.data !== this.state.data) {
-                this.setState({data: nextProps.data});
-            }
+        if (nextProps.data !== this.state.data) {
+            this.setState({data: nextProps.data});
         }
-        console.log(this.state)
+        if (nextProps.loading !== this.state.loading) {
+            this.setState({
+                loading: nextProps.loading
+            })
+        }
     }
-
 
     handleClickOpen = (key) => {
         this.setState({
@@ -63,19 +63,19 @@ class ProfileTable extends Component {
         return (
             <React.Fragment>
             <List>
-                {this.state.data.length ? this.state.data.map((item, idx) => {
-                        return <ListItem key={idx} idx={idx} item={item} className='marker_list'>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <RoomIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={item.address} secondary={item.date} />
-                            <ButtonUI variant="contained" color="secondary" onClick={() => this.handleClickOpen(item.key)}>
-                                <DeleteIcon />
-                            </ButtonUI>
-                        </ListItem>
-                    }) : this.props.data.empty ? <h2>Ни одного маркера не найдено</h2> : <Loading/>}
+                {this.state.loading ? <Loading/> : !this.state.data.length ? <h2>{offsets.profile.labelMarkNotFound}</h2> : this.state.data.map((item, idx) => {
+                    return <ListItem key={idx} idx={idx} item={item} className='marker_list'>
+                        <ListItemAvatar>
+                            <Avatar>
+                                <RoomIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={item.address} secondary={item.date} />
+                        <ButtonUI variant="contained" color="secondary" onClick={() => this.handleClickOpen(item.key)}>
+                            <DeleteIcon />
+                        </ButtonUI>
+                    </ListItem>
+                })}
             </List>
                 <Dialog
                     open={this.state.alertIsOpen}
@@ -83,18 +83,18 @@ class ProfileTable extends Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title"><Alert icon={<DeleteIcon fontSize="inherit" />} severity="warning">Подтверждение удаления маркера</Alert></DialogTitle>
+                    <DialogTitle id="alert-dialog-title"><Alert icon={<DeleteIcon fontSize="inherit" />} severity="warning">{offsets.profile.labelDeleteMarkHeader}</Alert></DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Вы уверены что хотите удалить данный маркер?
+                            {offsets.profile.labelDeleteMarkDescription}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <ButtonUI onClick={this.handleClose} color="primary">
-                            Отмена
+                            {offsets.profile.labelAlertButtonCancel}
                         </ButtonUI>
                         <ButtonUI onClick={this.handleSubmit} color="primary" autoFocus>
-                            Подтверждаю
+                            {offsets.profile.labelAlertButtonSubmit}
                         </ButtonUI>
                     </DialogActions>
                 </Dialog>

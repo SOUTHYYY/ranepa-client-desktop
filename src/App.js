@@ -14,13 +14,13 @@ import Book from "./components/container-components/studentbookContainer";
 import HomePage from "./components/home-page/home-page";
 import AboutUs from "./components/about-us/about-us";
 import Timetable from "./components/container-components/timetableContainer";
+import MaterialTableDemo from "./components/student-book/Table";
 
 
 export default class App extends Component {
 
     render() {
         firebase.initializeApp(config); // important
-        const favicon = document.getElementById("favicon"); // dynamic favicon
         return (
             <>
                 <HeaderContainer/>
@@ -35,8 +35,11 @@ export default class App extends Component {
                         <Route path={'/student-book'}>
                             <Book/>
                         </Route>
+                        <Route path={'/lol'}>
+                            <MaterialTableDemo/>
+                        </Route>
                         <Route path={'/timetable'}>
-                            <Timetable />
+                            <Timetable/>
                         </Route>
                         <Route path={'/references'}>
                             <MapContainer/>

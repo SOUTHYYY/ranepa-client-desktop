@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import StudentBook from '../student-book/student-book'
-import {fetchFromRanepaAPI} from "../../redux/actions/api_actions";
+import {fetchFromRanepaAPI, clearRanepaPayload} from "../../redux/actions/api_actions";
 
 const mapDispatchToProps = dispatch => {
     return {
+        clearData: () => dispatch(clearRanepaPayload()),
         someData: (id) => dispatch(fetchFromRanepaAPI(id))
     }
 };

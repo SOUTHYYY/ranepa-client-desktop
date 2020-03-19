@@ -4,10 +4,12 @@ import "./mapbox-gl.css";
 import Pins from "./Pins";
 import mapConfig from "./mapConfig";
 import { _getGeocoderResourse, updateFireData } from "../firebase/firebase-api";
-import ButtonUI from '@material-ui/core/Button';
-import {TextField} from "@material-ui/core";
-import Alert from '@material-ui/lab/Alert';
-import ScheduleIcon from '@material-ui/icons/Schedule';
+import ButtonUI from "@material-ui/core/Button";
+import { TextField } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import ScheduleIcon from "@material-ui/icons/Schedule";
+import { offsets } from "../../offsets/offsets";
+import { withSnackbar } from "notistack";
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class App extends Component {
         dragPan: !this.props.welcomeScreen,
         doubleClickZoom: !this.props.welcomeScreen,
         dragRotate: !this.props.welcomeScreen
-      },
+      }
     };
   }
 
@@ -79,19 +81,18 @@ class App extends Component {
   handleDateBegin = e => {
     this.setState({
       popupDateBegin: e.target.value
-    })
+    });
   };
   _transformDateBegin(date) {
-    if(date === null) return null;
+    if (date === null) return null;
 
     let time = date.substring(11);
     let year = date.substring(0, 10);
 
-    return year + ' ' + time;
+    return year + " " + time;
   }
 
   createMarker = (longitude, latitude, description, user, dateBegin) => {
-
     _getGeocoderResourse(latitude, longitude).then(address => {
       this._transformDateBegin(dateBegin);
       const newElement = {
@@ -108,7 +109,13 @@ class App extends Component {
       this.setState({
         popupData: [...this.props.API.data, ...this.state.popupData, newElement]
       });
-      updateFireData(latitude, longitude, user, description, this._transformDateBegin(dateBegin));
+      updateFireData(
+        latitude,
+        longitude,
+        user,
+        description,
+        this._transformDateBegin(dateBegin)
+      );
     });
   };
 
@@ -138,40 +145,58 @@ class App extends Component {
             <em className="popup-text-address">{popupIsCreated.address}</em>
             <br />
             <br />
-            <TextField id="outlined-size-small" label="Описание" variant="outlined" type="text" size="small"
-                       inputProps={{
-                         maxLength: 30,
-                       }}
-                       onChange={this.handleInput}/>
-            <br />
-            <br />
             <TextField
-                onChange={this.handleDateBegin}
-                id="datetime-local"
-                label="Дата"
-                type="datetime-local"
-                defaultValue="0000-00-00T00:00"
-                InputLabelProps={{
-                  shrink: true,
-                }}
+              id="outlined-size-small"
+              label={offsets.mapRender.label_textInput}
+              variant="outlined"
+              type="text"
+              size="small"
+              inputProps={{
+                maxLength: 30
+              }}
+              onChange={this.handleInput}
             />
             <br />
             <br />
-            <ButtonUI variant="contained" color="secondary" className="button_submit" onClick={() => {
-              this.createMarker(
+            <TextField
+              onChange={this.handleDateBegin}
+              id="datetime-local"
+              label={offsets.mapRender.label_dataInput}
+              type="datetime-local"
+              defaultValue="0000-00-00T00:00"
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+            <br />
+            <br />
+            <ButtonUI
+              variant="contained"
+              color="secondary"
+              className="button_submit"
+              onClick={() => {
+                this.createMarker(
                   popupIsCreated.longitude,
                   popupIsCreated.latitude,
                   popupInputData,
                   auth,
                   popupDateBegin
-              );
-              setTimeout(() => {
-                this.setState({
-                  popupIsCreated: false,
-                  popupInputData: null
-                });
-              }, 500);
-            }}>
+                );
+                setTimeout(() => {
+                  this.setState({
+                    popupIsCreated: false,
+                    popupInputData: null
+                  });
+                  this.props.enqueueSnackbar("Метка поставлена", {
+                    variant: "success",
+                    anchorOrigin: {
+                      vertical: "top",
+                      horizontal: "right"
+                    }
+                  });
+                }, 500);
+              }}
+            >
               Принять
             </ButtonUI>
           </form>
@@ -195,8 +220,14 @@ class App extends Component {
           <br />
           <em className="popup-text-address">{popupInfo.address}</em>
           <br />
-          {popupInfo.description === undefined ? null : <Alert severity="info">{popupInfo.description}</Alert>}
-          {popupInfo.dateBegin === undefined ? null : <Alert severity="error" icon={<ScheduleIcon fontSize="inherit"/>}>{popupInfo.dateBegin}</Alert>}
+          {popupInfo.description === undefined ? null : (
+            <Alert severity="info">{popupInfo.description}</Alert>
+          )}
+          {popupInfo.dateBegin === undefined ? null : (
+            <Alert severity="error" icon={<ScheduleIcon fontSize="inherit" />}>
+              {popupInfo.dateBegin}
+            </Alert>
+          )}
         </Popup>
       )
     );
@@ -205,10 +236,11 @@ class App extends Component {
   render() {
     const { viewport } = this.state;
     const mapPins = this.props.API.data ? (
-        <Pins
-          data={this.state.popupData ? this.state.popupData : this.props.API.data}
-          onClick={this._onClickMarker} iconSize={this.state.viewport.zoom}
-        />
+      <Pins
+        data={this.state.popupData ? this.state.popupData : this.props.API.data}
+        onClick={this._onClickMarker}
+        iconSize={this.state.viewport.zoom}
+      />
     ) : null;
 
     const preventLeakMemoryFromPopup = this.state.popupIsCreated
@@ -223,7 +255,11 @@ class App extends Component {
         height={this.props.height}
         {...this.state.mapWelcome}
         {...viewport}
-        mapStyle={this.props.welcomeScreen ? mapConfig.apiWelcomeStyle : mapConfig.apiStyle}
+        mapStyle={
+          this.props.welcomeScreen
+            ? mapConfig.apiWelcomeStyle
+            : mapConfig.apiStyle
+        }
         onViewportChange={this._updateViewport}
         className="mapContainer"
       >
@@ -235,4 +271,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withSnackbar(App);

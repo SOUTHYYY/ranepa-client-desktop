@@ -1,42 +1,46 @@
-import React  from 'react';
+import React, {Component} from 'react';
 import styles from './profile.module.css'
-import {Button} from '../UI';
 import ProfileTable from './profile-table';
 import ButtonUI from '@material-ui/core/Button';
+import {offsets} from "../../offsets/offsets";
+import Popover from "./Popover";
+
+class Profile extends Component {
+
+    handleLogout = () => {
+        this.props.logout()
+    };
 
 
-const Profile = (props) => {
-    const {logout, siteName, icon } = props
+    render() {
 
-    const handleLogout = () => {
-        logout()
-    }
-
-    return (
-        <div className={styles.profile}>
-            <div className={styles.content}>
-                <div className={styles.marks}>
-                    <div className={styles.personInfo}>
-                        <div className={styles.personInfo__header}>
-                            <img src={icon} alt={'logo'}/>
-                            <span>{siteName}</span>
+        return (
+            <div className={styles.profile}>
+                <div className={styles.content}>
+                    <div className={styles.marks}>
+                        <div className={styles.personInfo}>
+                            <div className={styles.personInfo__header}>
+                                <img src={this.props.icon} alt={'logo'}/>
+                                <span>{this.props.siteName}</span>
+                                {this.props.vkData === 'failed' ? null : <Popover vkData={this.props.vkData} />}
+                            </div>
+                            <div className={styles.personInfo__settings}>
+                                <ButtonUI variant="contained" disabled>
+                                    {offsets.profile.changePasswordLabel}
+                                </ButtonUI>
+                                <ButtonUI variant="contained" onClick={() => this.handleLogout()}>{offsets.profile.logoutLabel}</ButtonUI>
+                            </div>
                         </div>
-                        <div className={styles.personInfo__settings}>
-                            <ButtonUI variant="contained" disabled>
-                                Сменить пароль
-                            </ButtonUI>
-                            <ButtonUI variant="contained" onClick={() => handleLogout()}>Выйти</ButtonUI>
+                        <div>
+                            <h1>{offsets.profile.labelMyProfile}</h1>
+                            <h3>{offsets.profile.labelMyMarks}</h3>
+                            <ProfileTable data={this.props.userPins} loading={this.props.loader}/>
                         </div>
-                    </div>
-                    <div>
-                        <h1>Личный кабинет</h1>
-                        <h3>Ваши отмеченные точки</h3>
-                        <ProfileTable data={props.userPins}/>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Profile;

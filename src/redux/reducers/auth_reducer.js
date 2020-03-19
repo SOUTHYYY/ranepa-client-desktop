@@ -9,6 +9,7 @@ export const initialState = {
     siteName: null,
     icon: null,
     isFretching: false,
+    vkId: []
 }
 
 export function AuthReducer(state = initialState, action) {

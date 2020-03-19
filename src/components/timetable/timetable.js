@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./timetable.module.css";
 import TimetableItems from "./timetable-item";
-import TimetableLessons from "./timetable-lessons";
+import {offsets} from "../../offsets/offsets";
+import Table from './Table';
+import {withSnackbar} from 'notistack';
+import Fab from "@material-ui/core/Fab";
+import HelpOutlineIcon from '@material-ui/icons/Help';
+import SnackMessage from "../snack-message/SnackMessage";
 
-export default class Timetable extends React.Component {
-  constructor() {
-    super();
+
+class Timetable extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       text: "",
@@ -16,15 +22,14 @@ export default class Timetable extends React.Component {
       isLoading: false
     };
   }
+
+
   componentWillReceiveProps(nextProps, nextContent) {
-
     const { text, searchTimetable, lessonTimetable  } = nextProps;
-
     const { currentLessons } = this.state;
 
     if (searchTimetable !== this.state.lessons) {
       this.setState({
-        lessons: searchTimetable.filter(obj => obj.value.toLowerCase().indexOf(this.state.text.toLowerCase()) > -1),
         isTargetSelected: false,
         isLoading: false
       });
@@ -43,20 +48,21 @@ export default class Timetable extends React.Component {
   }
 
   handleChange = e => {
-    this.setState({ text: e.target.value });
+      if(!this.props.searchTimetable.length) {
+        this.props.fetchSearch(this.state.type);
+      }
+    this.setState({
+      text: e.target.value,
+      lessons: e.target.value === "" ? [] : this.props.searchTimetable.filter(obj => obj.value.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1)
+    });
   };
   handleType = type => {
+    this.props.searchClear();
     this.setState({
       isTargetSelected: false,
       lessons: [],
       type: type
     });
-  };
-  getSourceData = () => {
-    this.props.fetchSearch(this.state.type);
-    this.setState({
-      isLoading: true
-    })
   };
   getLessonsById = oid => {
     this.props.fetchLesson(oid, this.state.type, this.state.text);
@@ -67,46 +73,49 @@ export default class Timetable extends React.Component {
     const selectorStudent =
       this.state.type === "0" ? styles.timetable_selector_active : null;
 
-    const container = this.state.isTargetSelected ? <TimetableLessons data={this.state.currentLessons} /> : this.state.lessons.length ?
+    const container = this.state.isTargetSelected ? <Table data={this.state.currentLessons} /> : this.state.lessons.length ?
         <TimetableItems
             data={this.state.lessons}
             getLesson={this.getLessonsById}
         />
      : null;
     return (
-      <div>
-        <div className={styles.timetable_wrap_selector}>
+        <div>
+          <div className={styles.timetable_wrap_selector}>
           <span
-            className={styles.timetable_selector + " " + selectorTeacher}
-            onClick={() => this.handleType("1")}
+              className={styles.timetable_selector + " " + selectorTeacher}
+              onClick={() => this.handleType("1")}
           >
-            Учитель
+            {offsets.timetable.teacher}
           </span>
-          <span
-            className={styles.timetable_selector + " " + selectorStudent}
-            onClick={() => this.handleType("0")}
-          >
-            Студент
+            <span
+                className={styles.timetable_selector + " " + selectorStudent}
+                onClick={() => this.handleType("0")}
+            >
+            {offsets.timetable.student}
           </span>
-        </div>
-        <div className={styles.timetable_header}>
-          <input
-            className={styles.timetable_input}
-            placeholder="Поиск"
-            name="tableSearch"
-            onChange={this.handleChange}
-          />
-          <span
-            className={styles.timetable_Button}
-            onClick={() => this.getSourceData()}
-          >
-            <i
-              className={"fas fa-search fa-2x " + styles.timetable_searchIcon}
+          </div>
+          <div className={styles.timetable_header}>
+            <input
+                className={styles.timetable_input}
+                placeholder={offsets.timetable.labelSearch}
+                name="tableSearch"
+                onChange={this.handleChange}
             />
-          </span>
+            <Fab aria-label="add" style={{backgroundColor: '#951a1d'}} onClick={() => this.props.enqueueSnackbar('Подсказка', {
+              anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'right',
+            },
+              content: (key, message) => (
+              <SnackMessage id={key} message={message} />
+              )
+            })}>
+              <HelpOutlineIcon style={{color: '#fff'}} />
+            </Fab>
+          </div>
+          {this.state.isLoading ? <Loading /> : container}
         </div>
-        {this.state.isLoading ? <Loading /> : container}
-      </div>
     );
   }
 }
@@ -119,3 +128,4 @@ export const Loading = () => {
   )
 };
 
+export default withSnackbar(Timetable)

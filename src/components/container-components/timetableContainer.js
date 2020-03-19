@@ -1,13 +1,26 @@
 import { connect } from 'react-redux';
 import Timetable from "../timetable/timetable";
-import {fetchSearchTimetable, fetchObjectsTimetable} from "../../redux/actions/api_actions";
+import {
+    fetchSearchTimetable,
+    fetchObjectsTimetable,
+    payloadSearchTimetableClear
+} from "../../redux/actions/api_actions";
+import React, {Component} from "react";
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchSearch: (type) => dispatch(fetchSearchTimetable(type)),
-        fetchLesson: (oid, type, text) => dispatch(fetchObjectsTimetable(oid, type, text))
+        fetchLesson: (oid, type, text) => dispatch(fetchObjectsTimetable(oid, type, text)),
+        searchClear: () => dispatch(payloadSearchTimetableClear())
     }
 };
+
+class dispatchTimetable extends Component {
+
+    render() {
+        return <Timetable {...this.props}/>
+    }
+}
 
 const TimetableStateToProps = state => {
     const { lessonTimetable, searchTimetable, text } = state.APIReducer;
@@ -18,4 +31,4 @@ const TimetableStateToProps = state => {
     }
 };
 
-export default connect(TimetableStateToProps, mapDispatchToProps)(Timetable);
+export default connect(TimetableStateToProps, mapDispatchToProps)(dispatchTimetable);

@@ -2,9 +2,9 @@ import {SET_AUTH_USER_DATA_SUCCES, SET_AUTH_USER_DATA_FAILURE} from "./action_ty
 import {stopSubmit} from 'redux-form'
 import {getFireProfile} from "../../API/firebase/firebase-api";
 
-export const setAuthUserData = (id, login, password, isAuth, siteName, icon, isFailed) => ({
+export const setAuthUserData = (id, login, password, isAuth, siteName, icon, isFailed, vkId) => ({
     type: SET_AUTH_USER_DATA_SUCCES,
-    payload: {id, login, password, siteName, icon,  isAuth, isFailed}
+    payload: {id, login, password, siteName, icon,  isAuth, isFailed, vkId}
 });
 
 export const AuthFail = (type) => ({
@@ -15,15 +15,15 @@ export const AuthFail = (type) => ({
 export const OnSetAuthUserData = () => async (dispatch) => {
     try {
         const data = window.localStorage.getItem('user');
-        const parsed = JSON.parse(data)
+        const parsed = JSON.parse(data);
         if (parsed !== undefined) {
-            let {id, login, password, siteName, icon} = parsed
-            dispatch(setAuthUserData(id, login, password, true, siteName, icon, false))
+            let {id, login, password, siteName, icon, vkId} = parsed;
+            dispatch(setAuthUserData(id, login, password, true, siteName, icon, false, vkId))
         }
     } catch (e) {
 
     }
-}
+};
 
 export const login = (login, password) => async (dispatch) => {
     const data = await getFireProfile(password, login);
@@ -35,7 +35,7 @@ export const login = (login, password) => async (dispatch) => {
         //Convert the state to a JSON string
         const serialisedState = JSON.stringify(response.data);
         //Save the serialised state to localStorage against the key 'user'
-        await window.localStorage.setItem('user', serialisedState)
+        await window.localStorage.setItem('user', serialisedState);
         dispatch(OnSetAuthUserData())
 
     } else {
@@ -43,17 +43,17 @@ export const login = (login, password) => async (dispatch) => {
         let message = 'Упс... что-то пошло не так...';
         dispatch(stopSubmit('login', {_error: message}))
     }
-}
+};
 
 export const logout = () => async (dispatch) => {
     const response = {
         data: {
             resultCode: 0,
         }
-    }
+    };
 
     if (response.data.resultCode === 0) {
         window.localStorage.removeItem('user');
         dispatch(setAuthUserData(null, null, null, false, null, null))
     }
-}
+};

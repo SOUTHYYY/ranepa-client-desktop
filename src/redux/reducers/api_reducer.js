@@ -9,7 +9,9 @@ import {
   FETCH_USER_BOOK_FAILURE,
   FETCH_USER_BOOK_SUCCESS,
   FETCH_LESSON_DATA,
-  FETCH_SEARCH_DATA
+  FETCH_SEARCH_DATA,
+  FETCH_VK_GROUP_SUCCESS,
+  FETCH_VK_GROUP_FAILURE
 } from "../actions/action_types";
 
 export const initialState = {
@@ -20,7 +22,8 @@ export const initialState = {
   bookmarks: [],
   searchTimetable: [],
   lessonTimetable: [],
-  text: ''
+  text: '',
+  vkData: []
 };
 
 export function APIReducer(state = initialState, action) {
@@ -48,6 +51,10 @@ export function APIReducer(state = initialState, action) {
       return { ...state, searchTimetable: payload };
     case FETCH_LESSON_DATA:
       return { ...state, lessonTimetable: payload, text: text };
+    case FETCH_VK_GROUP_FAILURE:
+      return { ...state, vkData: 'failed'};
+    case FETCH_VK_GROUP_SUCCESS:
+      return { ...state, vkData: payload };
     default:
       return state;
   }
