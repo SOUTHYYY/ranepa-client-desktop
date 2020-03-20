@@ -29,7 +29,6 @@ export function REGReducer(state = initialState, action) {
         case FETCH_FIREBASE_PUSH_SUCCESS:
             return { ...state, registered: true };
         case FETCH_VK_CHECK_GROUP_SUCCESS:
-            debugger;
             return { ...state, vkId: payload };
         case FETCH_VK_CHECK_GROUP_FAILURE:
             return { ...state, error: payload};
