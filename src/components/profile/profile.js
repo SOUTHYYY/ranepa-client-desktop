@@ -13,14 +13,13 @@ class Profile extends Component {
 
 
     render() {
-
         return (
             <div className={styles.profile}>
                 <div className={styles.content}>
                     <div className={styles.marks}>
                         <div className={styles.personInfo}>
                             <div className={styles.personInfo__header}>
-                                <img src={this.props.icon} alt={'logo'}/>
+                                <img src={this.props.vkData.response[0].photo_200} alt={'logo'}/>
                                 <span>{this.props.siteName}</span>
                                 {this.props.vkData === 'failed' ? null : <Popover vkData={this.props.vkData} />}
                             </div>

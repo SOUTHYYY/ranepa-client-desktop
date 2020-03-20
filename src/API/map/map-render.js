@@ -144,6 +144,10 @@ class App extends Component {
         this._transformDateBegin(dateBegin)
       );
     });
+    this.setState({
+      popupInputData: null,
+      popupDateBegin: null
+    })
   };
 
   _renderCreatedPopup = () => {
@@ -247,11 +251,11 @@ class App extends Component {
           <br />
           <em className="popup-text-address">{popupInfo.address}</em>
           <br />
-          {popupInfo.description === undefined ? null : (
-            <Alert severity="info">{popupInfo.description}</Alert>
+          {popupInfo.description === null ? null : (
+            <Alert severity="info" className="map-info">{popupInfo.description}</Alert>
           )}
-          {popupInfo.dateBegin === undefined ? null : (
-            <Alert severity="error" icon={<ScheduleIcon fontSize="inherit" />}>
+          {popupInfo.dateBegin === null || !popupInfo.hasOwnProperty('dateBegin') ? null : (
+            <Alert severity="error" className="map-error" icon={<ScheduleIcon fontSize="inherit" />}>
               {popupInfo.dateBegin}
             </Alert>
           )}

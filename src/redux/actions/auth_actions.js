@@ -2,9 +2,9 @@ import {SET_AUTH_USER_DATA_SUCCES, SET_AUTH_USER_DATA_FAILURE} from "./action_ty
 import {stopSubmit} from 'redux-form'
 import {getFireProfile} from "../../API/firebase/firebase-api";
 
-export const setAuthUserData = (id, login, password, isAuth, siteName, icon, isFailed, vkId) => ({
+export const setAuthUserData = (id, login, password, isAuth, siteName, isFailed, vkId) => ({
     type: SET_AUTH_USER_DATA_SUCCES,
-    payload: {id, login, password, siteName, icon,  isAuth, isFailed, vkId}
+    payload: {id, login, password, siteName, isAuth, isFailed, vkId}
 });
 
 export const AuthFail = (type) => ({
@@ -17,8 +17,8 @@ export const OnSetAuthUserData = () => async (dispatch) => {
         const data = window.localStorage.getItem('user');
         const parsed = JSON.parse(data);
         if (parsed !== undefined) {
-            let {id, login, password, siteName, icon, vkId} = parsed;
-            dispatch(setAuthUserData(id, login, password, true, siteName, icon, false, vkId))
+            let {id, login, password, siteName, vkId} = parsed;
+            dispatch(setAuthUserData(id, login, password, true, siteName, false, vkId))
         }
     } catch (e) {
 
@@ -28,12 +28,12 @@ export const OnSetAuthUserData = () => async (dispatch) => {
 export const login = (login, password) => async (dispatch) => {
     const data = await getFireProfile(password, login);
     const response = {
-        ...data
+        ...data.data,
+        isAuth: data.isAuthed
     };
-
-    if (response.resultCode === 0) {
+    if (data.resultCode === 0) {
         //Convert the state to a JSON string
-        const serialisedState = JSON.stringify(response.data);
+        const serialisedState = JSON.stringify(response);
         //Save the serialised state to localStorage against the key 'user'
         await window.localStorage.setItem('user', serialisedState);
         dispatch(OnSetAuthUserData())

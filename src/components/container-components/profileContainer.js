@@ -31,7 +31,6 @@ const mapStateToProps = state => ({
     error: state.APIReducer.errorMessage,
     login: state.AuthReducer.login,
     siteName: state.AuthReducer.siteName,
-    icon: state.AuthReducer.icon,
     userPins: state.APIReducer.userPins
 });
 

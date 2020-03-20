@@ -124,4 +124,4 @@ export const Loading = () => {
   )
 };
 
-export default withSnackbar(Timetable)
+  export default withSnackbar(Timetable)

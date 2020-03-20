@@ -58,7 +58,7 @@
 .MuiInputBase {
   color: black !important;
 }
-.MuiAlert-standardInfo {
+.map-info {
   margin-top: 5px;
   padding-bottom: 0px !important;
   background-color: rgba(0,0,0,0) !important;
@@ -67,7 +67,7 @@
   border-top: 1px solid #bfbfbf;
   border-radius: 0px !important;
 }
-.MuiAlert-standardError {
+.map-error {
   padding-bottom: 0px !important;
   margin-top: 0px;
   background-color: rgba(0,0,0,0) !important;

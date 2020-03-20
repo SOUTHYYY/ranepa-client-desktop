@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './input.module.css'
 
 function Input(props) {
-    console.log(props)
     const isInvalid = ({valid, shouldValidate, touched}) => {
         return !valid && shouldValidate && touched
     }

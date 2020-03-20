@@ -47,6 +47,17 @@ export async function _getGeocoderResourse(latitude, longitude) {
     return __address_data.address;
 }
 
+export async function registerUser(login, siteName, vkId, password) {
+    await firebase.database().ref('profiles')
+        .child(login).set({
+            id: Math.floor(Math.random()*10000 * Math.floor(6)),
+            login: login,
+            password: password,
+            siteName: siteName,
+            vkId: vkId
+        });
+    return true;
+}
 export async function updateFireData(latitude, longitude, user, description, dateBegin) {
     let recievedData = await _getGeocoderResourse(latitude, longitude);
     firebase.database().ref('markers')
@@ -94,7 +105,6 @@ export async function getFireProfile(pass, login) {
                 _login_state.resultCode = 0;
             } else _login_state.resultCode = 1;
         }) : _login_state.resultCode = 1;
-
     return _login_state;
 }
 

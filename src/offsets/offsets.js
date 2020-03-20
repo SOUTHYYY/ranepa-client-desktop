@@ -22,7 +22,7 @@ export const offsets = {
     login: {
         loginHeader: "Войти в клиент",
         alertErrorLogin: "Кажется вы ввели неправильные данные",
-        loginButton: "Войти",
+        loginButton: "Вход",
         loginLabel: "Логин",
         passwordLabel: "Пароль"
     },

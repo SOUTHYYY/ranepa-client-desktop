@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styles from './login.module.css'
-import {Redirect} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 import {Input} from '../UI';
 import ranepa from '../../images/login/ranepa.png'
 import ButtonUI from '@material-ui/core/Button';
@@ -119,6 +119,18 @@ class Login extends Component {
                         {offsets.login.loginButton}
                     </ButtonUI>
                 </form>
+                <br/>
+                или
+                <br/><br/>
+                <NavLink to={'/reg'}>
+                    <ButtonUI variant="contained">
+                        Регистрация
+                    </ButtonUI>
+                </NavLink>
+
+
+
+
             </div>
         );
     }

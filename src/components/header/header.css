@@ -84,7 +84,7 @@
 }
 
 .main-menu li:hover > a {
-
+    cursor: pointer;
     color: #951a1d;
 }
 

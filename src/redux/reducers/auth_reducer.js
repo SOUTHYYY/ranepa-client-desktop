@@ -7,7 +7,6 @@ export const initialState = {
     isAuth: false,
     isFailed: false,
     siteName: null,
-    icon: null,
     isFretching: false,
     vkId: []
 }
