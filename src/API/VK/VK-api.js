@@ -27,10 +27,11 @@ export async function fetchVKChecker(id) {
     if(payload.hasOwnProperty('error')) {
         return false
     }
+    if(payload.response[0].hasOwnProperty('links') === false) {
+        return 'similarity_err'
+    }
     let similarity_protect = payload.response[0].links.map((el) => {
-        if(el.url === "https://vk.com/activniu" || el.url === "https://vk.com/ranepaspo" || el.url === "https://vk.com/niuranepa") {
-            return true;
-        }
+        return el.url === "https://vk.com/activniu" || el.url === "https://vk.com/ranepaspo" || el.url === "https://vk.com/niuranepa";
     });
     if(similarity_protect.includes(true)) {
         return payload;

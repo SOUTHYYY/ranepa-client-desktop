@@ -64,31 +64,10 @@ function Register(props) {
     const classes = useStyles();
 
     const handleData = ({ target: { id, value } }) => {
-        switch (id) {
-            case 'password':
-                setData({
-                    ...data,
-                    password: value
-                });
-                break;
-            case 'login':
-                setData({
-                    ...data,
-                    login: value.replace(/[^A-Za-z]/ig, '')
-                });
-                break;
-            case 'name':
-                setData({
-                    ...data,
-                    siteName: value
-                });
-                break;
-            case 'vkId':
-                setData({
-                    ...data,
-                    vkId: value
-                })
-        }
+        setData({
+            ...data,
+            [id]: value
+        })
     };
     const onSubmitCheck = () => {
         props.fetchVK(data.vkId);
@@ -178,7 +157,7 @@ function Register(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <Tooltip title="Пройти верификацию" placement="bottom">
-                            <Fab color="secondary" style={data.vkTrusted ? {backgroundColor: '#009616c9'} : {backgroundColor: '#f50057'}} onClick={onSubmitCheck}>
+                            <Fab color="secondary" disabled={data.vkId.length < 1} style={data.vkTrusted ? {backgroundColor: '#009616c9'} : data.vkId.length < 1 ? {backgroundColor: 'gray'} : {backgroundColor: '#f50057'}} onClick={onSubmitCheck}>
                                 {data.vkTrusted? <LockOpenIcon/> : <LockOutlinedIcon/>}
                             </Fab>
                             </Tooltip>
@@ -190,7 +169,7 @@ function Register(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                id="name"
+                                id="siteName"
                                 variant="outlined"
                                 required
                                 fullWidth
