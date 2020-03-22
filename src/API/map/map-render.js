@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MapGL, { Popup } from "react-map-gl";
+import MapGL, { Popup, GeolocateControl, NavigationControl } from "react-map-gl";
 import "./mapbox-gl.css";
 import Pins from "./Pins";
 import mapConfig from "./mapConfig";
@@ -305,6 +305,25 @@ class App extends Component {
             onViewportChange={this._updateViewport}
             className="mapContainer"
         >
+            <GeolocateControl
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  margin: 10
+                }}
+                positionOptions={{enableHighAccuracy: true}}
+                trackUserLocation={true}
+            />
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              marginTop: 50,
+              marginLeft: 10
+            }}>
+              <NavigationControl />
+            </div>
           {mapPins}
           {this._renderPopup()}
           {preventLeakMemoryFromPopup}

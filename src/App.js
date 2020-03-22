@@ -28,20 +28,16 @@ export default class App extends Component {
                         <Route exact path={'/'}>
                             <HomePage welcomeScreen={true}/>
                         </Route>
-                        <Route exact path={'/map'} >
+                        <Route exact path={'/map'} render={() => (
+                            console.log('hi')
+                        )}>
                             <MapContainer width='100%' height='100vh' welcomeScreen={false}/>
                         </Route>
                         <Route path={'/student-book'}>
                             <Book/>
                         </Route>
-                        <Route path={'/lol'}>
-                            <MaterialTableDemo/>
-                        </Route>
                         <Route path={'/timetable'}>
                             <Timetable/>
-                        </Route>
-                        <Route path={'/references'}>
-                            <MapContainer/>
                         </Route>
                         <Route path={'/login'}>
                             <LoginContainer/>

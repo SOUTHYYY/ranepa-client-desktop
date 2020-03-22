@@ -16,6 +16,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 class dispatchTimetable extends Component {
+
     render() {
         return <Timetable {...this.props}/>
     }
