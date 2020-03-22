@@ -35,8 +35,8 @@ class App extends Component {
         dragRotate: !this.props.welcomeScreen
       },
       settings: {
-        markHide: false,
-        darkMode: false
+        markHide: localStorage.getItem('mapSettings') ? JSON.parse(localStorage.getItem('mapSettings')).markHide : false,
+        darkMode: localStorage.getItem('mapSettings') ? JSON.parse(localStorage.getItem('mapSettings')).darkMode : false
       }
     };
   }
@@ -56,18 +56,26 @@ class App extends Component {
   _changesettings(type, action) {
     switch (type) {
       case 1:
+        localStorage.setItem('mapSettings', JSON.stringify({
+          ...this.state.settings,
+          markHide: action
+        }));
         this.setState({
           settings: {
             ...this.state.settings,
-            markHide: action
+            markHide: JSON.parse(localStorage.getItem('mapSettings')).markHide
           }
         });
         break;
       case 2:
+        localStorage.setItem('mapSettings', JSON.stringify({
+          ...this.state.settings,
+          darkMode: action
+        }));
         this.setState({
           settings: {
             ...this.state.settings,
-            darkMode: action
+            darkMode: JSON.parse(localStorage.getItem('mapSettings')).darkMode
           }
         });
         break;

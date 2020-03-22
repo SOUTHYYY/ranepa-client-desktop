@@ -43,6 +43,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+
+
 function Register(props) {
     const [open, setOpen] = React.useState(false);
     const { reg: { vkId, error }, } = props;
@@ -84,6 +86,7 @@ function Register(props) {
             vkTrusted: false
         })
     };
+
     useEffect(() => {
     if(props.reg.vkId !== null && props.reg.vkId !== false && props.reg.vkId !== 'similarity_err') {
         setData({
@@ -91,8 +94,8 @@ function Register(props) {
             vkTrusted: true
         });
         props.enqueueSnackbar('Группа ВК подтверждена', {variant: 'success'})
-    }
-    }, [vkId]);
+    }}, [vkId]);
+
     useEffect(() => {
         if(data.vkTrusted) {
             setData({
@@ -109,7 +112,6 @@ function Register(props) {
     }, [error]);
 
     if (props.reg.registered && !data.vkTrusted){
-        props.clearData();
         return <Redirect to={'/map'}/>
     }
     return (
@@ -201,18 +203,17 @@ function Register(props) {
                     <Alert severity="error" style={{marginBottom: '20px'}}>Ошибка безопастности</Alert>
                     Данная группа не имеет прямого отношения к НИУ РАНХиГС
                     <Divider variant="fullWidth"/>
+                    <Alert severity="error" style={{marginBottom: '20px', marginTop: '10px'}}>Данной группы несуществует</Alert>
                     <Typography gutterBottom>
-                        <Alert severity="error" style={{marginBottom: '20px', marginTop: '10px'}}>Данной группы несуществует</Alert>
                         Данной группы нет в базе данных ВКонтакте
                     </Typography>
                     <Divider variant="fullWidth"/>
+                    <Alert severity="info" style={{marginBottom: '20px', marginTop: '10px'}}>Как найти ID группы ВКонтакте</Alert>
                     <Typography gutterBottom>
-                        <Alert severity="info" style={{marginBottom: '20px', marginTop: '10px'}}>Как найти ID группы ВКонтакте</Alert>
-                        Скопируйте ссылку на ваше сообщество ВКонтакте из адресной строки, скопируйте всё что находится после &nbsp;
-                        <Chip label="https://vk.com/" variant="outlined" /><br/>
-                        <Chip label="https://vk.com/niuranepa"  style={{color: 'white', backgroundColor: '#f50057', marginBottom: 10}}/> - Неправильно<br/>
-                        <Chip label="niuranepa" style={{backgroundColor: '#009616c9'}} color="secondary"/> - Правильно
+                        Скопируйте ссылку на ваше сообщество ВКонтакте из адресной строки, скопируйте всё что находится после https://vk.com/
                     </Typography>
+                    <Chip label="https://vk.com/niuranepa"  style={{color: 'white', backgroundColor: '#f50057', marginBottom: 10}}/> - Неправильно<br/>
+                    <Chip label="niuranepa" style={{backgroundColor: '#009616c9'}} color="secondary"/> - Правильно
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">

@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
 export default function SpeedDialTooltipOpen(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [hide, setHide] = React.useState(true);
-    const [darkTheme, setDark] = React.useState(true);
+    const [hide, setHide] = React.useState(!JSON.parse(localStorage.getItem('mapSettings')).markHide);
+    const [darkTheme, setDark] = React.useState(!JSON.parse(localStorage.getItem('mapSettings')).darkMode);
 
     const actions = [
         { icon: <RoomIcon style={hide ? {color: '#951b1d'} : null}/>, name: 'Маркеры', id: 1 },

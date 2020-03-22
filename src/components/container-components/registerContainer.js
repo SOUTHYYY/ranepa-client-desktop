@@ -17,6 +17,10 @@ const regStateToProps = state => {
     }
 };
 class RegisterContainer extends Component {
+    componentWillUnmount() {
+        this.props.clearData();
+    }
+
     render() {
         return <Register {...this.props} />
     }

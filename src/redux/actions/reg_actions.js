@@ -1,6 +1,7 @@
 import {
   FETCH_VK_CHECK_GROUP_SUCCESS,
   FETCH_FIREBASE_PUSH_SUCCESS,
+  FETCH_FIREBASE_PUSH_FAILURE,
   FETCH_VK_CHECK_GROUP_FAILURE,
   CLEAR_DATA
 } from "./action_types";
@@ -24,7 +25,13 @@ export function fetchVKCheckerFailure(err) {
 
 export function fetchFirebasePushSuccess() {
     return {
-        type: FETCH_FIREBASE_PUSH_SUCCESS
+        type: FETCH_FIREBASE_PUSH_SUCCESS,
+    }
+}
+export function fetchFirebasePushFailure(err) {
+    return {
+        type: FETCH_FIREBASE_PUSH_FAILURE,
+        payload: err
     }
 }
 
@@ -55,7 +62,7 @@ export function fetchVK(id) {
 
 export function onRegister(login, siteName, vkId, password) {
     return async dispatch => {
-        await registerUser(login, siteName, vkId, password);
-        dispatch(fetchFirebasePushSuccess());
+        let registered = await registerUser(login, siteName, vkId, password);
+        registered ? dispatch(fetchFirebasePushSuccess()) : dispatch(fetchFirebasePushFailure('Аккаунт уже зарегистрирован'));
     }
 }

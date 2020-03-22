@@ -46,8 +46,18 @@ export async function _getGeocoderResourse(latitude, longitude) {
         });
     return __address_data.address;
 }
-
+async function checkUser(login) {
+    let result = null;
+    await firebase.database().ref('profiles')
+        .once('value')
+        .then((snap) =>
+            result = snap.hasChild(login)
+        );
+    return result
+}
 export async function registerUser(login, siteName, vkId, password) {
+    let hasUser = await checkUser(login);
+    if(hasUser) return false;
     await firebase.database().ref('profiles')
         .child(login).set({
             id: Math.floor(Math.random()*10000 * Math.floor(6)),
