@@ -13,7 +13,8 @@ const mapDispatchToProps = dispatch => {
 
 const regStateToProps = state => {
     return {
-        reg: state.REGReducer
+        reg: state.REGReducer,
+        regForm: state.form
     }
 };
 class RegisterContainer extends Component {

@@ -7,6 +7,7 @@ import {
 } from "./action_types";
 import {fetchVKChecker} from "../../API/VK/VK-api";
 import {registerUser} from "../../API/firebase/firebase-api";
+import {reset} from 'redux-form';
 
 
 export function fetchVKCheckerSuccess(data) {
@@ -63,6 +64,12 @@ export function fetchVK(id) {
 export function onRegister(login, siteName, vkId, password) {
     return async dispatch => {
         let registered = await registerUser(login, siteName, vkId, password);
-        registered ? dispatch(fetchFirebasePushSuccess()) : dispatch(fetchFirebasePushFailure('Аккаунт уже зарегистрирован'));
+        if(registered) {
+            dispatch(fetchFirebasePushSuccess())
+        } else {
+            dispatch(fetchFirebasePushFailure('Аккаунт уже зарегистрирован'));
+            dispatch(reset('register'));
+            dispatch(clearData());
+        }
     }
 }

@@ -26,7 +26,7 @@ const store = createStore(
         applyMiddleware(thunk)
     ));
 
-window.store = store.getState()
+window.store = store.getState();
 
 ReactDOM.render(
     <Router>

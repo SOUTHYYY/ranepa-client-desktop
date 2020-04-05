@@ -5,7 +5,11 @@ import {compose} from 'redux'
 import Profile from "../profile";
 import {AuthRedirect} from "../hoc/auth-redirect";
 import React, {Component} from "react";
-
+import AlertTitle from "@material-ui/lab/AlertTitle";
+import Alert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
+import {Loading} from "../timetable/timetable";
+import {NavLink} from "react-router-dom";
 
 class ProfileContainer extends Component {
     componentDidMount() {
@@ -15,7 +19,21 @@ class ProfileContainer extends Component {
 
     render() {
         if(!this.props.vkData.hasOwnProperty('response')) {
-            return <span>ЗАГРУЖАЕМ!</span>
+            return this.props.vkData === 'failed' ?
+                <Alert severity="error">
+                    <AlertTitle>
+                        Критическая ошибка
+                    </AlertTitle>
+                    Кажется в нашей системе произошел сбой. <br/><br/>
+                    <NavLink to='/login'>
+                        <Button onClick={() => this.props.logout()} variant="contained" color="secondary">
+                            Сбросить настройки
+                        </Button>
+                    </NavLink>
+                </Alert>
+             : <Loading/>
+
+
         } else {
             return (
                 <Profile {...this.props}/>

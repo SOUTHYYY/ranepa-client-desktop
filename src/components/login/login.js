@@ -39,6 +39,8 @@ class Login extends Component {
             }
         }
     };
+
+
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({alertState: nextProps.isFailed})
     }
@@ -113,9 +115,9 @@ class Login extends Component {
                 <h2>{offsets.login.loginHeader}</h2>
                 <form onSubmit={(e) => this.handleSubmit(e)} className={styles.login__form}>
                     {this.renderInputs()}
-                    <ButtonUI variant="contained" type='password'
+                        <ButtonUI variant="contained"
                               onClick={() => this.props.login(this.state.formControls.login.value, this.state.formControls.password.value)}
-                              disable={!this.state.isFormValid}>
+                              disabled={!this.state.isFormValid}>
                         {offsets.login.loginButton}
                     </ButtonUI>
                 </form>
@@ -127,10 +129,6 @@ class Login extends Component {
                         Регистрация
                     </ButtonUI>
                 </NavLink>
-
-
-
-
             </div>
         );
     }

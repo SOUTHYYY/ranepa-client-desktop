@@ -96,6 +96,7 @@ class Timetable extends React.Component {
                 placeholder={offsets.timetable.labelSearch}
                 name="tableSearch"
                 onChange={this.handleChange}
+                autoComplete="off"
             />
             <Fab aria-label="add" style={{backgroundColor: '#951a1d'}} onClick={() => this.props.enqueueSnackbar('Подсказка', {
               anchorOrigin: {

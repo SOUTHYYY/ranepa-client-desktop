@@ -7,19 +7,13 @@ import {
 } from "../actions/action_types";
 
 export const rootState = {
-    login: null,
-    password: null,
-    siteName: null,
     vkId: null,
     error: null,
     registered: null
 };
 
 export const initialState = {
-    login: null,
-    password: null,
-    siteName: null,
-    vkId: null,
+    vkId: false,
     error: null,
     registered: null
 };

@@ -12,11 +12,10 @@ import Book from "./components/container-components/studentbookContainer";
 import HomePage from "./components/home-page/home-page";
 import AboutUs from "./components/about-us/about-us";
 import Timetable from "./components/container-components/timetableContainer";
-import MaterialTableDemo from "./components/student-book/Table";
 import Registration from "./components/container-components/registerContainer";
 
 
-export default class App extends Component {
+export default class App extends Component {    
 
     render() {
         firebase.initializeApp(config); // important

@@ -94,7 +94,6 @@ class App extends Component {
 
   _createPopupForm = async event => {
     event.preventDefault();
-
     const { lngLat } = event;
 
     await _getGeocoderResourse(lngLat[1], lngLat[0]).then(address => {
