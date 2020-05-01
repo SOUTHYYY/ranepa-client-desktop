@@ -20,8 +20,6 @@ import Divider from "@material-ui/core/Divider";
 import Chip from "@material-ui/core/Chip";
 import DialogActions from "@material-ui/core/DialogActions";
 import Dialog from "@material-ui/core/Dialog";
-import {withRouter} from 'react-router-dom';
-import Redirect from "react-router-dom/es/Redirect";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -44,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const renderTextField = (
-    { input, label, meta: { touched, active }, input: { value }, ...custom },
+    { input, label, meta: { touched, active }, input: { value }, onChange, ...custom },
 ) => (
     <TextField
         required
@@ -53,6 +51,9 @@ const renderTextField = (
         label={label}
         variant="outlined"
         helperText={(touched && !value) && 'Ошибка'}
+        onChange={(e) => {
+            onChange(e.target.value)
+        }}
         {...input}
         {...custom}
     />
@@ -74,16 +75,22 @@ const RegisterForm = (props) => {
                 <Field name="password" component={renderTextField} label="Пароль" validate={[hasNotEmpty]}/>
             </Grid>
             <Grid item xs={12} sm={8}>
-                <Field name="vkId" component={renderTextField} label="ID ВК" error={false} helperText={false} validate={[hasNotEmpty]} disabled={!!props.vkRedux}/>
+                <Field name="vkId"
+                       component={renderTextField}
+                       label="ID ВК"
+                       error={false}
+                       helperText={false}
+                       validate={[hasNotEmpty]}
+                       disabled={!!props.vkRedux}
+                       onChange={(e) => props.onVkUpdate(e.target.value)}
+                />
             </Grid>
             <Grid item xs={2}>
-                <Tooltip title="Пройти верификацию" placement="bottom">
+                <Tooltip title={props.vkValid.length ? "Пройти верификацию" : ''} placement="bottom">
                     <Fab color="secondary"
-                         disabled={props.vkValid.hasOwnProperty('register') ?
-                        props.vkValid.register.hasOwnProperty('values') ?
-                            !props.vkValid.register.values.hasOwnProperty('vkId') : true : true}
+                         disabled={!props.vkValid.length}
                          style={props.vkRedux ? {backgroundColor: '#009616c9'} : null}
-                         onClick={() => props.onVkSubmit(props.vkValid.register.values.vkId)}
+                         onClick={() => props.onVkSubmit(props.vkValid)}
                     >
                         {!props.vkRedux ? <LockOutlinedIcon/> : <LockOpenIcon/>}
                     </Fab>
@@ -118,7 +125,7 @@ const ReduxRegisterForm = reduxForm({form: 'register'})(RegisterForm);
 
 const Register = (props) => {
     const classes = useStyles();
-    const { reg: { error } } = props;
+    const { reg: { error, errorMessage }, enqueueSnackbar } = props;
     const [open, setOpen] = useState(false);
 
     const handleClose = () => {
@@ -128,10 +135,10 @@ const Register = (props) => {
     const handleOpen = () => {
         setOpen(true);
     };
-
+    
     useEffect(() => {
         if(error) {
-            props.enqueueSnackbar(error);
+            enqueueSnackbar(errorMessage);
         }
     }, [error]);
 
@@ -143,14 +150,20 @@ const Register = (props) => {
         props.fetchVK(id);
     };
 
-    if(props.reg.registered) return <Redirect to={"/login"}/>;
+    const onVkUpdate = (state) => {
+        props.updVkState(state);
+    };
+
+    if(props.reg.registered) {
+        return props.history.push('/login');
+    }
     return <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
             <Typography component="h1" variant="h5">
                 Регистрация
             </Typography>
-                <ReduxRegisterForm onSubmit={onSubmit} vkRedux={props.reg.vkId} onVkSubmit={onVkSubmit} setOpen={handleOpen} vkValid={props.regForm}/>
+            <ReduxRegisterForm onSubmit={onSubmit} vkRedux={props.reg.vkId} onVkSubmit={onVkSubmit} setOpen={handleOpen} vkValid={props.reg.vkState} onVkUpdate={onVkUpdate}/>
         </div>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
             <DialogTitle id="customized-dialog-title" onClose={handleClose}>
@@ -182,4 +195,4 @@ const Register = (props) => {
 };
 
 
-export default withRouter(withSnackbar(Register));
+export default withSnackbar(Register);

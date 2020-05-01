@@ -10,7 +10,7 @@ class Book extends React.Component {
     super();
     this.state = {
       text: '',
-       propsText: '',
+      propsText: '',
       isLoading: false
     }
   }

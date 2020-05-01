@@ -12,7 +12,6 @@ export async function getVKGroupsInfo(id) {
                 fields: 'members_count,counters'
             }
         });
-    debugger;
     return payload;
 }
 

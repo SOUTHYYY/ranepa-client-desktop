@@ -81,11 +81,9 @@ input[name=tableSearch] {
     padding-left: 20px;
 }
 .book_td {
-
+    border: 1px solid black;
+    border-collapse: collapse;
 }
-.book_th {
-
-}
-.book_mark {
-
+.book_collapse {
+    border-collapse: collapse;
 }

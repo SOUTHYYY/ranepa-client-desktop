@@ -3,7 +3,8 @@ import {
   FETCH_FIREBASE_PUSH_SUCCESS,
   FETCH_FIREBASE_PUSH_FAILURE,
   FETCH_VK_CHECK_GROUP_FAILURE,
-  CLEAR_DATA
+  CLEAR_DATA,
+  UPDATE_VK_STATE
 } from "./action_types";
 import {fetchVKChecker} from "../../API/VK/VK-api";
 import {registerUser} from "../../API/firebase/firebase-api";
@@ -36,6 +37,19 @@ export function fetchFirebasePushFailure(err) {
     }
 }
 
+export function updVkState(state) {
+
+    if(!state) return {
+        type: UPDATE_VK_STATE,
+        payload: false
+    };
+
+    return {
+        type: UPDATE_VK_STATE,
+        payload: state
+    }
+}
+
 export function clearREGReducer() {
     return {
         type: CLEAR_DATA
@@ -47,17 +61,25 @@ export function clearData() {
         dispatch(clearREGReducer());
     }
 }
+
+
 export function fetchVK(id) {
     return async dispatch => {
-        dispatch(fetchVKCheckerFailure(null));
         const data = await fetchVKChecker(id);
-        if (data === 'similarity_err') {
-            dispatch(fetchVKCheckerFailure('Ошибка безопастности'));
+        switch (data) {
+            case 'similarity_err': {
+                dispatch(fetchVKCheckerFailure('Ошибка безопастности'));
+                break;
+            }
+            case false: {
+                dispatch(fetchVKCheckerFailure('Группа не найдена'));
+                break;
+            }
+            default: {
+                dispatch(fetchVKCheckerSuccess(data));
+            }
         }
-        if (data === false) {
-            dispatch(fetchVKCheckerFailure('Группа не найдена'));
-        }
-        dispatch(fetchVKCheckerSuccess(data));
+
     }
 }
 

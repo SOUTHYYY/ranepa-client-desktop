@@ -1,4 +1,5 @@
 import React, {forwardRef, useRef} from 'react';
+import styles from './student.module.css';
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -17,6 +18,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import PrintIcon from '@material-ui/icons/Print';
 import ReactToPrint from "react-to-print";
+import PrintComponents from 'react-print-components';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -70,7 +72,25 @@ export default function MaterialTableDemo(props) {
         <MaterialTable
             actions={[
                 {
-                    icon: () => <ReactToPrint trigger={() => <PrintIcon/>} content={() => componentRef}/>,
+                    icon: () => <PrintComponents
+                        trigger={<PrintIcon/>}
+                    >
+                        <h2>Зачетная книжка: {props.text}</h2>
+                        <table className={styles.book_collapse}>
+                            <tr>
+                                <th className={styles.book_td}>Курс</th>
+                                <th className={styles.book_td}>Предмет</th>
+                                <th className={styles.book_td}>Оценка</th>
+                            </tr>
+                            {
+                            props.data.API.bookmarks.map((el) => <tr>
+                                <td className={styles.book_td}>{el.course}</td>
+                                <td className={styles.book_td}>{el.subject}</td>
+                                <td className={styles.book_td}>{el.mark}</td>
+                            </tr>)}
+                        </table>
+
+                    </PrintComponents>,
                     tooltip: 'Печать',
                     isFreeAction: true
                 }
@@ -81,6 +101,8 @@ export default function MaterialTableDemo(props) {
             columns={state.columns}
             data={state.data}
             options={{
+                exportAllData: true,
+                exportDelimiter: " ",
                 grouping: true,
                 exportButton: true,
                 pageSizeOptions: []

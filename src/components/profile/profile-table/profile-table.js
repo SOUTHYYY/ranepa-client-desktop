@@ -27,6 +27,7 @@ class ProfileTable extends Component {
         tempKey: null,
         loading: false
     };
+
     deleteMarkArr = (id) => {
         this.state.data.splice(id, 1);
     };

@@ -15,7 +15,11 @@ import Timetable from "./components/container-components/timetableContainer";
 import Registration from "./components/container-components/registerContainer";
 
 
-export default class App extends Component {    
+export default class App extends Component {
+
+    componentWillReceiveProps(nextProps, prevProps) {
+        console.log(nextProps.history.location.pathname)
+    }
 
     render() {
         firebase.initializeApp(config); // important
@@ -27,9 +31,7 @@ export default class App extends Component {
                         <Route exact path={'/'}>
                             <HomePage welcomeScreen={true}/>
                         </Route>
-                        <Route exact path={'/map'} render={() => (
-                            console.log('hi')
-                        )}>
+                        <Route exact path={'/map'}>
                             <MapContainer width='100%' height='100vh' welcomeScreen={false}/>
                         </Route>
                         <Route path={'/student-book'}>
@@ -44,9 +46,7 @@ export default class App extends Component {
                         <Route path={'/profile'}>
                             <ProfileContainer/>
                         </Route>
-                        <Route path={'/reg'}>
-                            <Registration/>
-                        </Route>
+                        <Route path={'/reg'} render={({ history }) => <Registration history={history} />}/>
                         <Route path={'/about-us'}>
                             <AboutUs/>
                         </Route>
