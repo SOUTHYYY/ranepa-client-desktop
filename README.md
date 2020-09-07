@@ -15,11 +15,28 @@ npm install mapbox-gl
 Desktop | Mapbox GL | Firebase
 iOS/Anroid | undefined | Firebase
 
-# Config 
-```
 mapConfig.js
 
 pinsConfig: [Current style of all markers]
 apiStyle: [Your map style from Mapbox]
 token: [Your token from Mapbox]
+=======
+
+
+**mapConfig.js**
+```js
+  const config = {
+    pinsConfig: {
+        "circle-radius": {
+            "base": 1.45,
+            "stops": [[12, 2], [22, 180]]
+        },
+        "circle-color": "#951b1d",
+        "circle-opacity": 0.5,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#bcb7b9"
+    },
+    apiStyle: [Your map style from Mapbox],
+    token: [Your token from Mapbox]
+};
 ```
