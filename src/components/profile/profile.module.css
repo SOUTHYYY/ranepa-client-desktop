@@ -1,0 +1,101 @@
+.profile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 150px;
+    font-family: 'Quicksand', sans-serif;
+}
+.profile .content {
+    width: calc(100vw - 100px);
+    height: calc(100% - 150px);
+    margin: 0px 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.marks {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgba(211,211,211 , 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(211,211,211 , 0.3);
+}
+.marks > div:nth-child(2) {
+    width: 60%;
+}
+.marks > div:nth-child(2) > h1, h3 {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+.marks h1{
+    padding: 0;
+    margin: 0;
+    color: #000000;
+}
+
+.marks h3{
+    color: #d3d3d3;
+}
+
+.marks__count {
+    font-size: 25px;
+    color: #d3d3d3;;
+    font-weight: 500;
+}
+
+.personInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+    width: 40%;
+    padding: 25px 0;
+    border: 1px solid rgba(211,211,211 , 0.3);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(211,211,211 , 0.3) ;
+}
+
+.personInfo__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.personInfo__header img {
+    width: 100px;
+    border: 3px solid rgba(211,211,211 , 0.9);
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+img ~ span {
+    font-size: 30px;
+    font-weight: bold;
+}
+.MuiDialog-paperWidthSm {
+    max-width: 0 !important;
+}
+
+.personInfo__settings {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.personInfo__settings button {
+    margin-bottom: 10px;
+}
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+.studentBook_content {
+    max-width: 1000px;
+}
+
+.studentBook_input {
+    border: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 90%;
+    background-color: #f1eeee;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+}
+
+.studentBooK_tableHead {
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+    margin-top: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    max-width: 100%;
+    height: 60px;
+    background-color: #f1eeee;
+}
+.studentBooK_tableHead_text {
+    padding: 10px;
+
+    color: #951a1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.studentBooK_Content_text {
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+.studentBooK_tableContent {
+    margin-top: 10px;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+}
+
+.studentBook_header {
+    display: flex;
+    justify-content: flex-start;
+    width: 1000px;
+}
+
+input[name=tableSearch] {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 100 !important;
+    font-size: 20px !important;
+    text-indent: 15px !important;
+}
+
+.studentBook_Button {
+    line-height: 6vh;
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #f1eeee;
+    width: 10%;
+    height: 6.3vh;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(211, 211, 211, 0.3);
+
+}
+.studentBook_Button:hover {
+    background-color: #afacac;
+}
+
+.studentBook_searchIcon {
+    vertical-align: middle;
+    color: #951a1d;
+}
+.book_tr > td.studentBooK_tableHead_text {
+    padding-left: 20px;
+}
+.book_td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.book_collapse {
+    border-collapse: collapse;
+}
