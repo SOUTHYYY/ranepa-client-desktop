@@ -15,13 +15,6 @@ npm install mapbox-gl
 Desktop | Mapbox GL | Firebase
 iOS/Anroid | undefined | Firebase
 
-mapConfig.js
-
-pinsConfig: [Current style of all markers]
-apiStyle: [Your map style from Mapbox]
-token: [Your token from Mapbox]
-=======
-
 
 **mapConfig.js**
 ```js
